@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="pakage + interface" -->
+<mapper namespace="com.tasty.member.mapper.MemberMapper">
+	<select id="login" resultType="com.tasty.member.vo.LoginVO">
+		select id, name, gradeNo
+		from member
+		where id = #{id} and pw = #{pw}
+	</select>
+	
+	<insert id="join">
+		insert into member(id, pw, name, gender, birth, tel, email, address, memberNo)
+		values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{tel}, #{email}, #{address}, member_seq.nextval)
+	</insert>
+
+	<insert id="shopJoin">
+		insert into member(id, pw, name, gender, birth, tel, email)
+		values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{tel}, #{email})
+	</insert>
+</mapper>
