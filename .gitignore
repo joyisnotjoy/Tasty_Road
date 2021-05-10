@@ -68,4 +68,7 @@ local.properties
 # Spring Boot Tooling
 .sts4-cache/
 
+# JDT-specifit (Eclipse Java Development Tools)
+.classpath
+
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
