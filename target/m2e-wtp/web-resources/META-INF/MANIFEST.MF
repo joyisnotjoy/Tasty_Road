@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ￭ﾕﾜ￪ﾵﾭ￬ﾄﾸ￫ﾬﾴ￬ﾂﾬ￭ﾚﾌ
+Built-By: EZEN
 Build-Jdk: 15.0.2
 Created-By: Maven Integration for Eclipse
 
