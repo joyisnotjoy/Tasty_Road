@@ -15,6 +15,7 @@ local.properties
 .recommenders
 .target/
 
+
 # ignore properties file
 config.properties
 
