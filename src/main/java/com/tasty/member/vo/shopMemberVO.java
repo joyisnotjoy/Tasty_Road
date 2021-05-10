@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class shopMemberVO {
 	
+	
 	private String shopName;
 	private String shopNo;
 	private String address;
@@ -14,5 +15,6 @@ public class shopMemberVO {
 	private Number total;
 	private Number wait;
 	private String id;
+	private String tel;
 
 }
