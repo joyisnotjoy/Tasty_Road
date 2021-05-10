@@ -53,11 +53,11 @@
 	
 	<tx:annotation-driven/>
 	
-	<mybatis-spring:scan base-package="org.zerock"/>
+	<mybatis-spring:scan base-package="com.tasty"/>
 
 	<context:annotation-config></context:annotation-config>
 	
-	<context:component-scan base-package="org.zerock" />
+	<context:component-scan base-package="com.tasty" />
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
