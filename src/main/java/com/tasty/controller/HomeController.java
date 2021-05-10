@@ -1,4 +1,4 @@
-package com.tasty.comtroller;
+package com.tasty.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
