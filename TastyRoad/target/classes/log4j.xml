@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN"
+ "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- Application Loggers -->
+	<logger name="org.zerock">
+		<level value="info" />
+	</logger>
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+	
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<!-- log4jdbc 로그 출력 정도 정한다. root tag 위에 정의 -->
+	<!-- root의 log 수준을 info로 바꿔 주세요. 만약 적용이 안된다면
+		1. project를 maven > update project를 시키세요.
+		2. server를 클린시킨다.
+		3. Module path를 다시 "/"로 수정해 준다.
+		4. server를 시작하고 확인한다.  -->
+	
+	<logger name="jdbc.audit">
+		<level value="warn" />
+	</logger>
+
+	<logger name="jdbc.resultset">
+		<level value="warn" />
+	</logger>
+
+	<logger name="jdbc.connection">
+		<level value="warn" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>
