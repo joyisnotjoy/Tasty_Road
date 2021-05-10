@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="pakage + interface" 동일해야 한다 -->
+<mapper namespace="com.tasty.chat.mapper.ChatRoomMapper">
+
+	<!-- 1. 채팅 내용 -->
+	<select id="list" resultType="com.tasty.chat.vo.ChatRoomVO">
+		select rnum, chatNo, content, id, writeDate
+		from
+		(
+			select rownum rnum, chatNo, content, id, writeDate
+			from(
+				select chatNo, content, id, writeDate
+				from chatRoom
+				where chatNo = #{chatNo}
+				order by chatNo desc
+			)
+		)	
+	</select>
+	
+	<!-- 채팅 전체 데이터 -->
+	<select id="getTotalRow" resultType="java.lang.Long">
+		select count(*) from chatRom
+		where chatNo = #{chatNo}
+	</select>
+	
+	<!-- 채팅 전송하기 -->
+	<insert id="write">
+		insert into chatRoom(chatNo, content, id)
+		values(#{chatNo}, #{content}, #{id})
+	</insert>
+
+</mapper>

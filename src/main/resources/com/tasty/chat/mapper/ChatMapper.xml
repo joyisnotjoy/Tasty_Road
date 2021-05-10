@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="pakage + interface" 동일해야 한다 -->
+<mapper namespace="com.tasty.chat.mapper.ChatMapper">
+
+	<!-- 1. 채팅 리스트 : 결과 타입 필요(리턴 타입이 int가 아니면 지정해줘야 한다) -->
+	<!-- map-pageObject-startRow : pageObject.startRow -->
+	<!-- map-no : no -->
+	<select id="list" resultType="com.tasty.chat.vo.ChatVO">
+		select rnum, chatNo, id1, id2, chatName
+		from
+		(
+			select rownum rnum, chatNo, id1, id2, chatName
+			from(
+				select chatNo, id1, id2, chatName
+				from chat
+				
+				<include refid="search" />
+				
+				order by chatNo desc
+			)
+		)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 검색 조건 쿼리 따로 저장하기 -->
+	<sql id="search">
+		<!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
+		<if test="word != null and word != ''.toString()">
+			<!-- 검색하는 데이터가 있는 경우 where가 나온다. -->
+			where 1 = 0
+			<if test="key == 'm'.toString()">
+				OR member like '%' || #{word} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<!-- 1-1. 채팅 전테 데이터 : 채팅방 번호가 필요하다 -->
+	<select id="getTotalRow" resultType="java.lang.Long">
+		select count(*) from
+		chat
+		<!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
+		<include refid="search" />
+	</select>
+	
+	<!-- 2. 채팅 보기 -->
+	<select id="view" resultType="com.tasty.chat.vo.ChatRoomVO">
+		select chatNo, id1, id2, chatName
+		from chat
+		where chatNo = #{chatNo}
+	</select>
+	
+	<!-- 3. 채팅 쓰기 -->
+	<insert id="write">
+		insert into chat(chatNo, id1, id2, chatName)
+		values(chat_seq.nextval, #{id1}, #{id2}, #{chatName})
+	</insert>
+	
+	<!-- 4. 채팅방 이름 수정 -->
+	<update id="update">
+		update chat set chatName = #{chatName}
+		where chatNo = #{chatNo}
+	</update>
+	
+	<!-- 5. 채팅방 삭제 -->
+	<delete id="delete">
+		delete from chat
+		where chatNo = #{chatNo}
+	</delete>
+
+</mapper>

@@ -1,1 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="pakage + interface" -->
+<mapper namespace="com.tasty.list.mapper.ListMapper">
+	<!-- 1. 게시판 리스트 -->
+	<!-- id="method" -->
+	<select id="list" resultType="com.tasty.list.vo.MemberVO">
+<!-- 		select rnum, m.shopNo, m.shopName, m.content, m.address, b.cnt -->
+<!-- 		from -->
+<!-- 		( -->
+<!-- 			select rownum rnum, m.shopNo, m.shopName, m.content, m.address, b.cnt -->
+<!-- 			from( -->
+<!-- 		select m.shopNo, m.shopName, m.content, m.address, b.cnt -->
+<!-- 				from shopMember m, bookMark b -->
+<!-- 				WHERE m.shopNo = b.shopNo; -->
+		select rnum, shopNo, shopName, content, address 
+		from
+		(
+			select rownum rnum, shopNo, shopName, content, address 
+			from(
+				select shopNo, shopName, content, address 
+				from shopMember
+				
+				<!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
+				<include refid = "search" />
+				
+				order by shopNo desc
+			)
+		)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<!-- 검색 조건 쿼리 따로 저장하기 -->
+	<sql id = "search">
+	
+		  <!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
+		  <if test="word != null and word != ''.toString()">
+		  	<!-- 검색하는 데이터가 있는 경우 where가 나온다. -->
+		  	where 1 = 0
+		  	<if test="key == 't'.toString()">
+		    	OR title like '%' || #{word} || '%'
+		    </if>
+		  	<if test="key == 'c'.toString()">
+		    	OR content like '%' || #{word} || '%'
+		    </if>
+		  	<if test="key == 'w'.toString()">
+		    	OR writer like '%' || #{word} || '%'
+		    </if>
+		  	<if test="key == 'tc'">
+		    	OR title like '%' || #{word} || '%'
+		    	OR content like '%' || #{word} || '%'
+		    </if>
+		  	<if test="key == 'tw'">
+		    	OR title like '%' || #{word} || '%'
+		    	OR writer like '%' || #{word} || '%'
+		    </if>
+		  	<if test="key == 'cw'">
+		    	OR content like '%' || #{word} || '%'
+		    	OR writer like '%' || #{word} || '%'
+		    </if>
+		  	<if test="key == 'tcw'">
+		    	OR title like '%' || #{word} || '%'
+		    	OR content like '%' || #{word} || '%'
+		    	OR writer like '%' || #{word} || '%'
+		    </if>
+		  </if>
+	
+	</sql>
+	
+	
+	<!-- 1-1. 게시판 전체 글의 갯수 -->
+	<select id="getTotalRow" resultType="java.lang.Long">
+		select count(*) from member
+		
+		  <!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
+		  <include refid ="search" />
+
+	</select>
+	
+	<!-- 2. 게시판 글보기 -->
+	<select id="view" resultType="org.zerock.board.vo.BoardVO">
+		select id, name, email, gender
+		from member
+		where id = #{id}
+	</select>
+	
+	<!-- 2-2. 게시판 조회수 1증가 -->
+<!-- 	<update id="increase"> -->
+<!-- 		update board set hit = hit + 1 -->
+<!-- 		where no = #{no} -->
+<!-- 	</update> -->
+
+	<!-- 3. 게시판 글쓰기 -->
+<!-- 	<insert id="write"> -->
+<!-- 		insert into board(no, title, content, writer, pw) -->
+<!-- 		values(board_seq.nextval, #{title}, #{content}, #{writer}, #{pw}) -->
+<!-- 	</insert> -->
+	
+	<!-- 4. 게시판 글수정 -->
+<!-- 	<update id="update"> -->
+<!-- 		update board set title = #{title}, content=#{content}, writer=#{writer} -->
+<!-- 		where no = #{no} and pw = #{pw} -->
+<!-- 	</update> -->
+	
+	<!-- 5. 게시판 글삭제 -->
+<!-- 	<delete id="delete"> -->
+<!-- 		delete from board -->
+<!-- 		where no = #{no} and pw = #{pw} -->
+<!-- 	</delete> -->
+	
+</mapper>
