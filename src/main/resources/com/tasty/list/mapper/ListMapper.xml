@@ -6,7 +6,7 @@
 <mapper namespace="com.tasty.list.mapper.ListMapper">
 	<!-- 1. 게시판 리스트 -->
 	<!-- id="method" -->
-	<select id="list" resultType="com.tasty.list.vo.MemberVO">
+	<select id="list" resultType="com.tasty.list.vo.shopMemberVO">
 <!-- 		select rnum, m.shopNo, m.shopName, m.content, m.address, b.cnt -->
 <!-- 		from -->
 <!-- 		( -->
