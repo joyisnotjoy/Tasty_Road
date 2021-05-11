@@ -11,9 +11,9 @@ public class shopMemberVO {
 	private String address;
 	private String image;
 	private String content;
-	private Number now;
-	private Number total;
-	private Number wait;
+	private Long now;
+	private Long total;
+	private Long wait;
 	private String id;
 	private String tel;
 
