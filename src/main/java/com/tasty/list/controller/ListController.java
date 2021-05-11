@@ -40,9 +40,9 @@ public class ListController {
 	@GetMapping("/view.do")
 	// Model 객체 - 처리된 데이터를 JSP에 전달
 	// no, inc - 숫자 타입 : 원래는 String으로 데이터 전달. 없으면 null이된다. null을 숫자로
-	public String view(Model model, Long no, PageObject pageObject) throws Exception{
+	public String view(Model model, String shopNo, PageObject pageObject) throws Exception{
 		
-	model.addAttribute("vo", service.view(no));	
+	model.addAttribute("vo", service.view(shopNo));	
 		
 	return MODULE + "/view";
 	}

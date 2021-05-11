@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>맵 리스트</title>
+<title>맛집 리스트</title>
 
 <!-- bootstrap 라이브러리 등록 - CDN 방식 : sitemesh에서 decorator.jsp에서 한꺼번에 해결 -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,14 +30,15 @@ $(function(){
 	
 	// 게시판 글보기 페이지로 이동 함수
 	$(".dataRow").click(function(){
-		var no = $(this).find(".no").text();
+		var shopNo = $(this).find(".shopNo").text();
 		// 페이지 정보 붙이기
 		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
 				+= "&perPageNum=" += pageObject.perPageNum += "'"};
 		// 검색 정보 붙이기
 		query += ${(empty pageObject.word)?"''":"'&key=" += pageObject.key
 				+= "&word=" += pageObject.word += "'"};
-		location = "view.do?no=" + no + "&inc=1" + query;
+// 		location = "view.do?no=" + no + "&inc=1" + query;
+		location = "view.do?shopNo=" + shopNo + query;
 	});
 });
 </script>
@@ -90,12 +91,12 @@ $(function(){
 		<c:forEach items="${list }" var="vo">
 		  <li class="list-group-item dataRow">
 		  	<div>
-			  	<span class="no">가게명: ${vo.shopName }</span> /
-<%-- 			  	 ${vo.content } --%>
+			  	가게명: ${vo.shopName } / 
+			  	 ${vo.content }
 		  	</div> 
 		  	주소: ${vo.address } <br>
 		  	전화번호: ${vo.tel } <br>
-		  	사업자 번호: ${vo.shopNo }
+		  	<span class="shopNo">${vo.shopNo }</span>
 <%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
 <%-- 		  	<span class="badge">${vo.cnt }</span> --%>
 		  </li>
@@ -107,7 +108,7 @@ $(function(){
 	<a href = "write.do?perPageNum=${pageObject.perPageNum }"
 	 class="btn btn-default">맛집 추가</a>
 	 
-	<!-- 이동되는 페이지 표시 - 네이지네이션 -->
+	<!-- 이동되는 페이지 표시 - 페이지네이션 -->
 	<div>
 		<pageObject:pageNav listURI="list.do" pageObject="${pageObject }" 
 		query="&key=${pageObject.key }&word=${pageObject.word }"/>

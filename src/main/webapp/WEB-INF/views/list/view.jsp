@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 글보기</title>
+<title>맛집 보기</title>
 
-<!-- bootstrap 라이브러리 등록 - CDN 방식 : sitemesh에서 decorator.jsp에서 한꺼번에 해결-->
-<!--   <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<!-- bootstrap 라이브러리 등록 - CDN 방식 : sitemesh에서 decorator.jsp에서 한꺼번에 해결 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- Awesome 4 icons lib : class="fa~ -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -68,7 +68,7 @@ $(function(){
 	console.log("JS Reply List Test!!!");
 	
 	// 전역 변수 선언 - $(function(){~~}); -33번 줄 안에 선언된 함수에서는 공통으로 사용 가능
-	var no = ${vo.no};
+	var shopNo = ${vo.shopNo};
 	console.log("JS Reply List no : " + no);
 	var repPage = 1;
 	var repPerPageNum = 5;
@@ -341,7 +341,7 @@ $(function(){
 </head>
 <body>
 <div class="container">
-<h1>게시판 글보기</h1>
+<h1>맛집 보기</h1>
 <!-- 데이터 표시하는 부분 -->
 <ul class="list-group">
   <li class="list-group-item row">
@@ -349,35 +349,47 @@ $(function(){
   	<div class="col-md-10">${vo.shopName }</div>
   </li>
   <li class="list-group-item row">
+  	<div class="col-md-2 title_label">사업자번호</div>
+  	<div class="col-md-10">${vo.shopNo }</div>
+  </li>
+  <li class="list-group-item row">
+  	<div class="col-md-2 title_label">주소</div>
+  	<div class="col-md-10"><pre>${vo.address }</pre></div>
+  </li>
+  <li class="list-group-item row">
   	<div class="col-md-2 title_label">소개</div>
   	<div class="col-md-10">${vo.content }</div>
+  </li>
+  <li class="list-group-item row">
+  	<div class="col-md-2 title_label">전화번호</div>
+  	<div class="col-md-10">${vo.tel }</div>
   </li>
 <!--   <li class="list-group-item row"> -->
 <!--   	<div class="col-md-2 title_label">이미지</div> -->
 <%--   	<div class="col-md-10"><pre>${vo.content }</pre></div> --%>
 <!--   </li> -->
   <li class="list-group-item row">
-  	<div class="col-md-2 title_label">주소</div>
-  	<div class="col-md-10"><pre>${vo.address }</pre></div>
+  	<div class="col-md-2 title_label">총 자리</div>
+  	<div class="col-md-10">${vo.total }</div>
   </li>
   <li class="list-group-item row">
-  	<div class="col-md-2 title_label">전화번호</div>
-  	<div class="col-md-10">${vo.tel }</div>
+  	<div class="col-md-2 title_label">현재 인원</div>
+  	<div class="col-md-10">${vo.now }</div>
   </li>
   <li class="list-group-item row">
-  	<div class="col-md-2 title_label">대기열</div>
+  	<div class="col-md-2 title_label">대기</div>
   	<div class="col-md-10">${vo.wait }</div>
   </li>
-  <li class="list-group-item row">
-  	<div class="col-md-2 title_label">조회수</div>
-  	<div class="col-md-10">${vo.cnt }</div>
-  </li>
-  <li class="list-group-item row">
-  	<div class="col-md-2 title_label">즐겨찾기</div>
-  	<div class="col-md-10">${vo.status }</div>
-  </li>
+<!--   <li class="list-group-item row"> -->
+<!--   	<div class="col-md-2 title_label">조회수</div> -->
+<%--   	<div class="col-md-10">${vo.cnt }</div> --%>
+<!--   </li> -->
+<!--   <li class="list-group-item row"> -->
+<!--   	<div class="col-md-2 title_label">즐겨찾기</div> -->
+<%--   	<div class="col-md-10">${vo.status }</div> --%>
+<!--   </li> -->
 </ul>
-<a href="update.do?no=${vo.no }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
+<a href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
 class="btn btn-default">수정</a>
 <a class="btn btn-default" onclick="return false;"
 data-toggle="modal" data-target="#myModal" >삭제</a>
@@ -442,7 +454,7 @@ class="btn btn-default">리스트</a>
       </div>
       <div class="modal-body">
         <form action="delete.do" method="post" id="modal_form">
-        	<input type="hidden" name="no" value="${vo.no }">
+        	<input type="hidden" name="shopNo" value="${vo.shopNo }">
         	<input type="hidden" name="perPageNum"
         	value="${pageObject.perPageNum }">
         	<div class="form-group">
@@ -486,7 +498,7 @@ class="btn btn-default">리스트</a>
 			<div class="form-group" id="replyNoDiv">
 			  <label for="replyNo">게시판 번호:</label>
 			  <input name="no" type="text" class="form-control" id="replyNo"
-			  readonly="readonly" value="${vo.no }">
+			  readonly="readonly" value="${vo.shopNo }">
 			</div>		    
 		    <div class="form-group" id="replyContentDiv">
 		      <label for="replyContent">내용:</label>

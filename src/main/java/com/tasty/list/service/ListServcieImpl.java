@@ -35,9 +35,9 @@ public class ListServcieImpl implements ListService {
 
 	// 2. 맛집 보기
 	@Override
-	public shopMemberVO view(Long no) throws Exception {
+	public shopMemberVO view(String shopNo) throws Exception {
 		// TODO Auto-generated method stub
-		return mapper.view(no);
+		return mapper.view(shopNo);
 	}
 	
 

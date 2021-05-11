@@ -12,7 +12,7 @@ public interface ListService {
 
 	// 2. 맛집 보기	
 	//  조회수 1증가(리스트->글보기) + 글보기 데이터
-	public shopMemberVO view(Long no) throws Exception;
+	public shopMemberVO view(String shopNo) throws Exception;
 //	public BoardVO view(Long no, int inc) throws Exception;
 	
 	// 3. 맛집 수정

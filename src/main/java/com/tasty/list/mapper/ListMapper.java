@@ -14,7 +14,7 @@ public interface ListMapper {
 	public Long getTotalRow(PageObject pageObject);
 
 	// 2. 맛집 보기
-	public shopMemberVO view(Long no);
+	public shopMemberVO view(String shopNo);
 	
 	// 2-1. 맛집 조회수 1 증가
 //	public int increase(Long no);
