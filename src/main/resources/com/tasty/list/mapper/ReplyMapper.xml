@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="pakage + interface" -->
+<mapper namespace="com.tasty.list.mapper.ReplyMapper">
+	<!-- 1. 게시판 댓글 리스트 -->
+	<!-- id="method" -->
+	<!-- map-pageObject-startRow : pageObject.startRow -->
+	<!-- map-no : no -->
+	<select id="list" resultType="com.tasty.list.vo.ReplyVO">
+		select rnum, rno, no, content, writer, writeDate
+		from
+		(
+			select rownum rnum, rno, no, content, writer, writeDate
+			from(
+				select rno, no, content, writer, writeDate
+				from board_reply
+				where no = #{no}
+				order by rno desc
+			)
+		)
+		where rnum between #{pageObject.startRow} and #{pageObject.endRow}
+	</select>
+	
+	<!-- 1-1. 게시판 댓글 전체 갯수 - 게시판 글번호 필요 -->
+	<select id="getTotalRow" resultType="java.lang.Long">
+		select count(*) from board_reply
+		where no = #{no}
+	</select>
+	
+	<!-- 2. 게시판 댓글보기 - 생략 : 리스트에 포함 -->
+	
+	<!-- 3. 게시판 댓글쓰기 -->
+	<insert id="write">
+		insert into board_reply(rno, no, content, writer, pw)
+		values(board_reply_seq.nextval, #{no}, #{content}, #{writer}, #{pw})
+	</insert>
+	
+	<!-- 4. 게시판 댓글수정 -->
+	<update id="update">
+		update board_reply set content=#{content}, writer=#{writer}
+		where rno = #{rno} and pw = #{pw}
+	</update>
+	
+	<!-- 5. 게시판 댓글삭제 -->
+	<delete id="delete">
+		delete from board_reply
+		where rno = #{rno} and pw = #{pw}
+	</delete>
+	
+</mapper>

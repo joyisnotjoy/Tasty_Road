@@ -16,8 +16,9 @@ public interface ListService {
 //	public BoardVO view(Long no, int inc) throws Exception;
 	
 	// 3. 맛집 수정
-	
-	// 4. 맛집 삭제
-	
+	public int update(shopMemberVO vo) throws Exception;
 
+	// 4. 맛집 삭제
+	public int delete(shopMemberVO vo) throws Exception;
+	
 }
