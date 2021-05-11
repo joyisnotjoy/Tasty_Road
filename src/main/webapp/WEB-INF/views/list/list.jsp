@@ -91,7 +91,7 @@ $(function(){
 		  <li class="list-group-item dataRow">
 		  	<div>
 			  	<span class="no">가게명: ${vo.shopName }</span> /
-			  	 ${vo.content }
+<%-- 			  	 ${vo.content } --%>
 		  	</div> 
 		  	주소: ${vo.address } <br>
 		  	전화번호: ${vo.tel } <br>

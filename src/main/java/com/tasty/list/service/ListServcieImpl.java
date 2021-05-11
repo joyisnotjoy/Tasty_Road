@@ -22,6 +22,7 @@ public class ListServcieImpl implements ListService {
 	@Inject
 	private ListMapper mapper;
 
+	// 1. 맛집 리스트
 	@Override
 	public List<shopMemberVO> list(PageObject pageObject) throws Exception {
 		// TODO Auto-generated method stub
@@ -31,5 +32,13 @@ public class ListServcieImpl implements ListService {
 		log.info("pageObject : " + pageObject);
 		return mapper.list(pageObject);
 	}
+
+	// 2. 맛집 보기
+	@Override
+	public shopMemberVO view(Long no) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.view(no);
+	}
+	
 
 }

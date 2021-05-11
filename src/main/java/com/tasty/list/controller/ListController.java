@@ -33,9 +33,27 @@ public class ListController {
 	log.info("list().pageObject : " + pageObject + " ..........");
 	model.addAttribute("list", service.list(pageObject));
 	
-	
 	return MODULE + "/list";
-	
-	
 	}
+	
+	// 2. 맛집 보기 /view.do -get
+	@GetMapping("/view.do")
+	// Model 객체 - 처리된 데이터를 JSP에 전달
+	// no, inc - 숫자 타입 : 원래는 String으로 데이터 전달. 없으면 null이된다. null을 숫자로
+	public String view(Model model, Long no, PageObject pageObject) throws Exception{
+		
+	model.addAttribute("vo", service.view(no));	
+		
+	return MODULE + "/view";
+	}
+	
+	// 3. 맛집 수정 폼 / update.do - get
+	
+	
+	// 3-1. 맛집 수정 처리 / update.do - post
+	
+	
+	// 4. 맛집 삭제 / delete.do - get
+	
+	
 }
