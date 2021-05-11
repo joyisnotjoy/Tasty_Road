@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace="pakage + interface" 동일해야 한다 -->
-<mapper namespace="com.tasty.chat.mapper.BookmarkMapper">
+<mapper namespace="com.tasty.bookmark.mapper.BookmarkMapper">
 
 <insert id="write">
 insert into bookmark(BMNo, status ,cnt ,id writeDate, shopNo)
