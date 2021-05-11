@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="pakage + interface" 동일해야 한다 -->
+<mapper namespace="com.tasty.chat.mapper.BookmarkMapper">
+
+<insert id="write">
+insert into bookmark(BMNo, status ,cnt ,id writeDate, shopNo)
+values (bookmark_seq.nextval, #{status}, #{cnt}, #{id}, #{writeDate}, #{shopNo})
+
+</insert>
+
+<delete id="delete">
+delete from bookmark
+where BMNo = #{BMNo}
+</delete>
+
+</mapper>
