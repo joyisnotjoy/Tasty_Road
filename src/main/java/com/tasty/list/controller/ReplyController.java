@@ -45,10 +45,10 @@ public class ReplyController {
 		Map<String, Object> map = new HashMap<>();
 		// 댓글에 대한 페이지 정보
 		PageObject replyPageObject = new PageObject(repPage, repPerPageNum);
-		log.info("list().replyPageObject : " + replyPageObject + ", no : " + shopNo);
+		log.info("list().replyPageObject : " + replyPageObject + ", shopNo : " + shopNo);
 		
 		map.put("pageObject", replyPageObject);
-		map.put("list", service.list(replyPageObject, shopNo));
+		map.put("rList", service.list(replyPageObject, shopNo));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}

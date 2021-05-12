@@ -28,7 +28,7 @@ $(function(){
 	// 처리 후 나타나는 메시지 : 글쓰기나 글삭제 처리된 후 리스트로 돌아 오면 보여준다.
 	// - sitemesh - default_decorator.jsp에서 해결
 	
-	// 게시판 글보기 페이지로 이동 함수
+	// 맛집 글보기 페이지로 이동 함수
 	$(".dataRow").click(function(){
 		var shopNo = $(this).find(".shopNo").text();
 		// 페이지 정보 붙이기
