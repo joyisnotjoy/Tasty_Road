@@ -2,6 +2,8 @@ package com.tasty.list.controller;
 
 import java.net.URLEncoder;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasty.list.service.ListService;
+import com.tasty.member.vo.LoginVO;
 import com.tasty.member.vo.shopMemberVO;
 import com.webjjang.util.PageObject;
 
@@ -33,8 +36,10 @@ public class ListController {
 	// 1. 맛집 리스트 - 검색 / list.do -get
 	@GetMapping("list.do")
 	// @ModelAttribute - 전달 받은 변수의 값을 model에 담아서 JSP까지 보내준다. 변수 이름으로 사용
-	public String list(Model model, @ModelAttribute PageObject pageObject) throws Exception{
+	public String list(Model model, @ModelAttribute PageObject pageObject, HttpSession session) throws Exception{
 	
+	
+		
 	log.info("list().pageObject : " + pageObject + " ..........");
 	model.addAttribute("list", service.list(pageObject));
 	
@@ -45,11 +50,20 @@ public class ListController {
 	@GetMapping("/view.do")
 	// Model 객체 - 처리된 데이터를 JSP에 전달
 	// no, inc - 숫자 타입 : 원래는 String으로 데이터 전달. 없으면 null이된다. null을 숫자로
-	public String view(Model model, String shopNo, PageObject pageObject) throws Exception{
+	public String view(Model model, String shopNo, PageObject pageObject, HttpSession session) throws Exception{
+		
+	LoginVO vo = new LoginVO();
+	
+	vo.setId("test");
+	
+	session.setAttribute("login", vo);
+	
+	log.info(session.getAttribute("login"));
 		
 	model.addAttribute("vo", service.view(shopNo));	
-		
+	
 	return MODULE + "/view";
+	
 	}
 	
 	// 3. 맛집 수정 폼 / update.do - get

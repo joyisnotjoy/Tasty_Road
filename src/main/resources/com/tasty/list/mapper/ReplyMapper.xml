@@ -4,49 +4,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace="pakage + interface" -->
 <mapper namespace="com.tasty.list.mapper.ReplyMapper">
-	<!-- 1. 게시판 댓글 리스트 -->
+	<!-- 1. 맛집 댓글 리스트 -->
 	<!-- id="method" -->
 	<!-- map-pageObject-startRow : pageObject.startRow -->
 	<!-- map-no : no -->
 	<select id="list" resultType="com.tasty.list.vo.ReplyVO">
-		select rnum, rno, no, content, writer, writeDate
+		select rnum, replyNo, content, id, writeDate
 		from
 		(
-			select rownum rnum, rno, no, content, writer, writeDate
+			select rownum rnum, replyNo, content, id, writeDate
 			from(
-				select rno, no, content, writer, writeDate
-				from board_reply
-				where no = #{no}
-				order by rno desc
+				select replyNo, content, id, writeDate
+				from reply
+				where shopNo = #{shopNo}
+				order by shopNo desc
 			)
 		)
 		where rnum between #{pageObject.startRow} and #{pageObject.endRow}
 	</select>
 	
-	<!-- 1-1. 게시판 댓글 전체 갯수 - 게시판 글번호 필요 -->
+	<!-- 1-1. 맛집 댓글 전체 갯수 - 게시판 글번호 필요 -->
 	<select id="getTotalRow" resultType="java.lang.Long">
-		select count(*) from board_reply
-		where no = #{no}
+		select count(*) from reply
+		where shopNo = #{shopNo}
 	</select>
 	
-	<!-- 2. 게시판 댓글보기 - 생략 : 리스트에 포함 -->
+	<!-- 2. 맛집 댓글보기 - 생략 : 리스트에 포함 -->
 	
-	<!-- 3. 게시판 댓글쓰기 -->
+	<!-- 3. 맛집 댓글쓰기 -->
 	<insert id="write">
-		insert into board_reply(rno, no, content, writer, pw)
-		values(board_reply_seq.nextval, #{no}, #{content}, #{writer}, #{pw})
+		insert into reply(rno, replyNo, content, id, writeDate)
+		values(reply_seq.nextval, #{replyNo}, #{content}, #{id}, #{writeDate})
 	</insert>
 	
-	<!-- 4. 게시판 댓글수정 -->
+	<!-- 4. 맛집 댓글수정 -->
 	<update id="update">
-		update board_reply set content=#{content}, writer=#{writer}
-		where rno = #{rno} and pw = #{pw}
+		update reply set content=#{content}
+		where rno = #{rno}
 	</update>
 	
 	<!-- 5. 게시판 댓글삭제 -->
 	<delete id="delete">
-		delete from board_reply
-		where rno = #{rno} and pw = #{pw}
+		delete from reply
+		where rno = #{rno}
 	</delete>
 	
 </mapper>

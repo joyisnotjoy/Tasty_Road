@@ -67,9 +67,9 @@ $(function(){
 	console.log("==================================");
 	console.log("JS Reply List Test!!!");
 	
-	// 전역 변수 선언 - $(function(){~~}); -33번 줄 안에 선언된 함수에서는 공통으로 사용 가능
-	var shopNo = ${vo.shopNo};
-	console.log("JS Reply List no : " + shopNo);
+	// 전역 변수 선언 - $(function(){~~});
+	var shopNo = '${vo.shopNo}';
+	console.log("JS Reply List shopNo : " + shopNo);
 	var repPage = 1;
 	var repPerPageNum = 5;
 	var replyUL = $(".chat");
@@ -77,10 +77,10 @@ $(function(){
 	// 글보기를 하면 바로 댓글 리스트 호출
 	showList();
 	
-	// function shewList() - no, page, perPageNum : 전역변수로 선언되어 있으므로 변수명 사용
+	// function showList() - no, page, perPageNum : 전역변수로 선언되어 있으므로 변수명 사용
 	function showList(){
 		// replyService 객체는 reply.js에서 선언하고 있다.
-		replyService.list(
+		replyService.rList(
 				// 서버에 넘겨 줄 데이터
 				{shopNo:shopNo, repPage:repPage, repPerPageNum:repPerPageNum},
 				// 성공했을 때의 함수. data라는 이름으로 list가 들어온다.
@@ -92,7 +92,7 @@ $(function(){
 					// 문자열로 만들어서 데이터 표시 - 눈으로 확인
 // 					alert(data);
 // 					alert(JSON.stringify(data));
-					var list = data.list;
+					var list = data.rList;
 // 					return; // 데이터만 확인하고 처리는 하지 않도록 하기 위해서
 
 // 					alert(list);
@@ -110,7 +110,7 @@ $(function(){
 							str += "<li class='left clearfix' data-rno='"+ list[i].rno +"'>";
 			    			str += "<div>";
 			    			str += "<div class='header'>";
-			    			str += "<strong class='primary-font replyWriterData'>"+list[i].writer+"</strong>";
+			    			str += "<strong class='primary-font replyWriterData'>"+list[i].id+"</strong>";
 			    			// class="muted" - 글자색을 회색으로 만들어 주는 BS CSS
 			    			str += "<small class='pull-right text-muted'>"
 			    				+ replyService.displyTime(list[i].writeDate)
@@ -140,7 +140,7 @@ $(function(){
 	// 댓글 모달창의 전역 변수
 	var replyModal = $("#replyModal");
 	
-	// 댓글 등록 버튼 이벤트 처리 (등록 폼) : 댓글의 모달 창 정보 조정과 보이기 ------------------------
+// 	// 댓글 등록 버튼 이벤트 처리 (등록 폼) : 댓글의 모달 창 정보 조정과 보이기 ------------------------
 	$("#writeReplyBtn").click(function(){
 // 		alert("댓글등록");
 
@@ -157,7 +157,7 @@ $(function(){
 		footer.find("#replyModalUpdateBtn, #replyModalDeleteBtn").hide()
 		
 		// reply > Form  input 데이터 지우기 : intput 중에서 id="replyNo"는 제외시킨다. not("#replyNo")
-		replyModal.find("input, textarea").not("#replyNo").val("");
+		replyModal.find("input, textarea").not("#replyNo, #replyWriter").val(""); 
 		
 		replyModal.modal("show");
 	});
@@ -167,8 +167,7 @@ $(function(){
 		var reply = {};
 		reply.no = $("#replyNo").val();
 		reply.content = $("#replyContent").val();
-		reply.writer = $("#replyWriter").val();
-		reply.pw = $("#replyPw").val();
+		reply.id = $("#replyWriter").val();
 // 		alert(reply);
 // 		alert(JSON.stringify(reply));
 
@@ -457,12 +456,12 @@ class="btn btn-default">리스트</a>
         	<input type="hidden" name="shopNo" value="${vo.shopNo }">
         	<input type="hidden" name="perPageNum"
         	value="${pageObject.perPageNum }">
-        	<div class="form-group">
-        		<label>비밀번호 : </label>
-        		<input name="pw" type="password" class="form-control" id="pw" 
-			      pattern="[^가-힣ㄱ-ㅎ]{4,20}" required="required"
-			      title="4-20자. 한글은 입력할 수 없습니다." />
-        	</div>
+<!--         	<div class="form-group"> -->
+<!--         		<label>비밀번호 : </label> -->
+<!--         		<input name="pw" type="password" class="form-control" id="pw"  -->
+<!-- 			      pattern="[^가-힣ㄱ-ㅎ]{4,20}" required="required" -->
+<!-- 			      title="4-20자. 한글은 입력할 수 없습니다." /> -->
+<!--         	</div> -->
         </form>
       </div>
       <div class="modal-footer">
@@ -506,15 +505,15 @@ class="btn btn-default">리스트</a>
 		      required="required"></textarea>
 		    </div>
 			<div class="form-group" id="replyWriterDiv">
-			  <label for="replyWriter">작성자:</label>
+			  <label for="replyWriter">아이디:</label>
 			  <input name="writer" type="text" class="form-control" id="replyWriter"
-			  required="required" pattern="[A-Za-z가-힣][A-Za-z가-힣0-9]{1,9}">
+			  required="required" pattern="[A-Za-z가-힣][A-Za-z가-힣0-9]{1,9}" value="${login.id }">
 			</div>		    
-			<div class="form-group" id="replyPwDiv">
-			  <label for="replyPw">비밀번호:</label>
-			  <input name="pw" type="text" class="form-control" id="replyPw"
-			  required="required" pattern=".{4,20}">
-			</div>		    
+<!-- 			<div class="form-group" id="replyPwDiv"> -->
+<!-- 			  <label for="replyPw">비밀번호:</label> -->
+<!-- 			  <input name="pw" type="text" class="form-control" id="replyPw" -->
+<!-- 			  required="required" pattern=".{4,20}"> -->
+<!-- 			</div>		     -->
 		  </form>
       </div>
       <div class="modal-footer">
