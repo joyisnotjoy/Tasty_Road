@@ -69,7 +69,7 @@ $(function(){
 	
 	// 전역 변수 선언 - $(function(){~~}); -33번 줄 안에 선언된 함수에서는 공통으로 사용 가능
 	var shopNo = ${vo.shopNo};
-	console.log("JS Reply List no : " + no);
+	console.log("JS Reply List no : " + shopNo);
 	var repPage = 1;
 	var repPerPageNum = 5;
 	var replyUL = $(".chat");
@@ -82,7 +82,7 @@ $(function(){
 		// replyService 객체는 reply.js에서 선언하고 있다.
 		replyService.list(
 				// 서버에 넘겨 줄 데이터
-				{no:no, repPage:repPage, repPerPageNum:repPerPageNum},
+				{shopNo:shopNo, repPage:repPage, repPerPageNum:repPerPageNum},
 				// 성공했을 때의 함수. data라는 이름으로 list가 들어온다.
 // 				function(list){
 				function(data){
@@ -222,7 +222,7 @@ $(function(){
 	
 	// 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------------
 	$("#replyModalUpdateBtn").click(function(){
-// 		alert("수정 처리");
+		alert("수정 처리");
 		// 데이터 수집
 		var reply = {};
 		reply.rno = $("#replyRno").val();
@@ -373,11 +373,11 @@ $(function(){
   	<div class="col-md-10">${vo.total }</div>
   </li>
   <li class="list-group-item row">
-  	<div class="col-md-2 title_label">현재 인원</div>
+  	<div class="col-md-2 title_label">현재 자리</div>
   	<div class="col-md-10">${vo.now }</div>
   </li>
   <li class="list-group-item row">
-  	<div class="col-md-2 title_label">대기</div>
+  	<div class="col-md-2 title_label">남은 자리</div>
   	<div class="col-md-10">${vo.wait }</div>
   </li>
 <!--   <li class="list-group-item row"> -->

@@ -15,7 +15,7 @@ public interface ListMapper {
 
 	// 2. 맛집 보기
 	public shopMemberVO view(String shopNo);
-	
+
 	// 2-1. 맛집 조회수 1 증가
 //	public int increase(Long no);
 
@@ -23,11 +23,10 @@ public interface ListMapper {
 //	public int write(shopMemberVO vo);
 	
 	// 4. 게시판 글수정
-//	public int update(shopMemberVO vo);
+	public int update(shopMemberVO vo);
 	
 	// 5. 게시판 글삭제
-//	public int delete(shopMemberVO vo);
-	
+	public int delete(shopMemberVO vo);
 
 
 }

@@ -39,6 +39,20 @@ public class ListServcieImpl implements ListService {
 		// TODO Auto-generated method stub
 		return mapper.view(shopNo);
 	}
+
+	// 3. 맛집 수정
+	@Override
+	public int update(shopMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.update(vo);
+	}
+
+	// 4. 맛집 삭제
+	@Override
+	public int delete(shopMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.delete(vo);
+	}
 	
 
 }

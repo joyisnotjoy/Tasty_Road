@@ -4,9 +4,9 @@
 <!-- namespace="pakage + interface" 동일해야 한다 -->
 <mapper namespace="com.tasty.bookmark.mapper.BookmarkMapper">
 
-<insert id="write">
-insert into bookmark(BMNo, status ,cnt ,id writeDate, shopNo)
-values (bookmark_seq.nextval, #{status}, #{cnt}, #{id}, #{writeDate}, #{shopNo})
+<insert id="like">
+insert into bookmark(BMNo, status ,cnt ,id, shopNo)
+values (bookmark_seq.nextval, 1, 1, #{id}, #{shopNo})
 
 </insert>
 

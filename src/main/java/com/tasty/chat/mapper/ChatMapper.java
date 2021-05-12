@@ -23,6 +23,6 @@ public interface ChatMapper {
 	public int update(ChatVO vo);
 	
 	//5. chat delete
-	public int delete(ChatVO vo);
+	public int delete(Long no);
 
 }
