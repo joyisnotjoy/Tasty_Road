@@ -6,7 +6,7 @@
 <mapper namespace="com.tasty.list.mapper.ListMapper">
 	<!-- 1. 게시판 리스트 -->
 	<!-- id="method" -->
-	<select id="list" resultType="com.tasty.list.vo.shopMemberVO">
+	<select id="list" resultType="com.tasty.member.vo.shopMemberVO">
 <!-- 		select rnum, m.shopNo, m.shopName, m.content, m.address, b.cnt -->
 <!-- 		from -->
 <!-- 		( -->
@@ -15,12 +15,12 @@
 <!-- 		select m.shopNo, m.shopName, m.content, m.address, b.cnt -->
 <!-- 				from shopMember m, bookMark b -->
 <!-- 				WHERE m.shopNo = b.shopNo; -->
-		select rnum, shopNo, shopName, content, address 
+		select rnum, shopNo, shopName, content, address, tel
 		from
 		(
-			select rownum rnum, shopNo, shopName, content, address 
+			select rownum rnum, shopNo, shopName, content, address, tel 
 			from(
-				select shopNo, shopName, content, address 
+				select shopNo, shopName, content, address, tel
 				from shopMember
 				
 				<!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
@@ -72,18 +72,18 @@
 	
 	<!-- 1-1. 게시판 전체 글의 갯수 -->
 	<select id="getTotalRow" resultType="java.lang.Long">
-		select count(*) from member
+		select count(*) from shopMember
 		
 		  <!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
 		  <include refid ="search" />
 
 	</select>
 	
-	<!-- 2. 게시판 글보기 -->
-	<select id="view" resultType="org.zerock.board.vo.BoardVO">
-		select id, name, email, gender
-		from member
-		where id = #{id}
+	<!-- 2. 맛집 보기 -->
+	<select id="view" resultType="com.tasty.member.vo.shopMemberVO">
+		select shopName, shopNo, address, tel, content, now, total, wait
+		from shopMember
+		where shopNo = #{shopNo}
 	</select>
 	
 	<!-- 2-2. 게시판 조회수 1증가 -->
@@ -98,16 +98,17 @@
 <!-- 		values(board_seq.nextval, #{title}, #{content}, #{writer}, #{pw}) -->
 <!-- 	</insert> -->
 	
-	<!-- 4. 게시판 글수정 -->
-<!-- 	<update id="update"> -->
-<!-- 		update board set title = #{title}, content=#{content}, writer=#{writer} -->
-<!-- 		where no = #{no} and pw = #{pw} -->
-<!-- 	</update> -->
+	<!-- 4. 맛집 수정 -->
+	<update id="update">
+		update shopMember set shopName = #{shopName}, address = #{address},
+		 content = #{content}, tel = #{tel}
+		where shopNo = #{shopNo}
+	</update>
 	
-	<!-- 5. 게시판 글삭제 -->
-<!-- 	<delete id="delete"> -->
-<!-- 		delete from board -->
-<!-- 		where no = #{no} and pw = #{pw} -->
-<!-- 	</delete> -->
+	<!-- 5. 맛집 삭제 -->
+	<delete id="delete">
+		delete from shopMember
+		where no = #{shopNo} and pw = #{pw}
+	</delete>
 	
 </mapper>

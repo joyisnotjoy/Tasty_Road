@@ -58,10 +58,10 @@ public class ChatServiceImpl implements ChatService {
 
 	//5. 삭제
 	@Override
-	public int delete(ChatVO vo) throws Exception {
+	public int delete(Long no) throws Exception {
 		// TODO Auto-generated method stub
 		
-		return mapper.delete(vo);
+		return mapper.delete(no);
 	}
 
 }

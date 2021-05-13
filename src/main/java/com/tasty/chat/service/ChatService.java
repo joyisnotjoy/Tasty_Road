@@ -21,6 +21,6 @@ public interface ChatService {
 	public int update(ChatVO vo) throws Exception;
 	
 	//5. 채팅방 삭제하기
-	public int delete(ChatVO vo) throws Exception;
+	public int delete(Long no) throws Exception;
 
 }
