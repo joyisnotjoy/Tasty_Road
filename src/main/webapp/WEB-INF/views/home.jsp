@@ -8,8 +8,6 @@
 <h1>
 	Hello world!  
 </h1>
-<a href="bookmark/like.do">like</a>
-<a href="bookmark/unlike.do">unlike</a>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
