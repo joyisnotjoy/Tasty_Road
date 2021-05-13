@@ -14,9 +14,25 @@
 		insert into member(id, pw, name, gender, birth, tel, email, address, memberNo)
 		values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{tel}, #{email}, #{address}, member_seq.nextval)
 	</insert>
+	
+	<!-- 아이디 중복 검사 -->
+	<select id="checkId" resultType="com.tasty.member.vo.MemberVO">
+		select id from member where id = #{id}
+	</select>
+	
+	<!-- 이메일 중복 검사 -->
+	<select id="checkEmail" resultType="com.tasty.member.vo.MemberVO">
+		select email from member where email = #{email} and id = #{id}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="com.tasty.member.vo.MemberVO">
+		select id from member where email = #{email} and name = #{name}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw" >
+		update member set pw = #{pw} where id = #{id}
+	</update>
 
-	<insert id="shopJoin">
-		insert into member(id, pw, name, gender, birth, tel, email)
-		values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{tel}, #{email})
-	</insert>
 </mapper>
