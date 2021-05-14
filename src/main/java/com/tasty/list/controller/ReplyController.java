@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,16 +61,63 @@ public class ReplyController {
 	public ResponseEntity<String> write(@RequestBody ReplyVO vo) throws Exception{
 		log.info("write().vo : " + vo);
 		
+//		ReplyVO reply = new ReplyVO();
+//		reply.setReplyNo(ReplyNo);
 		// db에 데이터 저장하기
 		service.write(vo);
-		
+		log.info(service.write(vo));
 		return new ResponseEntity<String>
 		("댓글이 등록되었습니다.",HttpStatus.OK);
 	}
 	
 	// 0. 댓글 수정 처리 / update.do - patch
-	
+	@PatchMapping(value = "/update.do",
+			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
+			produces = {"application/text; charset=utf-8"})
+	public ResponseEntity<String> update(@RequestBody ReplyVO vo) throws Exception {
+		
+		log.info("update().vo : " + vo);
+		
+		int result = service.update(vo);
+		
+		// 전달되는 데이터의 선언
+		String msg = "게시판 글수정이 성공적으로 되었습니다.";
+		HttpStatus status = HttpStatus.OK;
+		
+		if(result == 0) {
+			msg = "게시판 수정 실패 - 정보를 확인해 주세요.";
+			status = HttpStatus.NOT_MODIFIED;
+		}
+		
+		log.info("update().msg : " + msg);
+		
+		return new ResponseEntity<String>(msg, status);
+	}
 	
 	// 0. 댓글 삭제 처리 / delete.do - delete 
+	@DeleteMapping(value = "/delete.do",
+			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
+			produces = {"application/text; charset=utf-8"})
+	public ResponseEntity<String> delete(@RequestBody ReplyVO vo)
+			throws Exception {
+		
+		log.info("delete().vo : " + vo);
+		
+		int result = service.delete(vo);
+
+		// 전달되는 데이터의 선언
+		String msg = "게시판 삭제가 성공적으로 되었습니다.";
+		HttpStatus status = HttpStatus.OK;
+		
+		if(result == 0) {
+			msg = "게시판 삭제 실패 - 정보를 확인해 주세요.";
+			status = HttpStatus.NOT_MODIFIED;
+		}
+		
+		log.info("update().msg : " + msg);
+		
+		return new ResponseEntity<String>(msg, status);
+	}
+	
 	
 }
