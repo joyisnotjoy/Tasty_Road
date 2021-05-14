@@ -95,19 +95,23 @@ public class BookmarkController {
 //	
 	// 3. 맛집 수정 폼 / update.do - get
 	@GetMapping("like.do")
-	public void like(BookmarkVO vo) throws Exception {
-		
+	public String like(BookmarkVO vo) throws Exception {
 		vo.setId("test");
 		vo.setShopNo("123-45-67890");
-		vo.setStatus(null);
 		log.info(vo);
 		 service.like(vo);
+		return "/home";
+	
+	
+		}
+	// 2. 맛집 북마크 삭제 / delete.do - get
+	@GetMapping("unlike.do")
+	public String unlike(BookmarkVO vo) throws Exception {
+		vo.setId("test");
+		vo.setShopNo("123-45-67890");
+		log.info(vo);
+		service.unlike(vo);
+		return  "/home";
 	}
-	
-	// 3-1. 맛집 수정 처리 / update.do - post
-	
-	
-	// 4. 맛집 삭제 / delete.do - get
-	
 	
 }
