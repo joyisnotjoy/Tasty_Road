@@ -1,11 +1,14 @@
 package com.tasty.member.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -89,15 +92,41 @@ public class MemberController {
 		return "redirect:/board/list.do";
 	}
 
+	// 이용약관
 	@GetMapping("/readme.do")
-	public String readme() {
+	public String readme() throws Exception {
 		
 		return MODULE + "/readme";
 	}
 	
-	@PostMapping("/popup/jusoPopup.do")
-	public String jusoPopup() {
+	// 아이디 찾기 폼
+	@GetMapping("/findIdForm.do")
+	public String findIdForm() throws Exception {
 		
-		return "/popup/jusoPopup";
+		return MODULE + "/findIdForm";
 	}
+	
+	
+	@PostMapping("/findId.do")
+	public String findId(HttpServletResponse response, Model model, MemberVO vo) throws Exception {
+		
+		model.addAttribute("vo", service.findId(response, vo));
+		
+		return MODULE + "/findId";
+	}
+	
+	// 비밀번호 찾기 폼
+	@GetMapping("/findPwForm.do")
+	public String findPwForm() throws Exception{
+		return MODULE + "/findPwForm";
+	}
+	
+	// 비밀번호 찾기 완료
+	@PostMapping("/findPw.do")
+	public String findPw(@ModelAttribute MemberVO vo,Model model , HttpServletResponse response) throws Exception{
+		model.addAttribute("vo", service.findPw(response, vo));
+		log.info("비밀번호 변경 Controller : " + vo);
+		return MODULE +  "/findPw";
+	}
+	
 }
