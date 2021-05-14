@@ -30,10 +30,12 @@ public class ReplyServiceImpl implements ReplyService {
 		// 게시판 글번호에 맞는 전체 데이터 갯수 가져오기
 //		pageObject.setTotalRow(mapper.getTotalRow(shopNo));
 		pageObject.setTotalRow(mapper.getTotalRow(shopNo));
+		log.info(shopNo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pageObject", pageObject);
 		map.put("shopNo", shopNo);
 		return mapper.list(map);
+		
 	}
 
 	@Override

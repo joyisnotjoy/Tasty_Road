@@ -5,14 +5,14 @@
 <mapper namespace="com.tasty.bookmark.mapper.BookmarkMapper">
 
 <insert id="like">
-insert into bookmark(BMNo, status ,cnt ,id, shopNo)
-values (bookmark_seq.nextval, 1, 1, #{id}, #{shopNo})
+insert into bookmark(id, shopNo)
+values (#{id}, #{shopNo})
 
 </insert>
 
-<delete id="delete">
+<delete id="unlike">
 delete from bookmark
-where BMNo = #{BMNo}
+where id = #{id} and shopNo = #{shopNo}
 </delete>
 
 </mapper>

@@ -43,7 +43,7 @@ var chatService = (
 					else alert("채팅 전송 성공");
 				},
 				error: function(xht, status, err) {
-					if (error) error(err);
+					if (error) error(err); 
 					else alert("전송 실패");
 				}
 			}); //$.ajax 의 끝
