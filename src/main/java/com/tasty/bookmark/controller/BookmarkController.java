@@ -27,8 +27,6 @@ public class BookmarkController {
 	private BookmarkService service;
 	
 	//1. 맛집 북마크 등록 / write
-<<<<<<< HEAD
-=======
 	@PostMapping(value = "/like.do",
 			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 			produces = {"application/text; charset=utf-8"})
@@ -96,7 +94,6 @@ public class BookmarkController {
 //	}
 //	
 	// 3. 맛집 수정 폼 / update.do - get
->>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
 	@GetMapping("like.do")
 	public String like(BookmarkVO vo) throws Exception {
 		vo.setId("test");
