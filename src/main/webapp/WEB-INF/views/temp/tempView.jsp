@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Temp</title>
+<script type="text/javascript" src="/js/bookmark.js"></script>
+<script type="text/javascript" src="/js/waiting.js"></script>
 </head>
 <body>
  <div class="container">
