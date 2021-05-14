@@ -19,18 +19,16 @@ public class BookmarkServiceImpl implements BookmarkService{
 	private BookmarkMapper mapper;
 	
 	@Override
-	public int like(BookmarkVO vo) throws Exception {
+	public void like(BookmarkVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		
+		mapper.like(vo);
 		log.info(vo);
-		return mapper.like(vo);
 	}
 
 	@Override
 	public void unlike(BookmarkVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		mapper.unlike(vo);
-		log.info(vo);
 	}
 
 }
