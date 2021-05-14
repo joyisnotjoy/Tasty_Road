@@ -24,6 +24,9 @@
 //					alert(data);
 					// callback : 데이터를 가져오면 처리하는 함수 
 					// - 가져온 list를 HTML만듦. 지정한 곳에 넣어준다.
+					
+					alert("test");
+					
 					if(callback){
 						callback(data);
 					}
@@ -164,15 +167,16 @@
 	}
 	
 		
-	var wait = $("#wait");
 	
 	$("#more").click(function () {
 	
 		// alert(shopNo);
 		
-		alert("click");
+		// alert("click");
 	
 		showWait();
+		
+		var wait = $("#wait");
 		
 		alert("실행");
 		 

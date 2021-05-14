@@ -29,7 +29,7 @@ public class waitinController {
 	@Qualifier("lsi")
 	private ListService lService;
 	
-	@GetMapping(value = "wait.do", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@GetMapping(value = "/wait.do", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<shopMemberVO> wait(String shopNo) throws Exception {
 		
 		log.info("shopNo : " + shopNo);
