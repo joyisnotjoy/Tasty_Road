@@ -27,3 +27,21 @@
 		}
 	});//$.ajax의 끝
 	}
+	//즐겨찾기 완료 alert 창	
+	$(function () {
+		
+		$(".like").click(function () {
+			
+			alert("즐겨찾기 완료");
+			
+		});
+	});
+	//즐겨찾기 해제 alert 창	
+	$(function () { 
+		
+		$(".unLike").click(function () {
+			
+			alert("즐겨찾기 해제 완료");
+			
+		});
+	});
