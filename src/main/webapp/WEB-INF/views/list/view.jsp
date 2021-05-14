@@ -256,12 +256,12 @@ $(function(){
 	
 	// 댓글 삭제 폼 : 모달 (replyModal) ----------------------------------------------
 	$(".chat").on("click", ".replyDeleteBtn", function(){
-		alert("댓글 삭제");
+// 		alert("댓글 삭제");
 		// 모달창 제목 바꾸기
 		$("#replyModalTitle").text("Reply Delete, 댓글 삭제 창");
 
 		// 작업할 데이터의 입력란을 보이게 안보이게
-		$("#replyshopNoDiv, #replyModal .form-group").show();
+		$("#replyNo, #replyshopNoDiv, #replyModal .form-group").show();
 		$("#replyContentDiv, #replyWriterDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
@@ -288,7 +288,7 @@ $(function(){
 // 		alert("댓글 삭제 처리");
 		// 데이터 수집
 		var reply= {};
-		reply.shopNo = $("#replyshopNo").val();
+		reply.replyNo = $("#replyNo").val();
 		reply.id = $("#replyWriter").val();
 		
 		// reply.js 안에 있는 replyService.delete(reply JSON, 성공함수, 오류함수)
@@ -490,6 +490,11 @@ class="btn btn-default">리스트</a>
 <!-- 			  <input name="rno" type="text" class="form-control" id="replyRno" -->
 <!-- 			  readonly="readonly"> -->
 <!-- 			</div>		     -->
+			<div class="form-group" id="replyNoDiv">
+			  <label for="replyNo">댓글 번호:</label>
+			  <input name="replyNo" type="text" class="form-control" id="replyNo"
+			  readonly="readonly" value="${vo.replyNo }">
+			</div>
 			<div class="form-group" id="replyshopNoDiv">
 			  <label for="replyshopNo">맛집 등록 번호:</label>
 			  <input name="shopNo" type="text" class="form-control" id="replyshopNo"
