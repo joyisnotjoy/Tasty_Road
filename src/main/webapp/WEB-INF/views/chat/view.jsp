@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="#">
 
-<title>메시지 보기</title>
+<title>Chatting</title>
 
 <!-- Awesome 4 icons lib : class="fa~ -->
 <link rel="stylesheet"
@@ -70,7 +70,7 @@
 						for(var i = 0; i < list.length; i++){
 							console.log(list[i]);
 							
-							if(a == b){ // id1과 login.id가 같다면
+							if(list[i].id == a){ // id1과 login.id가 같다면
 								
 								str +="<div class='row' id='myF'>";
 									str +="<div class='col-sm-4 pull-right' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
@@ -80,7 +80,7 @@
 								str +="</div>";
 							
 // 							}else{
-							}else if(c == b){ //id2랑 login.id가 같으면
+							}else if(list[i].id == c){ //id2랑 login.id가 같으면
 								
 								str +="<div class='row' id='myF'>";
 									str +="<div class='col-sm-4 pull-left' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
@@ -125,7 +125,7 @@
 // 		$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
 		$(window).animate({scrollTop: $(document).height() + $(window).height()});
 		
-		// setInterval(function(){ showList(); }, 3000);
+		setInterval(function(){ showList(); }, 3000);
 	});
 </script>
 </head>
