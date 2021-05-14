@@ -11,8 +11,17 @@ public interface MemberMapper {
 	// 회원가입
 	public int join(MemberVO vo);
 	
+	
+	// 아이디 중복검사 (int 형)
+	public int check_id(String id);
+	// 이메일 중복검사 (int 형)
+	public int check_email(String email);
+	
+	
+	// 아이디 중복검사(String 형)
 	public MemberVO checkId(String id);
 	
+	// 이메일 중복검사(VO 형)
 	public MemberVO checkEmail(MemberVO vo);
 
 	// 아이디 찾기

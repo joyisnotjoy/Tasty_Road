@@ -26,16 +26,71 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
 	
 	@Override
-	public LoginVO login(LoginVO vo) throws Exception {
-		// TODO Auto-generated method stub
+	public LoginVO login(LoginVO vo, HttpServletResponse response) throws Exception {
+		
+		// out.println을 쓰기 위한 선언
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		LoginVO data = mapper.login(vo);
+		
+		log.info("login().vo : " + vo);
+		log.info("login().data : " + data);
+		
+		if(data == null) {
+			out.println("<script>");
+			out.println("alert('가입된 정보가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		}else {
+			out.println("<script>");
+			out.println("location.href='/board/list.do'");
+			out.println("</script>");
+			out.close();
+		}
 		return mapper.login(vo);
 	}
 
 	@Override
-	public int join(MemberVO vo) throws Exception {
+	public int join(MemberVO vo, HttpServletResponse response) throws Exception {
 		
-		// TODO Auto-generated method stub
-		return mapper.join(vo);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		if (mapper.check_id(vo.getId()) == 1) {
+			out.println("<script>");
+			out.println("alert('동일한 아이디가 있습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return 0;
+		} else if (mapper.check_email(vo.getEmail()) == 1) {
+			out.println("<script>");
+			out.println("alert('동일한 이메일이 있습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return 0;
+		} else {
+			mapper.join(vo);
+			return 1;
+		}
+	}
+	
+	@Override
+	public void check_id(String id, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(mapper.check_id(id));
+		out.close();
+		
+	}
+
+	@Override
+	public void check_email(String email, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(mapper.check_email(email));
+		out.close();
 	}
 
 
@@ -149,6 +204,8 @@ public class MemberServiceImpl implements MemberService {
 			return vo;
 		}
 	}
+
+
 
 }
  
