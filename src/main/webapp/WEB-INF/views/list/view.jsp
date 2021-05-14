@@ -6,13 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 보기</title>
-
-<!-- bootstrap 라이브러리 등록 - CDN 방식 : sitemesh에서 decorator.jsp에서 한꺼번에 해결 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <!-- Awesome 4 icons lib : class="fa~ -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -107,7 +100,7 @@ $(function(){
 						for(var i = 0; i < list.length; i++){
 							console.log(list[i]);
 							// tag 만들기 - 데이터 한개당 li tag 하나가 생긴다.
-							str += "<li class='left clearfix' data-rno='"+ list[i].rno +"'>";
+							str += "<li class='left clearfix' data-rno='"+ list[i].replyNo +"'>";
 			    			str += "<div>";
 			    			str += "<div class='header'>";
 			    			str += "<strong class='primary-font replyWriterData'>"+list[i].id+"</strong>";
@@ -156,8 +149,8 @@ $(function(){
 		footer.find("button").show();
 		footer.find("#replyModalUpdateBtn, #replyModalDeleteBtn").hide()
 		
-		// reply > Form  input 데이터 지우기 : intput 중에서 id="replyNo"는 제외시킨다. not("#replyNo")
-		replyModal.find("input, textarea").not("#replyNo, #replyWriter").val(""); 
+		// reply > Form  input 데이터 지우기 : intput 중에서 id="replyshopNo"는 제외시킨다. not("#replyshopNo")
+		replyModal.find("input, textarea").not("#replyshopNo, #replyWriter").val(""); 
 		
 		replyModal.modal("show");
 	});
@@ -165,7 +158,7 @@ $(function(){
 	// 모달 댓글 등록 버튼에 대한 이벤트 처리 - 입력된 데이터를 가져와서 JSON 데이터 만들기 - 서버에 전송
 	$("#replyModalWriteBtn").click(function(){
 		var reply = {};
-		reply.no = $("#replyNo").val();
+		reply.shopNo = $("#replyshopNo").val();
 		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
 // 		alert(reply);
@@ -175,7 +168,7 @@ $(function(){
 		replyService.write(reply,
 			// 성공했을 때의 처리 함수
 			function(result){
-				alert(result);
+// 				alert(result);
 				replyModal.modal("hide");
 				showList();
 			}
@@ -191,8 +184,8 @@ $(function(){
 		$("#replyModalTitle").text("Reply Update");
 		
 		// 작업할 데이터의 입력란을 보이게 안보이게
-		$("#replyModal .form-group").show();
-		$("#replyNoDiv").hide();
+		$("#replyshopNoDiv, #replyModal .form-group").show(); 
+// 		$("#replyNoDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
 		var footer = $("#replyModal .modal-footer");
@@ -205,16 +198,16 @@ $(function(){
 		var li = $(this).closest("li");
 		
 		// html tag 안에 속성으로 data-rno="2" 값을 넣어 둔것은 obj.data("rno")로 찾아서 쓴다.
-		var rno = li.data("rno");
+		var shopNo = li.data(".replyshopNoData");
 		var content = li.find(".replyContentData").text();
-		var writer = li.find(".replyWriterData").text();
+		var id = li.find(".replyWriterData").text();
 		
 		// 데이터 셋팅
-		$("#replyRno").val(rno);
+		$("#replyshopNo").val(shopNo);
 		$("#replyContent").val(content);
-		$("#replyWriter").val(writer);
+		$("#replyWriter").val(id);
 		// 비밀번호는 지운다.
-		$("#replyPw").val("");
+// 		$("#replyPw").val("");
 		
 		replyModal.modal("show");
 	});
@@ -224,10 +217,10 @@ $(function(){
 		alert("수정 처리");
 		// 데이터 수집
 		var reply = {};
-		reply.rno = $("#replyRno").val();
+		reply.shopNo = $("#replyshopNo").val();
 		reply.content = $("#replyContent").val();
-		reply.writer = $("#replyWriter").val();
-		reply.pw = $("#replyPw").val();
+		reply.id = $("#replyWriter").val();
+// 		reply.pw = $("#replyPw").val();
 		
 		// 수집한 데이터 확인
 // 		alert(JSON.stringify(reply));
@@ -266,8 +259,8 @@ $(function(){
 		$("#replyModalTitle").text("Reply Delete");
 
 		// 작업할 데이터의 입력란을 보이게 안보이게
-		$("#replyModal .form-group").show();
-		$("#replyNoDiv, #replyContentDiv, #replyWriterDiv").hide();
+		$("#replyshopNoDiv, #replyModal .form-group").show();
+		$("#replyContentDiv, #replyWriterDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
 		var footer = $("#replyModal .modal-footer");
@@ -293,8 +286,8 @@ $(function(){
 // 		alert("댓글 삭제 처리");
 		// 데이터 수집
 		var reply= {};
-		reply.rno = $("#replyRno").val();
-		reply.pw = $("#replyPw").val();
+		reply.shopNo = $("#replyshopNo").val();
+		reply.id = $("#replyId").val();
 		
 		// reply.js 안에 있는 replyService.delete(reply JSON, 성공함수, 오류함수)
 		replyService.delete(reply,
@@ -349,7 +342,7 @@ $(function(){
   </li>
   <li class="list-group-item row">
   	<div class="col-md-2 title_label">사업자번호</div>
-  	<div class="col-md-10">${vo.shopNo }</div>
+  	<div class="col-md-10" id="viewshopNo">${vo.shopNo }</div>
   </li>
   <li class="list-group-item row">
   	<div class="col-md-2 title_label">주소</div>
@@ -441,7 +434,7 @@ class="btn btn-default">리스트</a>
 </div>
 <!-- container 끝 -->
 
-<!-- Modal - 게시판 글삭제 시 사용되는 모달 창 -->
+<!-- Modal - 맛집 정보 삭제 시 사용되는 모달 창 -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -449,11 +442,11 @@ class="btn btn-default">리스트</a>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">게시판 글삭제 비밀번호 입력</h4>
+        <h4 class="modal-title">맛집 정보 삭제 알림창</h4>
       </div>
       <div class="modal-body">
         <form action="delete.do" method="post" id="modal_form">
-        	<input type="hidden" name="shopNo" value="${vo.shopNo }">
+        	<input name="shopNo" readonly="readonly" value="정말 삭제 하시겠습니까?">
         	<input type="hidden" name="perPageNum"
         	value="${pageObject.perPageNum }">
 <!--         	<div class="form-group"> -->
@@ -489,14 +482,14 @@ class="btn btn-default">리스트</a>
       </div>
       <div class="modal-body">
 		  <form>
-			<div class="form-group" id="replyRnoDiv">
-			  <label for="replyRno">댓글번호:</label>
-			  <input name="rno" type="text" class="form-control" id="replyRno"
-			  readonly="readonly">
-			</div>		    
-			<div class="form-group" id="replyNoDiv">
-			  <label for="replyNo">게시판 번호:</label>
-			  <input name="no" type="text" class="form-control" id="replyNo"
+<!-- 			<div class="form-group" id="replyRnoDiv"> -->
+<!-- 			  <label for="replyRno">댓글번호:</label> -->
+<!-- 			  <input name="rno" type="text" class="form-control" id="replyRno" -->
+<!-- 			  readonly="readonly"> -->
+<!-- 			</div>		     -->
+			<div class="form-group" id="replyshopNoDiv">
+			  <label for="replyshopNo">게시판 번호:</label>
+			  <input name="shopNo" type="text" class="form-control" id="replyshopNo"
 			  readonly="readonly" value="${vo.shopNo }">
 			</div>		    
 		    <div class="form-group" id="replyContentDiv">

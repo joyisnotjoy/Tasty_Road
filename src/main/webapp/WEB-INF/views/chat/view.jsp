@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="#">
 
-<title>메시지 보기</title>
+<title>Chatting</title>
 
 <!-- Awesome 4 icons lib : class="fa~ -->
 <link rel="stylesheet"
@@ -22,7 +22,7 @@
 
 <script type="text/javascript">
 	$(function() {
-
+		
 		// 삭제 버튼 이벤트 - 다시 확인한다.
 		$("#deleteRoom").click(function() {
 			if (!confirm("메시지를 정말 삭제하시겠습니까?"))
@@ -35,10 +35,17 @@
 		
 		//전역 변수 선언 - $(function(){}); : 이 안에 선언된 함수에서는 공통으로 사용할 수 있다. 
 		var no = ${vo.chatNo};
+		var a = "${vo.id1}";
+		var b = "${login.id}";
+		var c = "${vo.id2}";
+		var d = "${cvo.id}";
+		
 		console.log(" * JS chat List no : " + no + " * ");
-		//key값:변수이름
-// 		var page = 1;
-// 		var perPageNum = 10;
+		console.log(" * JS chat List id1 : " + a + " * ");
+		console.log(" * JS chat List id2 : " + c + " * ");
+		console.log(" * JS chat List login.id : " + b + " * ");
+		console.log(" * JS chat List id : " + d + " * "); // 확인 xxxx
+		
 		var chatServiceUL = $(".chat");
 		
 		//글보기를 하면 바로 댓글 리스트를 호출
@@ -50,7 +57,7 @@
 // 					alert(data);
 // 					alert(JSON.stringify(data));
 					var list = data;
-// 					alert(list.length); 
+// 					alert(list.length);
 					
 					var str ="";
 					if(!list || list.length == 0){
@@ -59,13 +66,30 @@
 						str += "<h5 align='center'>전송된 채팅이 없습니다.</h5>"
 						
 					}else{
-// 						alert("데이터O");
+// 						alert("데이터O"); 
 						for(var i = 0; i < list.length; i++){
 							console.log(list[i]);
-							str +="<div class='accepter' data-chatNo='" + list[i].chatNo + "'>";
-							str +="<label>" + list[i].id + " : <br></label>";
-							str +="<pre>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
-							str +="</div>";
+							
+							if(list[i].id == a){ // id1과 login.id가 같다면
+								
+								str +="<div class='row' id='myF'>";
+									str +="<div class='col-sm-4 pull-right' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
+										str +="	<label>" + list[i].id + " : <br></label>";
+										str +="	<pre>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
+									str +="</div>";
+								str +="</div>";
+							
+// 							}else{
+							}else if(list[i].id == c){ //id2랑 login.id가 같으면
+								
+								str +="<div class='row' id='myF'>";
+									str +="<div class='col-sm-4 pull-left' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
+										str +="<label>" + list[i].id + " : <br></label>";
+										str +="<pre>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
+									str +="</div>";
+								str +="</div>";
+							
+							} // 둘이 세트로 묶어서 움직이네...
 						}
 						
 // 						alert(str);
@@ -74,13 +98,13 @@
 					chatServiceUL.html(str); //댓글 리스트 데이터를 표시하는 곳
 			}//function()의 끝
 			);
+// 			setInterval(function(){ showList(); }, 3000); 이건 왜 있지..? 왜 여기 있지..? 
 		}//showList의 끝
 		
+		//채팅 전송
 		$("#chatSendBtn").click(function(){
 // 			alert("click");
 			var chatRoom = {};
-			
-			
 			
 			chatRoom.chatNo = $("#chatNo").val();
 			chatRoom.content = $("#chatContent").val();
@@ -90,12 +114,18 @@
 // 			alert(JSON.stringify(chatRoom));
 			//ajax를 이용한 댓글 등록 처리
 			chatService.write(chatRoom,
-					//등록을 성공했을 때 등록 함수
-					function(result){
-						$("#chatContent").val("");
-			});
-		});
+				//등록을 성공했을 때 등록 함수
+				function(result){
+					$("#chatContent").val("");
+					$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
+					showList();
+			}); //chatService.write의 끝
+			
+		}); //chatSendBtn 클릭 시 일어나는 이벤트
+// 		$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
+		$(window).animate({scrollTop: $(document).height() + $(window).height()});
 		
+		setInterval(function(){ showList(); }, 3000);
 	});
 </script>
 </head>
@@ -105,10 +135,10 @@
 		<c:set var="id" value="${login.id }" />
 		<c:choose>
 			<c:when test="${vo.id2 == login.id}">
-				<h1>${vo.id1 }님과대화중입니다.</h1>
+				<h1 style="text-align: center;">[ ${vo.id1 } ] 님과 대화중입니다.</h1>
 			</c:when>
 			<c:when test="${vo.id1 == login.id}">
-				<h1>${vo.id2 }님과대화중입니다.</h1>
+				<h1 style="text-align: center;">[ ${vo.id2 } ] 님과 대화중입니다.</h1>
 			</c:when>
 		</c:choose>
 
@@ -130,72 +160,38 @@
 
 		<!-- 채팅 보여주는 곳 : function 부분 -->
 		<div class="col-12 form-group ">
-			<div class="col-11 form-control"
-				style="margin: 0 auto; border: 1px solid #e37d68; height: 400px; border-radius: 10px; overflow: scroll;"
-				id="chatArea">
-				<div id="chatMessageArea"
-					style="margin-top: 10px; margin-left: 10px;" class="chat">
-					<c:set var="content" value="${cvo.content }" />
-					<c:if test="${empty list }">
-						<c:choose>
-							<c:when test="${vo.id2 == login.id}">
-								<div
-									class='accepter ${(empty cvo.content)?"noChat":"vo.content" }'>
-									<label for="acceptMessage">${cvo.id } : </label>
-									<pre id="acceptMessage">${cvo.content }<br> <fmt:formatDate
-											value="${cvo.writeDate }" pattern="yyyy-MM-dd hh:mm:ss" /> </pre>
-								</div>
-							</c:when>
-
-							<c:when test="${vo.id1 == login.id}">
-								<div
-									class='pull-right ${(empty cvo.content)?"noChat":"cvo.content" }'>
-									<label for="sendMessage">${cvo.id } :</label>
-									<pre id="sendMessage">${cvo.id }<br>
-										<fmt:formatDate value="${cvo.writeDate }"
-											pattern="yyyy-MM-dd hh:mm:ss" /> </pre>
-								</div>
-							</c:when>
-						</c:choose>
-					</c:if>
-
-					<c:if test="${!empty list }">
-						<c:set var="content" value="${vo.content }" />
-						<c:forEach items="${list }" var="cvo">
-
-							<c:choose>
-								<c:when test="${vo.id2 == login.id}">
-									<div class="accepter" data-chatNo="12">
-										<label>${vo.id1 }: <br></label>
-										<pre>${cvo.content }<br><fmt:formatDate value="${cvo.writeDate }" pattern="yyyy-MM-dd hh:mm:ss" /> </pre>
-									</div>
-									<div class="sender pull-right" data-chatNo="12">
-										<!-- 오류 발생 시 sender로 변경 -->
-										<label>${vo.id2 }: <br></label>
-										<pre>${cvo.content }<br>
-											<fmt:formatDate value="${cvo.writeDate }"
-												pattern="yyyy-MM-dd hh:mm:ss" /> </pre>
-									</div>
-								</c:when>
-
-								<c:when test="${vo.id1 == login.id}">
-									<div class="accepter" data-chatNo="12">
-										<label for="accepter">${vo.id2 } : <br></label>
-										<pre>${cvo.content }<br>
-											<fmt:formatDate value="${cvo.writeDate }"
-												pattern="yyyy-MM-dd hh:mm:ss" /> </pre>
-									</div>
-									<div class="sender pull-right" data-chatNo="12">
-										<label for="sender">${vo.id1 } : <br></label>
-										<pre>${cvo.content }<br>
-											<fmt:formatDate value="${cvo.writeDate }"
-												pattern="yyyy-MM-dd hh:mm:ss" /> </pre>
-									</div>
-								</c:when>
-							</c:choose>
-
-						</c:forEach>
-					</c:if>
+			<div class="col-12 form-control chatView" style="margin: 0 auto; border: 1px solid #e37d68; height: 400px; border-radius: 10px; overflow: auto;" id="chatArea">
+				<div id="chatMessageArea" style="margin-top: 10px; margin-left: 10px;" class="chat">
+				
+					<div class="row">
+						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+							<label>test : <br></label>
+							<pre>test<br> 2021.05.13</pre>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+							<label>test : <br></label>
+							<pre>test<br> 2021.05.13</pre>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+							<label>test : <br></label>
+							<pre>test<br> 2021.05.13</pre>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+							<label>test : <br></label>
+							<pre>test<br> 2021.05.13</pre>
+						</div>
+					</div>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -214,14 +210,15 @@
 				<span style="margin-top: -85px; float: right; width: 18%; height: 85px; text-align: center; background-color: #e37d68; border-radius: 5px;">
 					<br>
 					<button type="button" class="btn btn-xl chatSendBtn" style="background-color: #e37d68;" id="chatSendBtn">전송</button>
-<!-- 					<button type="button" class="btn btn-xl chatSendBtn" style="background-color: #e37d68;" id="chatSendBtn">전송</button> -->
 				</span>
 			</form>
 		</div>
 		<div class="col-2" style="float: left">
 			<button type="button" class="btn btn-default goList" id="goList" onclick="location='list.do'">리스트</button>
+<%-- 			<c:if test="${vo.id1 == login.id}"> --%>
 			<a href="delete.do?no=${vo.chatNo }" class="btn btn-default deleteRoom" id="deleteRoom">나가기</a>
 <%-- 			<a href="delete.do?no=${vo.chatNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}" class="btn btn-default deleteRoom" id="deleteRoom">나가기</a> --%>
+<%-- 			</c:if> --%>
 		</div>
 	</div>
 </body>

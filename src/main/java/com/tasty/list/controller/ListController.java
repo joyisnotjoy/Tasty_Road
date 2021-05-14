@@ -38,7 +38,6 @@ public class ListController {
 	// @ModelAttribute - 전달 받은 변수의 값을 model에 담아서 JSP까지 보내준다. 변수 이름으로 사용
 	public String list(Model model, @ModelAttribute PageObject pageObject, HttpSession session) throws Exception{
 	
-	
 		
 	log.info("list().pageObject : " + pageObject + " ..........");
 	model.addAttribute("list", service.list(pageObject));
@@ -110,7 +109,6 @@ public class ListController {
 
 		// addFlashAttribute() - 단 일회만 사용 가능한 정보 저장
 		rttr.addFlashAttribute("msg", "게시판 글삭제가 성공적으로 되었습니다.");
-		
 		
 		return "redirect:list.do?perPageNum=" + perPageNum;
 	}

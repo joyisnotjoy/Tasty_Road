@@ -33,20 +33,22 @@
 	
 	<!-- 3. 맛집 댓글쓰기 -->
 	<insert id="write">
-		insert into reply(rno, replyNo, content, id, writeDate)
-		values(reply_seq.nextval, #{replyNo}, #{content}, #{id}, #{writeDate})
+		insert into reply(replyNo, content, id, shopNo)
+		values(reply_seq.nextval, #{content}, #{id}, #{shopNo})
 	</insert>
 	
 	<!-- 4. 맛집 댓글수정 -->
 	<update id="update">
 		update reply set content=#{content}
-		where rno = #{rno}
+		where id = #{id} and shopNo = #{shopNo}
+		<!-- replyNo = #{replyNo} and  -->
 	</update>
 	
 	<!-- 5. 게시판 댓글삭제 -->
 	<delete id="delete">
 		delete from reply
-		where rno = #{rno}
+		where id = #{id} and shopNo = #{shopNo}
+		<!-- replyNo = #{replyNo} and  -->
 	</delete>
 	
 </mapper>
