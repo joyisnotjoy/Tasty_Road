@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Temp</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/reply.js"></script>
 <script type="text/javascript" src="/js/bookmark.js"></script>
 <script type="text/javascript" src="/js/waiting.js"></script>
 </head>
