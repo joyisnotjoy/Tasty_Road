@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,6 @@ public class BookmarkController {
 	@Qualifier("bsi")
 	private BookmarkService service;
 	
-<<<<<<< HEAD
 	//1. 맛집 북마크 등록 / write
 	@PostMapping(value = "/like.do",
 			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
@@ -71,7 +71,6 @@ public class BookmarkController {
 //		log.info("update().msg: " + msg);
 //		return  new ResponseEntity<String>(msg, status);
 //	}
-=======
 //	// 1. 맵 리스트 - 검색 / list.do -get
 //	@GetMapping("list.do")
 //	// @ModelAttribute - 전달 받은 변수의 값을 model에 담아서 JSP까지 보내준다. 변수 이름으로 사용
@@ -104,7 +103,6 @@ public class BookmarkController {
 		log.info(vo);
 		 service.like(vo);
 	}
->>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
 	
 	// 3-1. 맛집 수정 처리 / update.do - post
 	
