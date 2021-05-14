@@ -5,18 +5,19 @@
 <mapper namespace="com.tasty.chat.mapper.ChatRoomMapper">
 
 	<!-- 1. 채팅 내용 -->
-	<select id="list" resultType="com.tasty.chat.vo.ChatRoomVO">
+	<select id="list" resultType="org.zerock.chat.vo.ChatRoomVO">
 		select rnum, chatNo, content, id, writeDate
-		from
-		(
-			select rownum rnum, chatNo, content, id, writeDate
-			from(
-				select chatNo, content, id, writeDate
-				from chatRoom
-				where chatNo = #{chatNo}
-				order by chatNo desc
+			from
+			(
+				select rownum rnum, chatNo, content, id, writeDate
+				from(
+					select chatNo, content, id, writeDate
+					from chatRoom
+					where chatNo = #{chatNo} 
+					order by writeDate asc
+				)
 			)
-		)	
+			
 	</select>
 	
 	<!-- 채팅 전체 데이터 -->
