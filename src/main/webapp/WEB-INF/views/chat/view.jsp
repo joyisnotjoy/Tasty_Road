@@ -22,7 +22,7 @@
 
 <script type="text/javascript">
 	$(function() {
-
+		
 		// 삭제 버튼 이벤트 - 다시 확인한다.
 		$("#deleteRoom").click(function() {
 			if (!confirm("메시지를 정말 삭제하시겠습니까?"))
@@ -74,13 +74,13 @@
 					chatServiceUL.html(str); //댓글 리스트 데이터를 표시하는 곳
 			}//function()의 끝
 			);
+// 			setInterval(function(){ showList(); }, 3000);
 		}//showList의 끝
 		
+		//채팅 전송
 		$("#chatSendBtn").click(function(){
 // 			alert("click");
 			var chatRoom = {};
-			
-			
 			
 			chatRoom.chatNo = $("#chatNo").val();
 			chatRoom.content = $("#chatContent").val();
@@ -90,12 +90,14 @@
 // 			alert(JSON.stringify(chatRoom));
 			//ajax를 이용한 댓글 등록 처리
 			chatService.write(chatRoom,
-					//등록을 성공했을 때 등록 함수
-					function(result){
-						$("#chatContent").val("");
-			});
-		});
-		
+				//등록을 성공했을 때 등록 함수
+				function(result){
+					$("#chatContent").val("");
+					showList();
+					
+			}); //chatService.write의 끝
+		}); //chatSendBtn 클릭 시 일어나는 이벤트
+		setInterval(function(){ showList(); }, 3000);
 	});
 </script>
 </head>
@@ -130,11 +132,8 @@
 
 		<!-- 채팅 보여주는 곳 : function 부분 -->
 		<div class="col-12 form-group ">
-			<div class="col-11 form-control"
-				style="margin: 0 auto; border: 1px solid #e37d68; height: 400px; border-radius: 10px; overflow: scroll;"
-				id="chatArea">
-				<div id="chatMessageArea"
-					style="margin-top: 10px; margin-left: 10px;" class="chat">
+			<div class="col-11 form-control chatView" style="margin: 0 auto; border: 1px solid #e37d68; height: 400px; border-radius: 10px; overflow: auto;" id="chatArea">
+				<div id="chatMessageArea" style="margin-top: 10px; margin-left: 10px;" class="chat">
 					<c:set var="content" value="${cvo.content }" />
 					<c:if test="${empty list }">
 						<c:choose>
@@ -214,14 +213,15 @@
 				<span style="margin-top: -85px; float: right; width: 18%; height: 85px; text-align: center; background-color: #e37d68; border-radius: 5px;">
 					<br>
 					<button type="button" class="btn btn-xl chatSendBtn" style="background-color: #e37d68;" id="chatSendBtn">전송</button>
-<!-- 					<button type="button" class="btn btn-xl chatSendBtn" style="background-color: #e37d68;" id="chatSendBtn">전송</button> -->
 				</span>
 			</form>
 		</div>
 		<div class="col-2" style="float: left">
 			<button type="button" class="btn btn-default goList" id="goList" onclick="location='list.do'">리스트</button>
+<%-- 			<c:if test="${vo.id1 == login.id}"> --%>
 			<a href="delete.do?no=${vo.chatNo }" class="btn btn-default deleteRoom" id="deleteRoom">나가기</a>
 <%-- 			<a href="delete.do?no=${vo.chatNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}" class="btn btn-default deleteRoom" id="deleteRoom">나가기</a> --%>
+<%-- 			</c:if> --%>
 		</div>
 	</div>
 </body>
