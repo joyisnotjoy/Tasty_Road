@@ -9,7 +9,7 @@
 		// param : JSON {no:2, repPage:1, repPerPageNum:5}
 		// list(JSON-넘겨줄데이터, 데이터를 성공적으로 가져왔을때의 실행함수, 실패했을때의 실행함수)
 		function waitView(param, callback, error){
-			var shopNo = param.shopNo;
+			var pShopNo = param.shopNo;
 			// param.repPage || 1 -> param.repPage의 값이 없으면 1을 사용
 			
 			// Ajax를 이용한 데이터 가져오기 -> Ajax 해야합니다. 형식에 맞으면 Ajax를 한다.
@@ -17,7 +17,7 @@
 			//            $(selector).load(url[, success]) - 아이디 중복체크 시 사용
 			$.getJSON(
 				// ajax로 호출하는 url
-				"/waiting/wait.do?shopNo=" + shopNo,
+				"/waiting/wait.do?shopNo=" + pShopNo,
 				// success(성공) 상태일 때 처리되는 함수
 				// 데이터 처리가 성공해서 데이터를 가져오면 data로 넣어준다. list이므로 배열이 넘어온다.
 				function(data){
