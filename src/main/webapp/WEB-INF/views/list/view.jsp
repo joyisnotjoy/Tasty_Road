@@ -14,6 +14,8 @@
 
 <!-- reply Model JS 포함 -->
 <script type="text/javascript" src="/js/reply.js"></script>
+<script type="text/javascript" src="/js/bookmark.js"></script>
+<script type="text/javascript" src="/js/waiting.js"></script>
 
 <style type="text/css">
 .title_label{
@@ -141,8 +143,8 @@ $(function(){
 		$("#replyModalTitle").text("Reply Write");
 
 		// 작업할 데이터의 입력란을 보이게 안보이게
-		$("#replyModal .form-group").show();
-		$("#replyRnoDiv").hide();
+		$("#replyNoDiv, #replyModal .form-group").show();
+// 		$("#replyRnoDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
 		var footer = $("#replyModal .modal-footer");
@@ -184,7 +186,7 @@ $(function(){
 		$("#replyModalTitle").text("Reply Update");
 		
 		// 작업할 데이터의 입력란을 보이게 안보이게
-		$("#replyshopNoDiv, #replyModal .form-group").show(); 
+		$("#replyNoDiv, #replyModal .form-group").show(); 
 // 		$("#replyNoDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
@@ -256,10 +258,10 @@ $(function(){
 	$(".chat").on("click", ".replyDeleteBtn", function(){
 // 		alert("댓글 삭제");
 		// 모달창 제목 바꾸기
-		$("#replyModalTitle").text("Reply Delete");
+		$("#replyModalTitle").text("Reply Delete, 댓글 삭제 창");
 
 		// 작업할 데이터의 입력란을 보이게 안보이게
-		$("#replyshopNoDiv, #replyModal .form-group").show();
+		$("#replyNo, #replyshopNoDiv, #replyModal .form-group").show();
 		$("#replyContentDiv, #replyWriterDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
@@ -269,13 +271,13 @@ $(function(){
 		
 		// 댓글 번호 가져오기
 		var li = $(this).closest("li");
-		var rno = li.data("rno");
+		var replyNo = li.data("replyNo");
 		
 		// 댓글 번호 셋팅
-		$("#replyRno").val(rno);
+		$("#replyNo").val(replyNo);
 		
 		// 댓글 비밀번호 지우기
-		$("#replyPw").val("");
+// 		$("#replyPw").val("");
 		
 		// 댓글 모달 보이기
 		replyModal.modal("show");
@@ -286,8 +288,8 @@ $(function(){
 // 		alert("댓글 삭제 처리");
 		// 데이터 수집
 		var reply= {};
-		reply.shopNo = $("#replyshopNo").val();
-		reply.id = $("#replyId").val();
+		reply.replyNo = $("#replyNo").val();
+		reply.id = $("#replyWriter").val();
 		
 		// reply.js 안에 있는 replyService.delete(reply JSON, 성공함수, 오류함수)
 		replyService.delete(reply,
@@ -363,6 +365,7 @@ $(function(){
   <li class="list-group-item row">
   	<div class="col-md-2 title_label">총 자리</div>
   	<div class="col-md-10">${vo.total }</div>
+	<button id="more" class="more">더보기</button>
   </li>
   <li class="list-group-item row">
   	<div class="col-md-2 title_label">현재 자리</div>
@@ -487,8 +490,13 @@ class="btn btn-default">리스트</a>
 <!-- 			  <input name="rno" type="text" class="form-control" id="replyRno" -->
 <!-- 			  readonly="readonly"> -->
 <!-- 			</div>		     -->
+			<div class="form-group" id="replyNoDiv">
+			  <label for="replyNo">댓글 번호:</label>
+			  <input name="replyNo" type="text" class="form-control" id="replyNo"
+			  readonly="readonly" value="${vo.replyNo }">
+			</div>
 			<div class="form-group" id="replyshopNoDiv">
-			  <label for="replyshopNo">게시판 번호:</label>
+			  <label for="replyshopNo">맛집 등록 번호:</label>
 			  <input name="shopNo" type="text" class="form-control" id="replyshopNo"
 			  readonly="readonly" value="${vo.shopNo }">
 			</div>		    
@@ -520,7 +528,7 @@ class="btn btn-default">리스트</a>
   </div>
 </div>
 <!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창의 끝 -->
-
+<div class="modal"></div>
 
 </body>
 </html>

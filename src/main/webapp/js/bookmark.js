@@ -31,11 +31,10 @@
 	$(function () {
 		
 		$(".like").click(function () {
-			
 			alert("즐겨찾기 완료");
-			
 		});
 	});
+	//tempView buttons
 	//즐겨찾기 해제 alert 창	
 	$(function () { 
 		
