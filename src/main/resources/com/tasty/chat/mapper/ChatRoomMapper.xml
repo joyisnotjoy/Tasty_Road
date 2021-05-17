@@ -5,7 +5,7 @@
 <mapper namespace="com.tasty.chat.mapper.ChatRoomMapper">
 
 	<!-- 1. 채팅 내용 -->
-	<select id="list" resultType="org.zerock.chat.vo.ChatRoomVO">
+	<select id="list" resultType="com.tasty.chat.mapper.ChatRoomkMapper">
 		select rnum, chatNo, content, id, writeDate
 			from
 			(
