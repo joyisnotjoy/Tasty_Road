@@ -20,7 +20,7 @@
 			
 	</select>
 	
-	<!-- 채팅 전체 데이터 -->
+	<!--1-1. 채팅 전체 데이터 -->
 	<select id="getTotalRow" resultType="java.lang.Long">
 		select count(*) from chatRom
 		where chatNo = #{chatNo}
