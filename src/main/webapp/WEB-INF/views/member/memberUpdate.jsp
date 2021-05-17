@@ -72,46 +72,8 @@
 				alert("공백은 입력이 불가능합니다.");
 				return false;
 			}
-		})
-		
-		// 아이디 중복체크
-		$("#id").keyup(function() {
-			$.ajax({
-				url : "/member/check_id.do",
-				type : "POST",
-				data : {
-					id : $("#id").val()
-				},
-				success : function(result) {
-					if (result == 1) {
-						$("#id_check").html("중복된 아이디가 있습니다.");
-						$("#btnJoin").attr("disabled", "disabled");
-					} else {
-						$("#id_check").html("");
-						$("#btnJoin").removeAttr("disabled");
-					}
-				},
-			})
 		});
-		
-		// 이메일 중복체크
-		$("#email").keyup(function(){
-			$.ajax({
-				url : "/member/check_email.do",
-				type : "POST",
-				data : {
-					email : $("#email").val()
-				},
-				success : function(result) {
-					if (result == 1) {
-						$("#email_check").html("중복된 이메일이 있습니다.");
-					} else {
-						$("#email_check").html("");
-					}
-				},
-			})
-		});
-	})
+	});
 </script>
 
 
@@ -130,7 +92,7 @@
 			<!-- content-->
 			<div id="content">
 
-	<form action="join.do" id="join" method="post">
+	<form action="memberUpdate.do" id="memberUpdate" method="post">
 
 
 				<div>
@@ -138,10 +100,8 @@
 						<label for="id">아이디</label>
 					</h3>
 					<span class="box int_id"> <input type="text" id="id"
-						name="id" class="int" maxlength="20" pattern = "[A-za-z0-9]{5,20}">
+						name="id" class="int" maxlength="20" pattern = "[A-za-z0-9]{5,20}" value="${vo.id }" readonly>
 					</span> 
-					<span id="id_check"></span>
-					<span class="error_next_box id_check"></span>
 				</div>
 
 				<div>
@@ -173,7 +133,7 @@
 						<label for="name">이름</label>
 					</h3>
 					<span class="box int_name"> <input type="text" id="name"
-						name="name" class="int" maxlength="20" required="required">
+						name="name" class="int" maxlength="20" required="required" value="${vo.name }" readonly>
 					</span> 
 					<span class="error_next_box"></span>
 				</div>
@@ -195,12 +155,8 @@
 					<h3 class="join_title">
 						<label for="gender">성별</label>
 					</h3>
-					<span class="box gender_code"> <select id="gender" name="gender"
-						class="sel">
-							<option>성별</option>
-							<option value="남자">남자</option>
-							<option value="여자">여자</option>
-					</select>
+					<span class="box gender_code"> <input type="text" id="gender"
+						name="gender" class="int" value="${vo.gender }" readonly>
 					</span> 
 					<span class="error_next_box">필수 정보입니다.</span>
 				</div>
@@ -209,10 +165,8 @@
 						<label for="email">이메일</label>
 					</h3>
 					<span class="box int_email"> <input type="text" id="email" name="email"
-						class="int" maxlength="100" pattern = [a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,} required="required">
+						class="int" maxlength="100" pattern = [a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,} required="required" value="${vo.email }" readonly>
 					</span> 
-					<span id="email_check" class="w3-text-red"></span>
-					<span class="error_next_box">이메일 주소를 다시 확인해주세요.</span>
 				</div>
 				<div>
 					<h3 class="join_title">
@@ -248,7 +202,7 @@
 
 				<div class="btn_area">
 					<button id="btnJoin">
-						<span>가입하기</span>
+						<span>수정하기</span>
 					</button>
 				</div>
 	</form>
