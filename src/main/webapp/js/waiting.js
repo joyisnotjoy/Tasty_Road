@@ -145,7 +145,7 @@
 //	     	str += "<input id='now' type='text' class='form-control' name='now' value='" + data.now + "' style='width: 100px;'>";
 //		    str += "</div>"
             str += "<div class='form-group col-12 row' id='totalTableDiv'>";
-            str += "<label for='total'>전체 Table</label>";
+            str += "<label for='total'>전체 Table</label >";
             str += "<input name='total' type='text' class='form-control' id='toal' readonly='readonly' value='"+ data.total + "'>";
             str += "</div>";
             str += "</form>";
