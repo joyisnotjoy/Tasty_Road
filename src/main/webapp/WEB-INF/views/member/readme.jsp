@@ -15,7 +15,7 @@ function chk(){
  }
  if(num==1){
   document.form.submit();
-  location.href="join.do";
+  location.href="joinForm.do";
  }else{
   alert("개인정보 약관에 동의하셔야 합니다.");
  }

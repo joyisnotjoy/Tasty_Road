@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="pageObject" tagdir="/WEB-INF/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,6 @@
  <div class="container">
   <h1>게시판 글 보기</h1>
   <button type="button" id="like" class="like">like</button><br>
-  <button type="button" id="unLike" class="unLike">unlike</button><br>
   <ul class="list-group">
    <li class="list-group-item row">
     <div class="col-md-2 title_label">가게명</div>

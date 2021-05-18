@@ -11,8 +11,17 @@ public interface MemberMapper {
 	// 회원가입
 	public int join(MemberVO vo);
 	
+	
+	// 아이디 중복검사 (int 형)
+	public int check_id(String id);
+	// 이메일 중복검사 (int 형)
+	public int check_email(String email);
+	
+	
+	// 아이디 중복검사(String 형)
 	public MemberVO checkId(String id);
 	
+	// 이메일 중복검사(VO 형)
 	public MemberVO checkEmail(MemberVO vo);
 
 	// 아이디 찾기
@@ -20,5 +29,10 @@ public interface MemberMapper {
 	
 	// 비밀번호 변경
 	public int updatePw(MemberVO vo) throws Exception;
+	
+	// 내 정보 보기
+	public MemberVO myPage(LoginVO vo);
+	
+	public int memberUpdate(MemberVO vo);
 
 }

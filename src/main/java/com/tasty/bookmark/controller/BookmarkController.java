@@ -93,7 +93,7 @@ public class BookmarkController {
 //	return MODULE + "/view";
 //	}
 //	
-	// 3. 맛집 수정 폼 / update.do - get
+	// 3. 맛집 북마크 등록 
 	@GetMapping("like.do")
 	public String like(BookmarkVO vo) throws Exception {
 		vo.setId("test");

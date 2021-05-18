@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,12 +29,12 @@ $(function(){
 <body>
 	<div class="container">
 		<h1>UpdateForm</h1>
-		<form action="update.do" method="post" id="updateForm">
+		<form action="update.do" method="post">
 		<input name="page" value="${param.page }" type="hidden" />
 		<input name="perPageNum" value="${param.perPageNum }" type="hidden" />
 			<div class="form-group">
-				<label for="chatNo">No</label>
-				<input name="chatNo" type="hidden" class="form-control" id="chatNo" readonly="readonly" value="${vo.chatNo }">
+				<label for="chatNo">chatNo</label>
+				<input name="chatNo" class="form-control" id="chatNo" readonly="readonly" value="${vo.chatNo }">
 			</div>
 			<div class="form-group">
 			<!-- required : 필수 입력, placeholder : 입력 초기 안내, pattern : 정규표현식을 사용하여 유효성 검사를 할 수 있게 만들었다,

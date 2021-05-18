@@ -81,6 +81,14 @@ a {
     outline:none;
     cursor: pointer;
 }
+.find-btn{
+    background-color: #03c75a;
+    border: none;
+    color:#fff;
+    font-size: 18px;
+    outline:none;
+    cursor: pointer;
+}
 /*로그인 아래 박스*/
 .under-login{
     height: 50px;

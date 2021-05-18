@@ -40,14 +40,16 @@
 	<!-- 4. 맛집 댓글수정 -->
 	<update id="update">
 		update reply set content=#{content}
-		where id = #{id} and shopNo = #{shopNo}
+		where id = #{id}
+<!-- 		where id = #{id} and replyNo = #{replyNo} -->
 		<!-- replyNo = #{replyNo} and  -->
 	</update>
 	
 	<!-- 5. 게시판 댓글삭제 -->
 	<delete id="delete">
 		delete from reply
-		where id = #{id} and shopNo = #{shopNo}
+		where id = #{id}
+<!-- 		where id = #{id} and replyNo = #{replyNo} -->
 		<!-- replyNo = #{replyNo} and  -->
 	</delete>
 	
