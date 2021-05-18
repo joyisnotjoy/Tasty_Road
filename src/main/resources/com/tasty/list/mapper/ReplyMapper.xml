@@ -17,7 +17,7 @@
 				select replyNo, content, id, writeDate
 				from reply
 				where shopNo = #{shopNo}
-				order by shopNo desc
+				order by replyNo desc
 			)
 		)
 		where rnum between #{pageObject.startRow} and #{pageObject.endRow}
