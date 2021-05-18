@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @RestController
 @RequestMapping("/waiting")
 @Log4j
-public class waitinController {
+public class waitingController {
 
 	@Inject
 	@Qualifier("waitsi")
