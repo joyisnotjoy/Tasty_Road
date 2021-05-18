@@ -65,7 +65,7 @@ public class ReplyController {
 //		reply.setReplyNo(ReplyNo);
 		// db에 데이터 저장하기
 		service.write(ro);
-		log.info(service.write(ro));
+//		log.info(service.write(ro));
 		return new ResponseEntity<String>
 		("댓글이 등록되었습니다.",HttpStatus.OK);
 	}

@@ -19,7 +19,7 @@
 	<resources mapping="/upload/**" location="/upload/" />
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/css/**" location="/css/" />
-	<resources mapping="/scss/**" location="/scss/" />
+<!-- 	<resources mapping="/scss/**" location="/scss/" /> -->
 	<resources mapping="/vendor/**" location="/vendor/" />
 	<resources mapping="/img/**" location="/img/" />
 
