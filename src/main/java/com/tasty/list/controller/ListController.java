@@ -53,7 +53,7 @@ public class ListController {
 		
 	LoginVO vo = new LoginVO();
 	
-	vo.setId("admin");
+	vo.setId("test");
 	
 	session.setAttribute("login", vo);
 	

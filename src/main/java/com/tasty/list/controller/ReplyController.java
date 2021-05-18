@@ -81,11 +81,11 @@ public class ReplyController {
 		int result = service.update(ro);
 		
 		// 전달되는 데이터의 선언
-		String msg = "게시판 글수정이 성공적으로 되었습니다.";
+		String msg = "댓글 수정이 성공적으로 되었습니다.";
 		HttpStatus status = HttpStatus.OK;
 		
 		if(result == 0) {
-			msg = "게시판 수정 실패 - 정보를 확인해 주세요.";
+			msg = "댓글 수정 실패 - 정보를 확인해 주세요.";
 			status = HttpStatus.NOT_MODIFIED;
 		}
 		
@@ -106,11 +106,11 @@ public class ReplyController {
 		int result = service.delete(ro);
 
 		// 전달되는 데이터의 선언
-		String msg = "게시판 삭제가 성공적으로 되었습니다.";
+		String msg = "댓글 삭제가 성공적으로 되었습니다.";
 		HttpStatus status = HttpStatus.OK;
 		
 		if(result == 0) {
-			msg = "게시판 삭제 실패 - 정보를 확인해 주세요.";
+			msg = "댓글 삭제 실패 - 정보를 확인해 주세요.";
 			status = HttpStatus.NOT_MODIFIED;
 		}
 		

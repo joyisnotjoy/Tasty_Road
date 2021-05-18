@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>맛집 보기</title>
 <!-- Awesome 4 icons lib : class="fa~ -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
 <!-- util JS 포함 - 반드시 reply.js 위에 선언을 해주셔야만 합니다. -->
 <script type="text/javascript" src="/js/util.js"></script>
@@ -109,6 +109,7 @@ $(function(){
 			    			str += "<div class='header'>";
 			    			str += "<strong class='primary-font replyWriterData'>"+list[i].id+"</strong>";
 			    			// class="muted" - 글자색을 회색으로 만들어 주는 BS CSS
+// 			    			str += "</br>"
 			    			str += "<small class='pull-right text-muted'>"
 			    				+ replyService.displyTime(list[i].writeDate)
 			    				+ "</small>";
@@ -155,7 +156,7 @@ $(function(){
 		footer.find("#replyModalUpdateBtn, #replyModalDeleteBtn").hide()
 		
 		// reply > Form  input 데이터 지우기 : intput 중에서 id="replyshopNo"는 제외시킨다. not("#replyshopNo")
-		replyModal.find("textarea").not("#replyshopNoDiv, #replyWriter").val(""); 
+// 		replyModal.find("textarea").not("#replyshopNoDiv, #replyWriter").val(""); 
 		
 		replyModal.modal("show");
 	});
@@ -164,7 +165,7 @@ $(function(){
 	$("#replyModalWriteBtn").click(function(){
 		var reply = {};
 		
-		reply.replyNo = $("#replyNo").val();
+		reply.replyNo = $("#replyRno").val();
 		reply.shopNo = $("#replyshopNo").val();
 		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
@@ -175,7 +176,7 @@ $(function(){
 		replyService.write(reply,
 			// 성공했을 때의 처리 함수
 			function(result){
-// 				alert(result);
+				alert(result);
 				replyModal.modal("hide");
 				showList();
 			}
@@ -204,14 +205,13 @@ $(function(){
 		// 전체 데이터를 포함하고 있는 태그 : li
 		var li = $(this).closest("li");
 		
-		// html tag 안에 속성으로 data-rno="2" 값을 넣어 둔것은 obj.data("rno")로 찾아서 쓴다.
+		// html tag 안에 속성으로 data-replyNo="2" 값을 넣어 둔것은 obj.data("replyNo")로 찾아서 쓴다.
 		var replyNo= li.data("replyNo");
-// 		var shopNo = li.data(".replyshopNoData");
 		var content = li.find(".replyContentData").text();
 		var id = li.find(".replyWriterData").text();
 		
 		// 데이터 셋팅
-		$("#replyNo").val(replyNo);
+		$("#replyRno").val(replyNo);
 		$("#replyshopNo").val(shopNo);
 		$("#replyContent").val(content);
 		$("#replyWriter").val(id);
@@ -226,7 +226,7 @@ $(function(){
 		alert("수정 처리");
 		// 데이터 수집
 		var reply = {};
-		reply.replyNo = $("#replyNo").val();
+		reply.replyNo = $("#replyRno").val();
 		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
 // 		reply.pw = $("#replyPw").val();
@@ -282,7 +282,7 @@ $(function(){
 		var replyNo = li.data("replyNo");
 		
 		// 댓글 번호 셋팅
-		$("#replyNo").val(replyNo);
+		$("#replyRno").val(replyNo);
 		alert(replyNo);
 		// 댓글 비밀번호 지우기
 // 		$("#replyPw").val("");
@@ -296,7 +296,7 @@ $(function(){
 // 		alert("댓글 삭제 처리");
 		// 데이터 수집
 		var reply= {};
-		reply.replyNo = $("#replyNo").val();
+		reply.replyNo = $("#replyRno").val();
 		reply.shopNo = $("#shopNo").val();
 		reply.id = $("#replyWriter").val();
 		
@@ -408,7 +408,7 @@ $(function(){
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<i class="fa fa-comments fa-fw"></i> Reply
+						<i class="fa fa-comments fa-fw"></i> Reply <br/>
 						<button class="btn btn-primary btn-xs pull-right"
 							id="writeReplyBtn">New Reply</button>
 					</div>
@@ -416,11 +416,13 @@ $(function(){
 						<ul class="chat">
 <!-- 							데이터가 있는 만큼 반복 처리 li태그 만드어 내기 -->
 <!-- 							rno를 표시하지 않고 태그안에 속성으로 숨겨 놓음 data-rno="12" -->
-							<li class="left clearfix" data-rno="12">
+<!-- 							<li class="left clearfix"> -->
+							<li class="left clearfix" >	
+<!-- 							<li class="left clearfix" data-replyNo="12">	 -->
 								<div>
 									<div class="header">
-										<strong class="primary-font">user00</strong> <small
-											class="pull-right text-muted">2021.04.21 14:12</small>
+										<strong class="primary-font">user00</strong> <br/>
+										<small class="pull-right text-muted">2021.04.21 14:12</small>
 									</div>
 									<p>Good job!</p>
 									<div class="text-right">
@@ -448,7 +450,7 @@ $(function(){
 	</div>
 	<!-- container 끝 -->
 
-	<!-- Modal - 맛집 정보 삭제 시 사용되는 모달 창 -->
+	<!-- Modal - 리스트 맛집 정보 삭제 시 사용되는 모달 창 -->
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 
@@ -479,7 +481,7 @@ $(function(){
 
 		</div>
 	</div>
-	<!-- Modal - 게시판 글삭제 시 사용되는 모달 창의 끝 -->
+	<!-- Modal - 리스트 맛집 삭제 시 사용되는 모달 창의 끝 -->
 
 	<!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창 -->
 	<div id="replyModal" class="modal fade" role="dialog">
@@ -503,8 +505,8 @@ $(function(){
 						<!-- 			</div>		     -->
 						<div class="form-group" id="replyNoDiv">
 							<label for="replyRno">댓글 번호:</label> 
-							<input name="replyNo" type="text" class="form-control" id="replyNo"
-								readonly="readonly" value="${ro.replyNo }">
+							<input name="replyNo" type="text" class="form-control" id="replyRno"
+								readonly="readonly" >
 						</div>
 						<div class="form-group" id="replyshopNoDiv">
 							<label for="replyshopNo">맛집 등록 번호:</label> 
@@ -524,8 +526,7 @@ $(function(){
 						<div class="form-group" id="replyWriterDiv">
 							<label for="replyWriter">아이디:</label> 
 							<input name="writer" type="text" class="form-control" id="replyWriter"
-								required="required" pattern="[A-Za-z가-힣][A-Za-z가-힣0-9]{1,9}"
-								value="${login.id }">
+								required="required" value="${login.id }">
 						</div>
 						<!-- 			<div class="form-group" id="replyPwDiv"> -->
 						<!-- 			  <label for="replyPw">비밀번호:</label> -->
