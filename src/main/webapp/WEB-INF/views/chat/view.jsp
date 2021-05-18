@@ -7,8 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="#">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
-<title>메시지 보기</title>
+<title>Chatting Room</title>
+<link rel="stylesheet" href="/css/view.css">
 
 <!-- Awesome 4 icons lib : class="fa~ -->
 <link rel="stylesheet"
@@ -38,13 +41,11 @@
 		var a = "${vo.id1}";
 		var b = "${login.id}";
 		var c = "${vo.id2}";
-		var d = "${cvo.id}";
 		
 		console.log(" * JS chat List no : " + no + " * ");
 		console.log(" * JS chat List id1 : " + a + " * ");
 		console.log(" * JS chat List id2 : " + c + " * ");
 		console.log(" * JS chat List login.id : " + b + " * ");
-		console.log(" * JS chat List id : " + d + " * "); // 확인 xxxx
 		
 		var chatServiceUL = $(".chat");
 		
@@ -57,42 +58,34 @@
 // 					alert(data);
 // 					alert(JSON.stringify(data));
 					var list = data;
-// 					alert(list.length);
-					
 					var str ="";
 					if(!list || list.length == 0){
-// 						alert("데이터X");
-						
 						str += "<h5 align='center'>전송된 채팅이 없습니다.</h5>"
-						
 					}else{
-// 						alert("데이터O"); 
 						for(var i = 0; i < list.length; i++){
 							console.log(list[i]);
-							
 							if(list[i].id == b){ 
-								
+								str +="<div>";
 								str +="<div class='row' id='myF'>";
 									str +="<div class='col-sm-4 pull-right' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
-										str +="	<label>" + list[i].id + " : <br></label>";
-										str +="	<pre>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
+										str +="	<label id='user'><i class='fas fa-user-circle'> " + list[i].id + " : <br></label></i>";
+										str +="	<pre class='rightChatView'>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
 									str +="</div>";
 								str +="</div>";
+								str +="</div>";
 							
-// 							}else{
 							}else{ 
+								str +="<div>";
 								str +="<div class='row' id='myF'>";
 									str +="<div class='col-sm-4 pull-left' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
-										str +="<label>" + list[i].id + " : <br></label>";
-										str +="<pre>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
+										str +="<label id='user'><i class='far fa-user-circle'> " + list[i].id + " : <br></label></i> ";
+										str +="<pre class='leftChatView'>" + list[i].content + "<br>" + chatService.displayTime(list[i].writeDate) + "</pre>";
 									str +="</div>";
 								str +="</div>";
-							
+								str +="</div>";
 							}
 						}
-						
 // 						alert(str);
-						
 					}
 					chatServiceUL.html(str); //댓글 리스트 데이터를 표시하는 곳
 			}//function()의 끝
@@ -116,40 +109,41 @@
 				//등록을 성공했을 때 등록 함수
 				function(result){
 					$("#chatContent").val("");
-					$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
+// 					$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
 					showList();
 			}); //chatService.write의 끝
 			
 		}); //chatSendBtn 클릭 시 일어나는 이벤트
-// 		$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
-		$(window).animate({scrollTop: $(document).height() + $(window).height()});
+// 		$(".chatView").scrollTop($(".chatView")[0].scrollHeight+20);
 		
-		setInterval(function(){ showList(); }, 3000);
+		setInterval(function(){ showList(); }, 2000);
+	
 	});
 </script>
+
 </head>
-<body>
-<body>
+<!-- <body> -->
+<body id="bg">
 	<div class="container hTag">
 		<c:set var="id" value="${login.id }" />
 		<c:choose>
 			<c:when test="${vo.id2 == login.id}">
-				<h1 style="text-align: center;">[ ${vo.id1 } ] 님과 대화중입니다.</h1>
+				<h1 class="radial" style="text-align: center;"><i class='far fa-comments' style='font-size:36px'> ${vo.id1 } 님과 대화중입니다.</i></h1>
 			</c:when>
 			<c:when test="${vo.id1 == login.id}">
-				<h1 style="text-align: center;">[ ${vo.id2 } ] 님과 대화중입니다.</h1>
+				<h1 class="radial" style="text-align: center;"><i class='far fa-comments' style='font-size:36px'> ${vo.id2 } 님과 대화중입니다.</i></h1>
 			</c:when>
 		</c:choose>
 
 		<!-- 채팅 메뉴 -->
 		<div class="col-12 row justify-content-center align-items-center my-5"></div>
 		<div class="col-12 form-group" style="margin-top: 40px; clear: both;">
-			<div class="col-10 form-control" style="margin: 20px auto; text-align: center; color: white; background-color: #e37d68; border: 1px solid #e37d68; padding: 10px 10px; border-radius: 8px;">
+			<div class="col-10 form-control" style="margin: 20px auto; text-align: center; color: #34558b; background-color: #ecf1f8; border: 1px solid #dae4f1; padding: 10px 10px; border-radius: 8px;">
 				${vo.chatName }
 				<input name="chatNo" id="chatNo" type="hidden" value="${vo.chatNo }" />
 				<c:if test="${vo.id1 == login.id}">
 					<a style="float: right;"
-						href="update.do?no=${vo.chatNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}"
+						href="updateForm.do?no=${vo.chatNo}&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}"
 						class="button">수정</a>
 				</c:if>
 			</div>
@@ -159,32 +153,32 @@
 
 		<!-- 채팅 보여주는 곳 : function 부분 -->
 		<div class="col-12 form-group ">
-			<div class="col-12 form-control chatView" style="margin: 0 auto; border: 1px solid #e37d68; height: 400px; border-radius: 10px; overflow: auto;" id="chatArea">
-				<div id="chatMessageArea" style="margin-top: 10px; margin-left: 10px;" class="chat">
+			<div class="col-12 form-control chat" style="margin: 0 auto; border: 1px solid #dae4f1; height: 400px; border-radius: 10px; overflow: auto; overflow-x: hidden;" id="chatArea">
+				<div id="chatMessageArea" style="margin-top: 10px; margin-left: 10px;">
 				
 					<div class="row">
-						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+						<div class='col-sm-3 pull-right' id='myF' data-chatNo=10>
 							<label>test : <br></label>
 							<pre>test<br> 2021.05.13</pre>
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+						<div class='col-sm-3 pull-right' id='myF' data-chatNo=10>
 							<label>test : <br></label>
 							<pre>test<br> 2021.05.13</pre>
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+						<div class='col-sm-3 pull-right' id='myF' data-chatNo=10>
 							<label>test : <br></label>
 							<pre>test<br> 2021.05.13</pre>
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class='col-sm-3 pull-right' id='chatMessageArea' data-chatNo=10>
+						<div class='col-sm-3 pull-right' id='myF' data-chatNo=10>
 							<label>test : <br></label>
 							<pre>test<br> 2021.05.13</pre>
 						</div>
@@ -204,20 +198,18 @@
 				<input name="id2" id="chatAccepter" type="hidden" value="${vo.id2 }" />
 				<div class="chatContent row">
 					<label for="chatContent"></label>
-					<textarea style="border: 1px solid #e37d68; height: 85px; float: left; width: 80%" placeholder="메시지를 입력해주세요." id="chatContent" name="content"></textarea>
+					<textarea cols="5" wrap="hard" style="border: 1px solid #dae4f1; height: 85px; float: left; width: 80%" placeholder="메시지를 입력해주세요." id="chatContent" name="content"></textarea>
 				</div>
-				<span style="margin-top: -85px; float: right; width: 18%; height: 85px; text-align: center; background-color: #e37d68; border-radius: 5px;">
+				<span style="margin-top: -85px; float: right; width: 20%; height: 85px; text-align: center; background-color: #ecf1f8; border-radius: 5px;">
+<!-- 				<span style="margin-top: -85px; float: right; width: 18%; height: 85px; text-align: center; background-color: #ecf1f8; border-radius: 5px;"> -->
 					<br>
-					<button type="button" class="btn btn-xl chatSendBtn" style="background-color: #e37d68;" id="chatSendBtn">전송</button>
+					<button type="button" class="btn chatSendBtn" id="chatSendBtn">전송</button>
 				</span>
 			</form>
 		</div>
 		<div class="col-2" style="float: left">
 			<button type="button" class="btn btn-default goList" id="goList" onclick="location='list.do'">리스트</button>
-<%-- 			<c:if test="${vo.id1 == login.id}"> --%>
 			<a href="delete.do?no=${vo.chatNo }" class="btn btn-default deleteRoom" id="deleteRoom">나가기</a>
-<%-- 			<a href="delete.do?no=${vo.chatNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}" class="btn btn-default deleteRoom" id="deleteRoom">나가기</a> --%>
-<%-- 			</c:if> --%>
 		</div>
 	</div>
 </body>

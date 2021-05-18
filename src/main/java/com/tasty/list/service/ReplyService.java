@@ -11,13 +11,13 @@ public interface ReplyService {
 	public List<ReplyVO> list(PageObject pageObject, String shopNo) throws Exception;
 	
 	// 2. 댓글 쓰기 
-	public int write(ReplyVO vo) throws Exception;
+	public int write(ReplyVO ro) throws Exception;
 
 	// 3. 댓글 수정
-	public int update(ReplyVO vo) throws Exception;
+	public int update(ReplyVO ro) throws Exception;
 	
 	// 4. 댓글 삭제
-	public int delete(ReplyVO vo) throws Exception;
+	public int delete(ReplyVO ro) throws Exception;
 
 
 }

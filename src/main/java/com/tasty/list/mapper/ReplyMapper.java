@@ -16,12 +16,12 @@ public interface ReplyMapper {
 	// 2. 댓글보기 생략 - 리스트에 다 표시가 되므로
 	
 	// 3. 댓글쓰기
-	public int write(ReplyVO vo) throws Exception;
+	public int write(ReplyVO ro) throws Exception;
 	
 	// 4. 댓글 수정
-	public int update(ReplyVO vo) throws Exception;
+	public int update(ReplyVO ro) throws Exception;
 	
 	// 5. 댓글 삭제
-	public int delete(ReplyVO vo) throws Exception;
+	public int delete(ReplyVO ro) throws Exception;
 
 }

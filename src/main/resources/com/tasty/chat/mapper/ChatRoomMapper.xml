@@ -14,7 +14,7 @@
 					select chatNo, content, id, writeDate
 					from chatRoom
 					where chatNo = #{chatNo} 
-					order by writeDate asc
+					order by writeDate desc
 				)
 			)
 			
