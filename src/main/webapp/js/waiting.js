@@ -22,8 +22,6 @@
                // callback : 데이터를 가져오면 처리하는 함수 
                // - 가져온 list를 HTML만듦. 지정한 곳에 넣어준다.
                
-               alert("test");
-               
                if(callback){
                   callback(data);
                }
@@ -77,17 +75,15 @@
    
    var shopNo = $("#viewShopNo").text();
    
-   alert(shopNo);
-   
    // alert(shopNo);
    
    function showWait() {
       
       waitService.wait({shopNo : shopNo}, function(data) {
          
-//         alert(data);
+         // alert(data);
          
-//         alert(JSON.stringify(data));
+         // alert(JSON.stringify(data));
          
          var str = "";
          
@@ -97,10 +93,10 @@
             str += "<div class='modal-dialog'>";
             str += "<div class='modal-content'>";
             str += "<div class='modal-header'>";
-            str += "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
             str += "<h4 class='modal-title'>";
             str += "<i class='fa fa-comments fa-fw'></i>";
             str += "<span id='replyModalTitle'>대기열 수정</span>";
+            str += "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
             str += "</h4>";
             str += "</div>";
             str += "<div class='modal-body col-12'>";
@@ -116,31 +112,32 @@
             
          } else {
             
-//            alert("wating else")
+           // alert("wating else")
             
             console.log(data);
             
-            alert("실행");
+            // alert("실행");
+            
             str += "<div class='modal fade waitModal' id='wait' role='dialog'>";
             str += "<div class='modal-dialog'>";
             str += "<div class='modal-content'>";
             str += "<div class='modal-header'>";
-            str += "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
             str += "<h4 class='modal-title'>";
+            str += "<button type='button' class='close pull-left' data-dismiss='modal'>&times;</button>";
             str += "<i class='fa fa-comments fa-fw'></i>";
             str += "<span id='replyModalTitle'>대기열 수정</span>";
             str += "</h4>";
             str += "</div>";
             str += "<div class='modal-body col-12'>";
             str += "<form>";
-            str += "<div class='form-group' id='shopNoDiv '>";
-            str += "<input name='shopNo' type='text' class='form-control ' id='shopNo' readonly='readonly' value='" + data.shopNo + "' >";
+            str += "<div class='form-group' id='shopNoDiv '>"; 
+            str += "<input name='shopNo' type='hidden' class='form-control ' id='shopNo' readonly='readonly' value='" + data.shopNo + "'>";
             str += "</div>";
-            str += "<div class='form-group col-12 row' id='nowTalbeDiv'>";
+            str += "<div class='form-group col-12 row' id='nowTalbeDiv'>";  
             str += "<label for='now'>사용 중인 Table: </label>";
-            str += "<input name='now' type='text' class='form-control col-2' id='now' readonly='readonly' value='" + data.now +"'>";
+            str += "<input name='now' type='text' class='form-control' id='now' readonly='readonly' value='" + data.now +"'>";
             str += "</div>";
-            str += "<div class='form-group col-12' id='totalTableDiv'>";
+            str += "<div class='form-group col-12 row' id='totalTableDiv'>";
             str += "<label for='total'>전체 Table</label>";
             str += "<input name='total' type='text' class='form-control' id='toal' readonly='readonly' value='"+ data.total + "'>";
             str += "</div>";
@@ -153,16 +150,15 @@
             
          }      // end of if-else
          
-//          alert(str);
+         // alert(str);
          
-//         $(".waitModal").html(str);
          $("article").append(str);
          
       });      // end of function(data)
       
    }
-   
-      showWait();
+
+	showWait();
    
    $("#more").click(function () {
    
@@ -170,8 +166,7 @@
       
       // alert("click");
       
-   
-      alert("실행-- wait : " + $("#wait") );
+      // alert("실행-- wait : " + $("#wait") );
       
       $("#wait").modal();
 
