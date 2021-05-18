@@ -29,5 +29,10 @@ public interface MemberMapper {
 	
 	// 비밀번호 변경
 	public int updatePw(MemberVO vo) throws Exception;
+	
+	// 내 정보 보기
+	public MemberVO myPage(LoginVO vo);
+	
+	public int memberUpdate(MemberVO vo);
 
 }

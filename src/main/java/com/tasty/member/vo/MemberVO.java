@@ -22,6 +22,6 @@ public class MemberVO {
 	private Date conDate;
 	private String status;
 	private String address;
-	private Number GradeNo;
+	private int gradeNo;
 	
 }

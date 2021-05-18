@@ -24,5 +24,11 @@ public interface MemberService {
 	
 	// 이메일 중복 체크(int 형)
 	public void check_email(String email, HttpServletResponse response) throws Exception;
+	
+	// 회원 정보 보기
+	public MemberVO myPage(LoginVO vo) throws Exception;
+	
+	// 회원 정보 수정
+	public int memberUpdate(MemberVO vo) throws Exception;
 
 }
