@@ -45,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
 			out.close();
 		}else {
 			out.println("<script>");
-			out.println("location.href='/board/list.do'");
+			out.println("location.href='/member/loginForm.do'");
 			out.println("</script>");
 			out.close();
 		}
@@ -203,6 +203,20 @@ public class MemberServiceImpl implements MemberService {
 			
 			return vo;
 		}
+	}
+
+	@Override
+	public MemberVO myPage(LoginVO vo) throws Exception {
+
+//		session.getAttribute("login");
+		
+		return mapper.myPage(vo);
+	}
+
+	@Override
+	public int memberUpdate(MemberVO vo) throws Exception {
+		
+		return mapper.memberUpdate(vo);
 	}
 
 

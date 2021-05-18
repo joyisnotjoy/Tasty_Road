@@ -4,19 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace="pakage + interface" -->
 <mapper namespace="com.tasty.member.mapper.MemberMapper">
+
+	<!-- 로그인 -->
 	<select id="login" resultType="com.tasty.member.vo.LoginVO">
 		select id, name, gradeNo
 		from member
 		where id = #{id} and pw = #{pw}
 	</select>
 	
+	<!-- 회원가입 -->
 	<insert id="join">
 		insert into member(id, pw, name, gender, birth, tel, email, address, memberNo, gradeNo)
 		values(#{id}, #{pw}, #{name}, #{gender}, #{birth}, #{tel}, #{email}, #{address}, member_seq.nextval, '4')
 	</insert>
 	
 	
-<!-- 아이디 중복 검사 -->
+	<!-- 아이디 중복 검사 -->
 	<select id="check_id" parameterType="String" resultType="int">
 		select count(*) from member where id = #{id}
 	</select>
@@ -46,6 +49,18 @@
 	<!-- 비밀번호 변경 -->
 	<update id="updatePw" >
 		update member set pw = #{pw} where id = #{id}
+	</update>
+	
+	<!-- 내 정보 보기 -->
+	<select id="myPage" resultType="com.tasty.member.vo.MemberVO">
+		select id, name, birth, gender, tel, email, regDate, status, address, gradeNo
+		from member
+		where id = #{id}
+	</select>
+	
+	<update id="memberUpdate">
+		update member set pw = #{pw}, birth = #{birth}, gender = #{gender}, tel = #{tel}, address = #{address}
+		where id=#{id}
 	</update>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.tasty.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -54,13 +55,13 @@ public class MemberController {
 		session.setAttribute("login", service.login(vo, response));
 		
 		// 로그인이 끝나면 이동할 url
-		return "redirect:/board/list.do";
+		return MODULE + "/login";
 	}
 	
 	
 	// 로그 아웃 처리 메서드 - session을 그대로 두고 session안에 login 정보가 지운다.
 	@GetMapping("/logout.do")
-	public String logout(HttpSession session, RedirectAttributes rttr) {
+	public String logout(HttpSession session) {
 		
 		log.info("logout() - 로그아웃 처리 ");
 		
@@ -71,9 +72,9 @@ public class MemberController {
 		session.removeAttribute("login");
 		
 		// 메시지 보내기 - session이 사라지면 오류가 난다. session.invalidate() 사용 금지
-		rttr.addFlashAttribute("msg", "정상적으로 로그아웃이 되었습니다.");
+//		rttr.addFlashAttribute("msg", "정상적으로 로그아웃이 되었습니다.");
 		
-		return "redirect:/board/list.do";
+		return "redirect:/member/loginForm.do";
 	}
 	
 	@GetMapping("/joinForm.do")
@@ -88,7 +89,7 @@ public class MemberController {
 		
 		rttr.addFlashAttribute("result", service.join(vo, response));
 		
-		return "redirect:/board/list.do";
+		return "redirect:/member/loginForm.do";
 	}
 	
 	// 아이디 중복 검사(AJAX)
@@ -140,4 +141,53 @@ public class MemberController {
 		return MODULE +  "/findPw";
 	}
 	
+	@GetMapping("/myPage.do")
+	public String myPage(HttpServletRequest request, Model model) throws Exception {
+		
+//		log.info("찍어보자 : " + (String) session.getId());
+//		log.info("찍어보자 : " + (String) session.getAttribute("login"));
+		HttpSession session = request.getSession();
+		log.info("찍어보좌 : " + session.getAttribute("login"));
+		LoginVO id = (LoginVO) session.getAttribute("login");
+		
+		if(id == null) {
+			return "redirect:/member/loginForm.do";
+		}
+		
+		MemberVO vo = service.myPage(id);
+		log.info("myPage.MemberVO : " + vo);
+		
+		model.addAttribute("vo", vo);
+		
+		return MODULE + "/myPage";
+	}
+	
+	@GetMapping("/memberUpdateForm.do")
+	public String memberUpdateForm(Model model, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		LoginVO id = (LoginVO) session.getAttribute("login");
+		
+		if(id == null) {
+			return "redirect:/member/loginForm.do";
+		}
+		
+		MemberVO vo = service.myPage(id);
+		log.info("myPage.MemberVO : " + vo);
+		
+		model.addAttribute("vo", vo);
+		
+		
+		return MODULE + "/memberUpdate";
+	}
+	
+	@PostMapping("/memberUpdate.do")
+	public String memberUpdate(MemberVO vo, Model model) throws Exception {
+		
+		log.info("회원정보수정 : " + vo);
+		model.addAttribute("vo", service.memberUpdate(vo));
+//		service.updateMember(vo);
+		
+		return "redirect:/member/myPage.do";
+	}
 }
