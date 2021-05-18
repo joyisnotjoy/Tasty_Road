@@ -225,7 +225,7 @@ $(function(){
 	
 	// 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------------
 	$("#replyModalUpdateBtn").click(function(){
-		alert("수정 처리");
+// 		alert("수정 처리");
 		// 데이터 수집
 		var reply = {};
 		reply.replyNo = $("#replyNo").val();
