@@ -143,7 +143,7 @@ $(function(){
 // 		alert("댓글등록");
 
 		// 댓글 모달 창의 제목 바꾸기
-		$("#replyModalTitle").text("Reply Write");
+		$("#replyModalTitle").text("댓글 쓰기");
 
 		// 작업할 데이터의 입력란을 보이게 안보이게
 		$("#replyModal .form-group").show();
@@ -167,7 +167,7 @@ $(function(){
 		
 // 		reply.replyNo = $("#replyNo").val();
 		reply.shopNo = $("#replyshopNo").val();
-		reply.content = $("#replyContent").val();
+// 		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
 // 		alert(reply);
 // 		alert(JSON.stringify(reply));
@@ -189,7 +189,7 @@ $(function(){
 	$(".chat").on("click",".replyUpdateBtn",function(){
 // 		alert("댓글 수정");
 		// 모달창 제목 바꾸기
-		$("#replyModalTitle").text("Reply Update");
+		$("#replyModalTitle").text("댓글 수정하기");
 		
 		// 작업할 데이터의 입력란을 보이게 안보이게
 		$("#replyModal .form-group").show(); 
@@ -267,12 +267,12 @@ $(function(){
 	$(".chat").on("click", ".replyDeleteBtn", function(){
 // 		alert("댓글 삭제");
 		// 모달창 제목 바꾸기
-		$("#replyModalTitle").text("Reply Delete, 댓글 삭제 창");
+		$("#replyModalTitle").text("댓글 삭제하기");
 
 		// 작업할 데이터의 입력란을 보이게 안보이게
 		$("#replyModal .form-group").show();
 // 		$("#replyNo, #replyshopNoDiv, #replyModal .form-group").show();
-		$("#replyContentDiv, #replyWriterDiv").hide();
+		$("#replyWriterDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
 		var footer = $("#replyModal .modal-footer");
@@ -281,6 +281,7 @@ $(function(){
 		
 		// 댓글 번호 가져오기
 		var li = $(this).closest("li");
+		var content = li.find(".replyContentData").text();
 		var replyNo = li.data("replyno");
 		
 		// 댓글 번호 셋팅
@@ -300,7 +301,9 @@ $(function(){
 		var reply= {};
 		reply.replyNo = $("#replyNo").val();
 		reply.shopNo = $("#shopNo").val();
+		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
+		
 		
 		// reply.js 안에 있는 replyService.delete(reply JSON, 성공함수, 오류함수)
 		replyService.delete(reply,
@@ -551,7 +554,7 @@ $(function(){
 		</div>
 	</div>
 	<!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창의 끝 -->
-	<div class="modal"></div>
+   <div class="modal fade waitModal" id="wait" role="dialog" style="position: relative; z-index: 1;"></div>
 
 </body>
 </html>
