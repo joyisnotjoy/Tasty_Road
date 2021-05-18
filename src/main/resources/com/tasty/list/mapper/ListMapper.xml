@@ -39,28 +39,28 @@
 		  <if test="word != null and word != ''.toString()">
 		  	<!-- 검색하는 데이터가 있는 경우 where가 나온다. -->
 		  	where 1 = 0
-		  	<if test="key == 't'.toString()">
+		  	<if test="key == 'n'.toString()">
 		    	OR title like '%' || #{word} || '%'
 		    </if>
 		  	<if test="key == 'c'.toString()">
 		    	OR content like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'w'.toString()">
+		  	<if test="key == 'r'.toString()">
 		    	OR writer like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'tc'">
+		  	<if test="key == 'nc'">
 		    	OR title like '%' || #{word} || '%'
 		    	OR content like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'tw'">
+		  	<if test="key == 'nr'">
 		    	OR title like '%' || #{word} || '%'
 		    	OR writer like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'cw'">
+		  	<if test="key == 'cr'">
 		    	OR content like '%' || #{word} || '%'
 		    	OR writer like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'tcw'">
+		  	<if test="key == 'ncr'">
 		    	OR title like '%' || #{word} || '%'
 		    	OR content like '%' || #{word} || '%'
 		    	OR writer like '%' || #{word} || '%'

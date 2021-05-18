@@ -98,8 +98,7 @@ $(function(){
 	</ul>
 	
 	<!-- a tag, js : location,  주소입력 : get방식으로 넘어 간다. post방식 꼭 지정을 해야한다. -->
-	<a href = "write.do?perPageNum=${pageObject.perPageNum }"
-	 class="btn btn-default">맛집 추가</a>
+	<a href = "write.do?perPageNum=${pageObject.perPageNum }"></a>
 	 
 	<!-- 이동되는 페이지 표시 - 페이지네이션 -->
 	<div>

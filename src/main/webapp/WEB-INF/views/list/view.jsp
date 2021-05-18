@@ -551,7 +551,6 @@ $(function(){
 		</div>
 	</div>
 	<!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창의 끝 -->
-	<div class="modal"></div>
 
 </body>
 </html>
