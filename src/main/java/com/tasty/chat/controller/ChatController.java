@@ -64,28 +64,28 @@ public class ChatController {
 		return "redirect:list.do?perPageNum=" + perPageNum;
 	}
 
-	// 이름 수정
-	@GetMapping("/update.do")
-	public String updateForm(Model model, ChatVO vo) throws Exception {
-		log.info("updateForm().vo : " + vo);
-		model.addAttribute("vo", service.update(vo));
-
+	//채팅방 이름 수정
+	@GetMapping("/updateForm.do")
+	public String updateForm(Model model, ChatVO vo, Long no) throws Exception {
+		log.info("updateForm().no : " + no);
+		model.addAttribute("vo", service.view(no));
+		
 		return MODULE + "/update";
 	}
-
-	// 수정 처리
+	
+	//수정 처리
 	@PostMapping("/update.do")
 	public String update(ChatVO vo, RedirectAttributes rttr, PageObject pageObject, Long no) throws Exception {
+		log.info("update().no : " + no);
 		log.info("update().vo : " + vo);
+		
 		int result = service.update(vo);
-		if (result == 0)
-			throw new Exception("정보를 확인해주세요.");
+		if(result==0)throw new Exception("정보를 확인해주세요.");
 		log.info("update().result : " + result);
-
-		rttr.addFlashAttribute("msg", "수정이 완료되었습니다");
-
-		return "redirect:view.do?no=" + vo.getChatNo() + "&page" + pageObject.getPage() + "&perPageNum="
-				+ pageObject.getPerPageNum();
+		
+		rttr.addFlashAttribute("msg", "방 제목 수정이 완료되었습니다.");
+		
+		return "redirect:view.do?no=" + vo.getChatNo() + "&page=" + pageObject.getPage() + "&perPageNum=" + pageObject.getPerPageNum();
 	}
 
 	// 삭제

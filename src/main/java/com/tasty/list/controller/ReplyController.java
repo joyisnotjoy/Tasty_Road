@@ -58,14 +58,14 @@ public class ReplyController {
 	@PostMapping(value = "/write.do",
 		consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 		produces = {"application/text; charset=utf-8"})
-	public ResponseEntity<String> write(@RequestBody ReplyVO vo) throws Exception{
-		log.info("write().vo : " + vo);
+	public ResponseEntity<String> write(@RequestBody ReplyVO ro) throws Exception{
+		log.info("write().ro : " + ro);
 		
 //		ReplyVO reply = new ReplyVO();
 //		reply.setReplyNo(ReplyNo);
 		// db에 데이터 저장하기
-		service.write(vo);
-		log.info(service.write(vo));
+		service.write(ro);
+		log.info(service.write(ro));
 		return new ResponseEntity<String>
 		("댓글이 등록되었습니다.",HttpStatus.OK);
 	}
@@ -74,18 +74,18 @@ public class ReplyController {
 	@PatchMapping(value = "/update.do",
 			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 			produces = {"application/text; charset=utf-8"})
-	public ResponseEntity<String> update(@RequestBody ReplyVO vo) throws Exception {
+	public ResponseEntity<String> update(@RequestBody ReplyVO ro) throws Exception {
 		
-		log.info("update().vo : " + vo);
+		log.info("update().ro : " + ro);
 		
-		int result = service.update(vo);
+		int result = service.update(ro);
 		
 		// 전달되는 데이터의 선언
-		String msg = "게시판 글수정이 성공적으로 되었습니다.";
+		String msg = "댓글 수정이 성공적으로 되었습니다.";
 		HttpStatus status = HttpStatus.OK;
 		
 		if(result == 0) {
-			msg = "게시판 수정 실패 - 정보를 확인해 주세요.";
+			msg = "댓글 수정 실패 - 정보를 확인해 주세요.";
 			status = HttpStatus.NOT_MODIFIED;
 		}
 		
@@ -98,19 +98,19 @@ public class ReplyController {
 	@DeleteMapping(value = "/delete.do",
 			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 			produces = {"application/text; charset=utf-8"})
-	public ResponseEntity<String> delete(@RequestBody ReplyVO vo)
+	public ResponseEntity<String> delete(@RequestBody ReplyVO ro)
 			throws Exception {
 		
-		log.info("delete().vo : " + vo);
+		log.info("delete().ro : " + ro);
 		
-		int result = service.delete(vo);
+		int result = service.delete(ro);
 
 		// 전달되는 데이터의 선언
-		String msg = "게시판 삭제가 성공적으로 되었습니다.";
+		String msg = "댓글 삭제가 성공적으로 되었습니다.";
 		HttpStatus status = HttpStatus.OK;
 		
 		if(result == 0) {
-			msg = "게시판 삭제 실패 - 정보를 확인해 주세요.";
+			msg = "댓글 삭제 실패 - 정보를 확인해 주세요.";
 			status = HttpStatus.NOT_MODIFIED;
 		}
 		
