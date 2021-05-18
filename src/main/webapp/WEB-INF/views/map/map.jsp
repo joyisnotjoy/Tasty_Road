@@ -119,7 +119,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div id="info.body" class="body">
 			<div id="info.main" class="Main INFOLEFT">
 				<div id="info.main.home" class="home">
@@ -142,7 +141,7 @@
 					<div id="info.main.famous" class="famous"></div>
 					<div id="info.main.around" class="infoAround">
 						<h3 class="tit_around">주변 탐색</h3>
-						<ul class="list_around"></ul>
+						<ul class="list_around" id="shopList"></ul>
 					</div>
 					<div id="info.main.favorite" class="regfav"></div>
 					<div id="info.main.newplace" class="newplace">
