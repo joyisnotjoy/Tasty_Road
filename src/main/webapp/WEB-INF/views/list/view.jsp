@@ -361,7 +361,7 @@ $(function(){
 				<div class="col-md-2 title_label">주소</div>
 				<div class="col-md-10">
 					<pre>${vo.address }</pre>
-				</div>
+				</div> 
 			</li>
 			<li class="list-group-item row">
 				<div class="col-md-2 title_label">소개</div>
