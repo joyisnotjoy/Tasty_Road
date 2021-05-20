@@ -46,12 +46,12 @@
 	      // update() : ----------------------------------------------------
 	      // update(JSON data, 성공함수, 실패함수)
 	      function update(nowUpdate, callback, error){
-	         console.log("reply update() ----------------------------");
+	         console.log("nowUpdate() ----------------------------");
 	         // ajax를 이용해서 데이터 넘기기
 	         $.ajax({
 	            type:"patch",
-	            url : "/waiting/Nowupdate.do",
-	            data : JSON.stringify(reply),
+	            url : "/waiting/nowUpdate.do",
+	            data : JSON.stringify(nowUpdate),
 	            contentType : "application/json; charset=utf-8",
 	            success : function(result, status, xhr){
 	               if(callback) callback(result, status);
@@ -138,8 +138,8 @@
             str += "<div class='form-group col-12' id='nowTalbeDiv'>";  
             str += "<label for='now'>사용 중인 Table: </label> <br>";
             str += "<input name='now' type='text' class='form-control col-md-6' id='now' readonly='readonly' value='" + data.now +"' style='width: 6em; display: inline;' >";
-            str += "<button type='button' id='nowPlus' class='btn btn-default nowBtn col-md-3' style='float: right;' >&#43;</button>"
-            str += "<button type='button' id='nowMinus' class='btn btn-default nowBtn col-md-3' style='float: right;' >&#45;</button>"
+            str += "<button type='button' id='nowPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
+            str += "<button type='button' id='nowMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
 //          str += "<div class='input-group'>";
 //	    	str += "<span class='input-group-addon'>사용중인 Table </span>";
@@ -148,8 +148,8 @@
             str += "<div class='form-group col-12' id='totalTableDiv'>";
             str += "<label for='total'>전체 Table</label > <br>";
             str += "<input name='now' type='text' class='form-control col-md-6' id='total' readonly='readonly' value='" + data.total +"' style='width: 6em; display: inline;' >";
-            str += "<button type='button' id='totalPlus' class='btn btn-default col-md-3' style='float: right;' >&#43;</button>"
-            str += "<button type='button' id='totalMinus' class='btn btn-default col-md-3' style='float: right;' >&#45;</button>"
+            str += "<button type='button' id='totalPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
+            str += "<button type='button' id='totalMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
             str += "</form>";
             str += "</div>";
@@ -185,7 +185,33 @@
       
    });
    
-   $(document).on("click", ".nowBtn", function() {		// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
+	
+   
+   $(document).on("click", ".changeBtn", function() {		// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
+	
+		function modify(data, id) {		// changeBtn click시 now와 total의 데이터 변경 Ajax처리
+	
+			waitService.update (update, function(result, staus) {
+						
+				if(status == "notnodified") {
+					
+					alert("수정에 실패하였습니다, 같은 증상이 반복되면 고객센터에 문의해 주세요");
+					
+				} else {
+					
+					alert("수정되었습니다.");
+					
+					form.find(id).val(data);		// id값과 data값 추가를 통해 다양한 상황에서 적용
+					
+				}
+					
+			}, function(err, status) {
+			
+				alert(err);
+			
+			});
+	
+		}	// end of function Update(data, id);
 	
 		// alert("click");
 		
@@ -194,58 +220,77 @@
 		var shopNo = form.find("#shopNo").val();
 		var id = form.find("#id").val();
 		var preNow = parseInt(form.find("#now").val());
+		var now= form.find("#now").val();
+		var total = form.find("#total").val();
+		var preTotal = parseInt(form.find("#total").val());
 		
-		//alert(shopNo);
-		alert(id);
+		// alert(shopNo);
+		// alert(id);
+		// alert(total);
+		// alert(now);
+		 
+		var update = {};
+		update.shopNo = shopNo;
+		update.id = id;
 		
-		var nowUpdate = {};
-		nowUpdate.shopNo = shopNo;
+		// alert(nowUpdate);
 		
 		if(thisBtn == "nowPlus") {		// $(this)가 plus인 경우
 			
-			// alert(preNow);
-			// alert(preNow + 1);
+			if(now <= total) {
+				
+				// alert(preNow);
+				// alert(preNow + 1);
+				// alert(thisBtn);
+				update.now = (preNow + 1);
+				
+				modify((preNow + 1), "#now");
+			
+			} else {
+				
+				alert("전체 자리 수 보다 증가 시킬 수 없습니다.");
+				
+			}
+			
+			
+		} else if(thisBtn == "nowMinus") {		// $(this)가 Minus인 경우
+			
+			if(now > 0) {
+				
+				//alert(thisBtn);			
+			
+				update.now = (preNow - 1);
+				
+				modify((preNow - 1), "#now");
+				
+			} else {
+				
+				alert("0 밑으로는 내릴 수 없습니다.");
+				
+			}
+			
+			
+		} else if(thisBtn == "totalPlus") {		// $(this)가 plus 이면서 total인 경우
+			
 			// alert(thisBtn);
 			
-		} else {		// $(this)가 Minus인 경우
+			// alert(preTotal);
 			
-			alert(thisBtn);			
+			update.total = (preTotal + 1);
+			
+			modify((preTotal + 1), "#total");
+			
+		} else if(thisBtn == "totalMinus") {		// $(this)가 minus 이면서 total인 경우
+			
+			// alert(thisBtn);
+			
+			update.total = (preTotal - 1);
+			
+			modify((preTotal - 1), "#total");
 			
 		}
 		
-		
-	
+	 
 	})
    
 });
-//
-//	<ul class="list-group">	// map.jsp
-//
-//	if(!data || data.length == 0) {
-//		  <li class="list-group-item">
-//		  	데이터가 존재하지 않습니다.
-//		  </li>
-//	}
-//	
-//	else{
-//		
-//		for(var i = 0; list.length; i++) {
-//			
-//			<li class="list-group-item dataRow">
-//			  	<div>
-//				  	가게명: ${vo.shopName } / 
-//				  	 ${vo.content }
-//			  	</div> 
-//			  	주소: ${vo.address } <br>
-//			  	전화번호: ${vo.tel } <br>
-//			  	<span class="shopNo">${vo.shopNo }</span>
-//	<%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
-//	<%-- 		  	<span class="badge">${vo.cnt }</span> --%>
-//			  </li>
-//			
-//		}
-//			  
-//		
-//	}		
-//
-//$("#shopList").html(str);
