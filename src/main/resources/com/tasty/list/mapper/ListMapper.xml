@@ -40,30 +40,30 @@
 		  	<!-- 검색하는 데이터가 있는 경우 where가 나온다. -->
 		  	where 1 = 0
 		  	<if test="key == 'n'.toString()">
-		    	OR title like '%' || #{word} || '%'
+		    	OR shopName like '%' || #{word} || '%'
 		    </if>
 		  	<if test="key == 'c'.toString()">
 		    	OR content like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'r'.toString()">
-		    	OR writer like '%' || #{word} || '%'
+		  	<if test="key == 'a'.toString()">
+		    	OR address like '%' || #{word} || '%'
 		    </if>
 		  	<if test="key == 'nc'">
-		    	OR title like '%' || #{word} || '%'
+		    	OR shopName like '%' || #{word} || '%'
 		    	OR content like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'nr'">
-		    	OR title like '%' || #{word} || '%'
-		    	OR writer like '%' || #{word} || '%'
+		  	<if test="key == 'na'">
+		    	OR shopName like '%' || #{word} || '%'
+		    	OR address like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'cr'">
+		  	<if test="key == 'ca'">
 		    	OR content like '%' || #{word} || '%'
-		    	OR writer like '%' || #{word} || '%'
+		    	OR address like '%' || #{word} || '%'
 		    </if>
-		  	<if test="key == 'ncr'">
-		    	OR title like '%' || #{word} || '%'
+		  	<if test="key == 'nca'">
+		    	OR shopName like '%' || #{word} || '%'
 		    	OR content like '%' || #{word} || '%'
-		    	OR writer like '%' || #{word} || '%'
+		    	OR address like '%' || #{word} || '%'
 		    </if>
 		  </if>
 	
@@ -81,7 +81,7 @@
 	
 	<!-- 2. 맛집 보기 -->
 	<select id="view" resultType="com.tasty.member.vo.shopMemberVO">
-		select shopName, shopNo, address, tel, content, now, total, wait
+		select shopName, shopNo, address, tel, content, now, total, wait, id
 		from shopMember
 		where shopNo = #{shopNo}
 	</select>

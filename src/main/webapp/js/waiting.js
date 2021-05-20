@@ -45,12 +45,12 @@
 	      
 	      // update() : ----------------------------------------------------
 	      // update(JSON data, 성공함수, 실패함수)
-	      function update(reply, callback, error){
+	      function update(nowUpdate, callback, error){
 	         console.log("reply update() ----------------------------");
 	         // ajax를 이용해서 데이터 넘기기
 	         $.ajax({
 	            type:"patch",
-	            url : "/replies/update.do",
+	            url : "/waiting/Nowupdate.do",
 	            data : JSON.stringify(reply),
 	            contentType : "application/json; charset=utf-8",
 	            success : function(result, status, xhr){
@@ -133,33 +133,38 @@
             str += "<form>";
             str += "<div class='form-group' id='shopNoDiv '>"; 
             str += "<input name='shopNo' type='hidden' class='form-control ' id='shopNo' readonly='readonly' value='" + data.shopNo + "'>";
+            str += "<input name='id' type='hidden' class='form-control ' id='id' readonly='readonly' value='" + data.id + "'>";
             str += "</div>";
             str += "<div class='form-group col-12' id='nowTalbeDiv'>";  
             str += "<label for='now'>사용 중인 Table: </label> <br>";
             str += "<input name='now' type='text' class='form-control col-md-6' id='now' readonly='readonly' value='" + data.now +"' style='width: 6em; display: inline;' >";
-            str += "<button type='button' id='nowPlus' class='btn btn-default col-md-3' style='float: right;' >&#43;</button>"
-            str += "<button type='button' id='nowPlus' class='btn btn-default col-md-3' style='float: right;' >&#45;</button>"
+            str += "<button type='button' id='nowPlus' class='btn btn-default nowBtn col-md-3' style='float: right;' >&#43;</button>"
+            str += "<button type='button' id='nowMinus' class='btn btn-default nowBtn col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
 //          str += "<div class='input-group'>";
 //	    	str += "<span class='input-group-addon'>사용중인 Table </span>";
 //	     	str += "<input id='now' type='text' class='form-control' name='now' value='" + data.now + "' style='width: 100px;'>";
 //		    str += "</div>"
-            str += "<div class='form-group col-12 row' id='totalTableDiv'>";
-            str += "<label for='total'>전체 Table</label >";
-            str += "<input name='total' type='text' class='form-control' id='toal' readonly='readonly' value='"+ data.total + "'>";
+            str += "<div class='form-group col-12' id='totalTableDiv'>";
+            str += "<label for='total'>전체 Table</label > <br>";
+            str += "<input name='now' type='text' class='form-control col-md-6' id='total' readonly='readonly' value='" + data.total +"' style='width: 6em; display: inline;' >";
+            str += "<button type='button' id='totalPlus' class='btn btn-default col-md-3' style='float: right;' >&#43;</button>"
+            str += "<button type='button' id='totalMinus' class='btn btn-default col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
             str += "</form>";
             str += "</div>";
             str += "</div>";
             str += "</div>";
             str += "</div>";
-         
+          
             
          }      // end of if-else
          
          // alert(str);
          
          $("article").append(str);
+         
+        // $(".waitModal").html(str);
          
       });      // end of function(data)
       
@@ -179,6 +184,38 @@
 
       
    });
+   
+   $(document).on("click", ".nowBtn", function() {		// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
+	
+		// alert("click");
+		
+		var thisBtn = $(this).attr("id");
+		var form = $(this).closest("form");
+		var shopNo = form.find("#shopNo").val();
+		var id = form.find("#id").val();
+		var preNow = parseInt(form.find("#now").val());
+		
+		//alert(shopNo);
+		alert(id);
+		
+		var nowUpdate = {};
+		nowUpdate.shopNo = shopNo;
+		
+		if(thisBtn == "nowPlus") {		// $(this)가 plus인 경우
+			
+			// alert(preNow);
+			// alert(preNow + 1);
+			// alert(thisBtn);
+			
+		} else {		// $(this)가 Minus인 경우
+			
+			alert(thisBtn);			
+			
+		}
+		
+		
+	
+	})
    
 });
 //
