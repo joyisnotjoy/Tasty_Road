@@ -10,7 +10,7 @@
       // list(JSON-넘겨줄데이터, 데이터를 성공적으로 가져왔을때의 실행함수, 실패했을때의 실행함수)
       function list(param, callback, error){
          
-         var shopNo = $("#viewShopNo").text();
+         var shopNo = param.shopNo;
          
          $.getJSON(
             // ajax로 호출하는 url
@@ -158,7 +158,7 @@
       
    }
 
-	showWait();
+	// showWait();
    
    $("#more").click(function () {
    
@@ -252,134 +252,47 @@
          
          // alert(JSON.stringify(data));
          
-         var str = "";
-         
-         if(!data || data.length == 0) {
-            
-            str += "<div class='modal fade waitModal' id='wait' role='dialog'>";
-            str += "<div class='modal-dialog'>";
-            str += "<div class='modal-content'>";
-            str += "<div class='modal-header'>";
-            str += "<h4 class='modal-title'>";
-            str += "<i class='fa fa-comments fa-fw'></i>";
-            str += "<span id='replyModalTitle'>대기열 수정</span>";
-            str += "<button type='button' class='close' data-dismiss='modal'>&times;</button>";
-            str += "</h4>";
-            str += "</div>";
-            str += "<div class='modal-body col-12'>";
-            str += "<form>";
-            str += "<div class='form-group' id='shopNoDiv '>";
-            str += "<input name='shopNo' type='text' class='form-control ' id='shopNo' readonly='readonly' value='대기열을 불러올 수 없습니다.' >";
-            str += "</div>";
-            str += "</form>";
-            str += "</div>";
-            str += "</div>";
-            str += "</div>";
-            str += "</div>";
-            
-         } else {
-            
-           // alert("wating else")
-            
-            console.log(data);
-            
-            // alert("실행");
-            
-            str += "<div class='modal fade waitModal' id='wait' role='dialog'>";
-            str += "<div class='modal-dialog'>";
-            str += "<div class='modal-content'>";
-            str += "<div class='modal-header'>";
-            str += "<h4 class='modal-title'>";
-            str += "<button type='button' class='close pull-left' data-dismiss='modal'>&times;</button>";
-            str += "<i class='fa fa-comments fa-fw'></i>";
-            str += "<span id='replyModalTitle'>대기열 수정</span>";
-            str += "</h4>";
-            str += "</div>";
-            str += "<div class='modal-body col-md-12'>";
-            str += "<form>";
-            str += "<div class='form-group' id='shopNoDiv '>"; 
-            str += "<input name='shopNo' type='hidden' class='form-control ' id='shopNo' readonly='readonly' value='" + data.shopNo + "'>";
-            str += "</div>";
-            str += "<div class='form-group col-12' id='nowTalbeDiv'>";  
-            str += "<label for='now'>사용 중인 Table: </label> <br>";
-            str += "<input name='now' type='text' class='form-control col-md-6' id='now' readonly='readonly' value='" + data.now +"' style='width: 6em; display: inline;' >";
-            str += "<button type='button' id='nowPlus' class='btn btn-default col-md-3' style='float: right;' >&#43;</button>"
-            str += "<button type='button' id='nowPlus' class='btn btn-default col-md-3' style='float: right;' >&#45;</button>"
-            str += "</div>";
-//          str += "<div class='input-group'>";
-//	    	str += "<span class='input-group-addon'>사용중인 Table </span>";
-//	     	str += "<input id='now' type='text' class='form-control' name='now' value='" + data.now + "' style='width: 100px;'>";
-//		    str += "</div>"
-            str += "<div class='form-group col-12 row' id='totalTableDiv'>";
-            str += "<label for='total'>전체 Table</label >";
-            str += "<input name='total' type='text' class='form-control' id='toal' readonly='readonly' value='"+ data.total + "'>";
-            str += "</div>";
-            str += "</form>";
-            str += "</div>";
-            str += "</div>";
-            str += "</div>";
-            str += "</div>";
-         
-            
-         }      // end of if-else
-         
-         // alert(str);
-         
-         $("article").append(str);
-         
-      });      // end of function(data)
-      
-   }
-
-	showWait();
-   
-   $("#more").click(function () {
-   
-      // alert(shopNo);
-      
-      // alert("click");
-      
-      // alert("실행-- wait : " + $("#wait") );
-      
-      $("#wait").modal();
-
-      
-   });
-   
-//
-	var str = "";
-	
-	str += "<ul class='list-group'>"	// list.jsp
+	str += ""	// list.jsp
 
 	if(!data || data.length == 0) {
 		str +=  "<li class='list-group-item'> 데이터가 존재하지 않습니다. </li>"
-	}
-	
-	else{
+		
+	}else{
 		
 		for(var i = 0; list.length; i++) {
 			
-		str += "<li class='ist-group-item dataRow'>"
-		str += "<div>"
-		str += "'가게명:'" + data.shopName + "'/'"
-		str += data.content
-		str += "</div>" 
-		str += "주소:" + data.address + "<br>"
-		str += "전화번호:" + data.tel + "<br>"
-		str += "<span class='shopNo'>" + data.shopNo + "</span>"
-		str += "</li>"
+			str += "<li class='ist-group-item dataRow'>"
+			str += "<div>"
+			str += "'가게명:'" + data.shopName + "'/'"
+			str += data.content
+			str += "</div>" 
+			str += "주소:" + data.address + "<br>"
+			str += "전화번호:" + data.tel + "<br>"
+			str += "<span class='shopNo'>" + data.shopNo + "</span>"
+			str += "</li>"
 			
 		}
 		
 		str += "<a href = 'write.do?perPageNum=" + pageObject.perPageNum + "'></a>"  
 		str += "<div>"
-		str += "<pageObject:pageNav listURI='list.do' pageObject='" + pageObject + "' "query='&key="${pageObject.key }&word=${pageObject.word }"/>"
+		str += "<pageObject:pageNav listURI='list.do' pageObject='" + pageObject + "' query='&key=" + pageObject.key + "&word=" + pageObject.word + "'/>"	  
 		str += "</div>"
-		str += 
-			  
 		
-	}		
-$("#shopList").html(str);
+		}
+         
+        // alert(str);
+         
+		$("#shopList").html(str);
+       
+      });      // end of function(data)
+      
+   }
+
+	showList();
+   
+   
+//
+	
 
 
 

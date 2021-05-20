@@ -22,6 +22,8 @@
 	href="https://t1.daumcdn.net/kakaomapweb/subway/linemap/canvas/prod/css/subway.css">
 
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
 <title>카카오맵</title>
 </head>
 <body class="MAP">
