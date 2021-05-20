@@ -62,15 +62,15 @@
 	</filter-mapping>
 
 	<!-- sitemesh filter - 전체 레이아웃 -->
-<!-- 	<filter> -->
-<!-- 		<description>사이트에 레이아웃을 잡는 필터 처리</description> -->
-<!-- 		<filter-name>sitemesh</filter-name> -->
-<!-- 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>sitemesh</filter-name> -->
-<!-- 		<url-pattern>*.do</url-pattern> -->
-<!-- 	</filter-mapping> -->
+	<filter>
+		<description>사이트에 레이아웃을 잡는 필터 처리</description>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
 
 
 
