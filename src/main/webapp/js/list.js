@@ -4,7 +4,6 @@
  $(document).ready(function() {
    
    var listService = (
-<<<<<<< HEAD
    function(){
       // list
       // param : JSON {no:2, repPage:1, repPerPageNum:5}
@@ -175,9 +174,6 @@
    });
    
 });
-=======
-	
-	   function(){
 	      // list
 	      // param : JSON {no:2, repPage:1, repPerPageNum:5}
 	      // list(JSON-넘겨줄데이터, 데이터를 성공적으로 가져왔을때의 실행함수, 실패했을때의 실행함수)
@@ -243,9 +239,6 @@
 	         view : view
 	         
 	      }
-	   }
-   
-)();
    
    var shopNo = $("#viewShopNo").text();
    
@@ -353,7 +346,6 @@
       
    });
    
-});
 //
 	var str = "";
 	
@@ -378,6 +370,12 @@
 		str += "</li>"
 			
 		}
+		
+		str += "<a href = 'write.do?perPageNum=" + pageObject.perPageNum + "'></a>"  
+		str += "<div>"
+		str += "<pageObject:pageNav listURI='list.do' pageObject='" + pageObject + "' "query='&key="${pageObject.key }&word=${pageObject.word }"/>"
+		str += "</div>"
+		str += 
 			  
 		
 	}		
@@ -545,4 +543,3 @@ $("#shopList").html(str);
 	str += "</html>"
 	
 	
->>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
