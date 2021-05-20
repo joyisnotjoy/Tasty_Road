@@ -47,8 +47,8 @@
     <div class="col-md-10">${vo.wait }</div>
    </li>
   </ul>
-  <div class="modal"></div>
  </div>
+ <div class="modal fade waitModal" id="wait" role="dialog"></div>
 </body>
 </body>
 </html>

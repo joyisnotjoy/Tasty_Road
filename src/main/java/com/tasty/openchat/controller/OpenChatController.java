@@ -28,7 +28,7 @@ public class OpenChatController {
 		mv.setViewName("chat");
 		return mv;
 	}
-	/**
+	/** 
 	 * 방 페이지
 	 * @return
 	 */
