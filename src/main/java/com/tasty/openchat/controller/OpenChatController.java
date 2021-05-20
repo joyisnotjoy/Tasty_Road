@@ -79,7 +79,7 @@ public class OpenChatController {
 		
 		List<OpenChatVO> new_list = roomList.stream().filter(o->o.getOpenRoomNo()==openRoomNo).collect(Collectors.toList());
 		if(new_list != null && new_list.size() > 0) {
-			mv.addObject("openRoomNumber", params.get("openRoomName"));
+			mv.addObject("openRoomName", params.get("openRoomName"));
 			mv.addObject("openRoomNo", params.get("openRoomNo"));
 			mv.setViewName("chat");
 		}else {

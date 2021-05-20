@@ -234,8 +234,9 @@
 		    font-size: 15px;
 		    box-shadow: 1px 2px 3px 0px #f2f2f2;
 		    outline: none;
+		    margin-right: 267px;
 		}
-		#fileUpload + label:hover {
+		#fileUpload:hover + label {
 		    border: 1px solid #d9e1e8;
 		    background-color: #grey;
 		    color: #2b90d9;
@@ -435,7 +436,7 @@
 </script>
 <body>
 	<div id="container" class="container">
-		<h1>${openRoomName } talk</h1>
+		<h1>${openRoomName } TALK</h1>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="openRoomNo" value="${openRoomNo }">
 		
@@ -460,9 +461,9 @@
 					<br/></th>
 				</tr>
 				<tr>
-					<th class="file"><br/>IMG</th>
+					<th class="file"><br/></th>
 					<th><br/><input type="file" id="fileUpload">
-					<label for='fileUpload'>파일 선택</label></th>
+					<label for='fileUpload'>이미지 선택</label></th>
 					<th><br/><button onclick="fileSend()" id="sendFileBtn" class="buttonF">업로드</button></th>
 				</tr>
 			</table>
