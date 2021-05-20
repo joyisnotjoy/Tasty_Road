@@ -17,7 +17,7 @@
 	            // ajax로 호출하는 url
 	            "/waiting/wait.do?shopNo=" + shopNo,
 	            // success(성공) 상태일 때 처리되는 함수
-	            // 데이터 처리가 성공해서 데이터를 가져오면 data로 넣어준다. list이므로 배열이 넘어온다.
+	            // 데이터 처리가 성공해서 데이터를 가져오면 data로 넣어준다. list이므로 배열이 넘어온다. 
 	            function(data){
 	//               alert(data);
 	               // callback : 데이터를 가져오면 처리하는 함수 
