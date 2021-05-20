@@ -33,16 +33,16 @@
 			border: none;
 		}
 		.roomList th{
-			border: 1px solid #ffe600;
-			background-color: #fff;
+			border: 1px solid #a2e7ff;
+			background-color: #beeeff;
 			border-radius: 7px;
 			color: black;
 		}
 		.roomList td{
-			border: 1px solid #ffe600;
+			border: 1px solid #a2e7ff;
 			background-color: #fff;
 			border-radius: 7px;
-			text-align: left;
+			text-align: center;
 			color: black;
 		}
 		.roomList .num{
@@ -56,21 +56,37 @@
 			width: 71px;
 			text-align: center;
 		}
-		button{
+		.buttonT{
 			background-color:  #a2e7ff;
 			font-size: 14px;
 			color: #000;
-			border: 1px solid #000;
+			border: 1px solid #beeeff;
 			border-radius: 5px;
 			padding: 3px;
+			width: 65px;
 			margin: 3px;
 		}
-		button:hover{
+		.buttonT:hover{
+			cursor: pointer;
+			background-color: #beeeff;
+		}
+		.buttonC{
+			background-color: #a2e7ff;
+		    font-size: 15px;
+		    color: #000;
+		    border: 1px solid #beeeff;
+		    border-radius: 5px;
+		    padding: 5px;
+		    width: 80px;
+		    margin: -3px;
+		}
+		.buttonC:hover{
 			cursor: pointer;
 			background-color: #beeeff;
 		}
 		.inputTable th{
 			padding: 5px;
+			width: 54px;
 		}
 		.inputTable input{
 			width: 330px;
@@ -110,7 +126,7 @@
 
 	function createChatingRoom(res){
 		if(res != null){
-			var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
+			var tag = "<tr><th class='num'></th><th class='room'>방 이름</th><th class='go'></th></tr>";
 			console.log(res);
 			res.forEach(function(d, idx){
 				var rN = d.openRoomName.trim();
@@ -118,7 +134,7 @@
 				tag += "<tr>"+
 							"<td class='num'>"+(idx+1)+"</td>"+
 							"<td class='room'>"+ rN +"</td>"+
-							"<td class='go'><button type='button' onclick='goRoom(\""+openRoomNo+"\", \""+rN+"\")'>참여</button></td>" +
+							"<td class='go'><button type='button' class='buttonT' onclick='goRoom(\""+openRoomNo+"\", \""+rN+"\")'>입장</button></td>" +
 						"</tr>";	
 			});
 			$("#roomList").empty().append(tag);
@@ -150,9 +166,9 @@
 		<div>
 			<table class="inputTable">
 				<tr>
-					<th>방 제목</th>
+					<th>주 제</th>
 					<th><input type="text" name="openRoomName" id="openRoomName"></th>
-					<th><button id="createRoom">방 만들기</button></th>
+					<th><button id="createRoom" class="buttonC">생성</button></th>
 				</tr>
 			</table>
 		</div>

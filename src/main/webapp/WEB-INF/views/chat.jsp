@@ -21,14 +21,17 @@
 			padding: 5px 5px 5px 15px;
 			color: #111922;
 /* 			border-left: 3px solid #FFBB00; */
-			margin-bottom: 20px;
+			margin-bottom: 7px;
 		}
 		.chating{
-			background-color: white;
-			width: 500px;
-			height: 500px;
+			background-color: #c8e8ff;
+			width: 515px;
+			height: 499px;
 			overflow: auto;
-		
+			padding-right: 3px;
+			padding-left: 3px;
+			margin-bottom: 7px;
+			border-radius: 5px;
 		}
 		.chating .me2{
 			word-break:break-all;
@@ -36,7 +39,7 @@
 			text-align: right;
 			display: inline-block;
             max-width: 55%;
-            background-color: #dbedfe;
+            background-color: #ffeb00;
             padding: 5px;
             margin-top: 1.5px;
             margin-bottom: 3px;
@@ -44,14 +47,15 @@
             position: relative;
             border-width: 0.6px;
             border-style: solid;
-            border-color: grey;
+            border-color: #ffeb00;
             
 		}
 		.chating .me{
 			color: black;
 			text-align: right;
 			font-weight: bolder;
-			font-size: 11px
+			font-size: 11px;
+			padding-top: 1px;
 		}
 		
 		.chating .me2 {
@@ -70,8 +74,8 @@
 		    height: 3px;
 		    border-style: solid;
 		    border-width: 0px 0.6px 0.6px 0.6px;
-		    border-color: grey;
-		    background: #FBEB00;
+		    border-color: #ffeb00;
+		    background: #ffeb00;
 		    border-bottom-left-radius: 79px 106px;
 		    border-bottom-right-radius: 22px 0px;
 		    border-top-right-radius: 50px 62px;
@@ -88,7 +92,7 @@
 		    height: 3.3px;
 		    border-style: solid;
 		    border-width: 0 0.6px 0.6px 0.6px;
-		    border-color: grey;
+		    border-color: #ffeb00;
 		    background: #FBEB00;
 		    border-top-right-radius: 27px 54px;
 		    border-bottom-right-radius: 24px 0px;
@@ -118,7 +122,8 @@
 			color: black;
 			text-align: left;
 			font-weight: bolder;
-			font-size: 11px
+			font-size: 11px;
+			padding-top: 1px;
 		}
 		.chating .others2{
 			word-break:break-all;
@@ -134,7 +139,7 @@
             position: relative;
             border-width: 0.6px;
             border-style: solid;
-            border-color: grey;
+            border-color: white;
 		}
 		.others2 {
 			position: relative;
@@ -152,7 +157,7 @@
 		    height: 3.4px;
 		    border-style: solid;
 		    border-width: 0px 0.6px 0.6px 0.6px;
-		    border-color: grey;
+		    border-color: white;
 		    background: white;
 		    border-bottom-right-radius: 79px 106px;
 		    border-bottom-left-radius: 22px 0px;
@@ -170,7 +175,7 @@
 		    height: 3.3px;
 		    border-style: solid;
 		    border-width: 0 0.6px 0.6px 0.6px;
-		    border-color: grey;
+		    border-color: white;
 		    background: white;
 		    border-top-left-radius: 27px 54px;
 		    border-bottom-left-radius: 24px 0px;
@@ -180,7 +185,7 @@
 		
 		}
 		input{
-			width: 330px;
+			width: 350px;
 			height: 25px;
 		}
 		#yourMsg{
@@ -200,6 +205,101 @@
 		}
 		.img{
 			float: right;
+		}
+		
+		input.fileUpload {
+        	background: url( "/Tasty_Road/src/main/webapp/WEB-INF/images/3927-200.png" ) no-repeat;
+	        border: none;
+	        width: 32px;
+	        height: 32px;
+	        cursor: pointer;
+	      }
+      
+      	#fileUpload{
+		    width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+		}
+		
+		#fileUpload + label {
+		    border: 1px solid #d9e1e8;
+		    background-color: #fff;
+		    color: #2b90d9;
+		    border-radius: 2rem;
+		    padding: 8px 17px 8px 17px;
+		    font-weight: 500;
+		    font-size: 15px;
+		    box-shadow: 1px 2px 3px 0px #f2f2f2;
+		    outline: none;
+		}
+		#fileUpload + label:hover {
+		    border: 1px solid #d9e1e8;
+		    background-color: #grey;
+		    color: #2b90d9;
+		    border-radius: 2rem;
+		    padding: 8px 17px 8px 17px;
+		    font-weight: 500;
+		    font-size: 15px;
+		    box-shadow: 1px 2px 3px 0px #f2f2f2;
+		    outline: none;
+		}
+		#fileUpload:focus + label,
+		#fileUpload + label:hover {
+		    cursor: pointer;
+		}
+		.buttonF{
+			background-color: #a2e7ff;
+		    font-size: 15px;
+		    color: #000;
+		    border: 1px solid #beeeff;
+		    border-radius: 5px;
+		    padding: 5px;
+		    width: 72px;
+		    margin: -3px;
+		    margin-left: 5px;
+		}
+		.buttonF:hover{
+			cursor: pointer;
+			background-color: #beeeff;
+		}
+		.buttonS{
+			background-color: #a2e7ff;
+		    font-size: 15px;
+		    color: #000;
+		    border: 1px solid #beeeff;
+		    border-radius: 5px;
+		    padding: 5px;
+		    width: 72px;
+		    margin: -3px;
+		    margin-left: 5px;
+		}
+		.buttonS:hover{
+			cursor: pointer;
+			background-color: #beeeff;
+		}
+		.buttonW{
+			background-color: #a2e7ff;
+		    font-size: 15px;
+		    color: #000;
+		    border: 1px solid #beeeff;
+		    border-radius: 5px;
+		    padding: 5px;
+		    width: 77px;
+		    margin: -3px;
+		    margin-left: 5px;
+		}
+		.buttonW:hover{
+			cursor: pointer;
+			background-color: #beeeff;
+		}
+		.nick{
+			padding-right: 10px;
+		}
+		.msg{
+			padding-right: 5px;
 		}
 	</style>
 </head>
@@ -335,7 +435,7 @@
 </script>
 <body>
 	<div id="container" class="container">
-		<h1>${openRoomName} talk</h1>
+		<h1>${openRoomName } talk</h1>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="openRoomNo" value="${openRoomNo }">
 		
@@ -345,23 +445,25 @@
 		<div id="yourName">
 			<table class="inputTable">
 				<tr>
-					<th>사용자명</th>
-					<th><input type="text" name="userName" id="userName"></th>
-					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th>
+					<th class="nick">닉네임</th>
+					<th><input type="text" name="userName" id="userName" class="inputN"></th>
+					<th><button onclick="chatName()" id="startBtn" class="buttonW">등록</button></th>
 				</tr>
 			</table>
 		</div>
 		<div id="yourMsg">
 			<table class="inputTable">
 				<tr>
-					<th>메시지</th>
+					<th class="msg">CHAT</th>
 					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요." style="width: 380px;"></th>
-					<th><button onclick="send()" id="sendBtn" >보내기</button></th>
+					<th><button onclick="send()" id="sendBtn" class="buttonS">보내기</button>
+					<br/></th>
 				</tr>
 				<tr>
-					<th>이미지 업로드</th>
-					<th><input type="file" id="fileUpload"></th>
-					<th><button onclick="fileSend()" id="sendFileBtn">업로드</button></th>
+					<th class="file"><br/>IMG</th>
+					<th><br/><input type="file" id="fileUpload">
+					<label for='fileUpload'>파일 선택</label></th>
+					<th><br/><button onclick="fileSend()" id="sendFileBtn" class="buttonF">업로드</button></th>
 				</tr>
 			</table>
 		</div>
