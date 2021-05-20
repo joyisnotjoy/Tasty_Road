@@ -9,11 +9,11 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<junit-version>4.12</junit-version>
+		<junit-version>4.7</junit-version>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.9.0</org.aspectj-version>
-		<org.slf4j-version>1.7.25</org.slf4j-version>
+		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<!-- project 절대 위치를 property로 설정 - 본인의 위치 -->
 		<project.basedir>D:/leeyh/workspace/spring/tasty_Road</project.basedir>
 	</properties>
@@ -186,11 +186,11 @@
 		</dependency>
 
 		<!-- XML 데이터 처리 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.9.6</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.dataformat</groupId> -->
+<!-- 			<artifactId>jackson-dataformat-xml</artifactId> -->
+<!-- 			<version>2.9.6</version> -->
+<!-- 		</dependency> -->
 
 		<!-- 파일 업로드 -->
 		<dependency>
@@ -221,6 +221,32 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-websocket</artifactId>
+				<version>${org.springframework-version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-client-api -->
+			<dependency>
+			    <groupId>javax.websocket</groupId>
+			    <artifactId>javax.websocket-client-api</artifactId>
+			    <version>1.1</version>
+			</dependency>
+			<!-- json simple -->
+			<dependency>
+				<groupId>com.googlecode.json-simple</groupId>
+				<artifactId>json-simple</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<!-- json simple -->
+			
+		
+		
+		
+		
+		
 
 	</dependencies>
 
