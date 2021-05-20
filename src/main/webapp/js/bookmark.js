@@ -1,6 +1,3 @@
-/**
- * 
- */
  //like()
  function like(bookmark, callback, error){
 	
@@ -8,7 +5,7 @@
 	//ajax 이용해서 데이터를 서버에 보낸다.
 	$.ajax({
 		//전송방법의 타입
-		type:"post",
+		type:"POST",
 		// 요청 URL
 		url: "/bookmark/like.do",
 		// 전송되는 데이터
@@ -25,7 +22,7 @@
 			if(error) error(err);
 			else alert("즐겨찾기 등록 오류");
 		}
-	});//$.ajax의 끝
+	});//$.ajax의 끝 
 	}
 	//즐겨찾기 완료 alert 창	
 	//tempView buttons
