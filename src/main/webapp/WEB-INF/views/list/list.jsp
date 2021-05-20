@@ -53,11 +53,11 @@ $(function(){
 	  		<select name="key">
 	  			<option value="n" ${(pageObject.key == "n")?"selected":"" }>가게명</option>
 	  			<option value="c" ${(pageObject.key == "c")?"selected":"" }>내용</option>
-	  			<option value="r" ${(pageObject.key == "r")?"selected":"" }>댓글</option>
+	  			<option value="a" ${(pageObject.key == "a")?"selected":"" }>주소</option>
 	  			<option value="nc" ${(pageObject.key == "nc")?"selected":"" }>가게명/내용</option>
-	  			<option value="nr" ${(pageObject.key == "nr")?"selected":"" }>가게명/댓글</option>
-	  			<option value="cr" ${(pageObject.key == "cr")?"selected":"" }>내용/댓글</option>
-	  			<option value="ncr" ${(pageObject.key == "ncr")?"selected":"" }>모두</option>
+	  			<option value="na" ${(pageObject.key == "na")?"selected":"" }>가게명/주소</option>
+	  			<option value="ca" ${(pageObject.key == "ca")?"selected":"" }>내용/주소</option>
+	  			<option value="nca" ${(pageObject.key == "nca")?"selected":"" }>모두</option>
 	  		</select>
 	  	</span>
 	    <input type="text" class="form-control" placeholder="Search"
