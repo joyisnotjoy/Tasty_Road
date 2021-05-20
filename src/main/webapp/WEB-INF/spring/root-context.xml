@@ -27,7 +27,7 @@
 		
 		<!-- /src/main/resources/log4jdbc.log4j2.properties 필요 - 설정 -->
 		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@192.168.0.125:1521:xe" />
+			value="jdbc:log4jdbc:oracle:thin:@172.30.1.18:1521:xe" />
 		
 		<property name="username" value="tasty" />
 		<property name="password" value="road" />
