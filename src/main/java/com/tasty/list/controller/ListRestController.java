@@ -51,7 +51,7 @@ public class ListRestController {
 		log.info("list().replyPageObject : " + PageObject + ", shopNo : " + shopNo);
 		
 		map.put("pageObject", PageObject);
-		map.put("rList", service.tlist(PageObject, shopNo));
+		map.put("list", service.tlist(PageObject, shopNo));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}

@@ -45,7 +45,17 @@ public class waitingController {
 		
 		log.info("updateVO [vo] : " + vo);
 		
-		int result = service.nowUpdate(vo);
+		int result = 0;
+		
+		if(vo.getNow() != null) {
+			
+			result = service.nowUpdate(vo);
+			
+		} else if(vo.getTotal() != null) {
+			
+			result = service.totalUpdate(vo);
+			
+		}
 		
 		String msg = "수정되었습니다.";
 		
