@@ -44,6 +44,9 @@
 		});
 		
 	// 북마크 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------
+	var likeModal = $("#likeModal");
+	likeModal.modal("show");
+	// like 등록
 		$("#likeModalUpdateBtn").click(function() {
 			alert("수정처리");
 		});	

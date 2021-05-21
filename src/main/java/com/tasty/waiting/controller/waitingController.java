@@ -1,5 +1,8 @@
 package com.tasty.waiting.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tasty.list.service.ListService;
 import com.tasty.member.vo.shopMemberVO;
 import com.tasty.waiting.service.WaitService;
+import com.tasty.waiting.vo.waitVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -27,16 +31,16 @@ public class waitingController {
 	@Qualifier("waitsi")
 	private WaitService service;
 	
-	@Inject
-	@Qualifier("lsi")
-	private ListService lService;
 	
 	@GetMapping(value = "/wait.do", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<shopMemberVO> wait(String shopNo) throws Exception {
+	public ResponseEntity<Map<String, Object>> wait(String shopNo) throws Exception {
+
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		log.info("shopNo : " + shopNo);
+		map.put("wait", service.wait(shopNo));
+		map.put("bookMark", service.bm(shopNo));
 		
-		return new ResponseEntity<shopMemberVO>(lService.view(shopNo), HttpStatus.OK);
+		return new ResponseEntity<>(map, HttpStatus.OK);
 		
 	}
 	
