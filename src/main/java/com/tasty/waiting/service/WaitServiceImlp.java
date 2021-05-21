@@ -31,7 +31,9 @@ public class WaitServiceImlp implements WaitService {
 	@Override
 	public int totalUpdate(shopMemberVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		return mapper.totalUpdate(vo);
+		
 	}
 
 }
