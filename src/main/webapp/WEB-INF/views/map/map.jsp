@@ -27,7 +27,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
-<script type="text/javascript" src="/js/list.js"></script>
+<script type="text/javascript" src="/js/list/list.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -125,18 +125,12 @@ $(function(){
 					<h2 class="screen_out">검색 메뉴</h2>
 					<ul class="menu">
 						<li id="search.tab1" class="keyword keyword-ACTIVE"><a
-							href="#" class="mainmenutab" title="검색">검색</a></li>
+							href="#" class="mainmenutab" title="검색">List</a></li>
 						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><a
-							href="#" class="mainmenutab" title="길찾기">길찾기</a></li>
-						<li id="search.tab3" class="transitRoute transitRoute-INACTIVE">
-							<a href="#" class="mainmenutab" title="버스">버스</a>
-						</li>
-						<li id="search.tab4" class="subwayRoute subwayRoute-INACTIVE">
-							<a href="#" class="mainmenutab" title="지하철">지하철</a>
-						</li>
+							href="/chat/list.do" class="mainmenutab" title="길찾기">Talk</a></li>
 						<c:if test="${empty login }">
 							<li id="search.tab5" class="favorite favorite-INACTIVE emptyLogin"><a
-								href="#" class="mainmenutab" title="즐겨찾기">로그인</a></li>
+								href="/member/loginForm.do" class="mainmenutab" title="즐겨찾기">로그인</a></li>
 						</c:if>
 						<c:if test="${!empty login }">
 							<li id="search.tab5" class="favorite favorite-INACTIVE login"><a
