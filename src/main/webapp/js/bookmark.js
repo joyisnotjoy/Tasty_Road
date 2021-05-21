@@ -1,6 +1,3 @@
-/**
- * 
- */
  //like()
  function like(bookmark, callback, error){
 	
@@ -8,9 +5,9 @@
 	//ajax 이용해서 데이터를 서버에 보낸다.
 	$.ajax({
 		//전송방법의 타입
-		type:"post",
+		type:"POST",
 		// 요청 URL
-		url: "/bookmark/like.do",
+		url: "/bm/like.do",
 		// 전송되는 데이터
 		data : JSON.stringify(bookmark),
 		//전송되는 데이터 타입과 엔코딩 방식
@@ -25,7 +22,7 @@
 			if(error) error(err);
 			else alert("즐겨찾기 등록 오류");
 		}
-	});//$.ajax의 끝
+	});//$.ajax의 끝 
 	}
 	//즐겨찾기 완료 alert 창	
 	//tempView buttons
@@ -45,5 +42,11 @@
 //			alert("즐겨찾기 완료");
 //			document.getElementById('like').id = 'unlike';
 		});
+		
+	// 북마크 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------
+		$("#likeModalUpdateBtn").click(function() {
+			alert("수정처리");
+		});	
+	
 		
 	});

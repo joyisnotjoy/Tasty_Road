@@ -385,7 +385,7 @@ $(function(){
 				<div class="col-md-10">${vo.now }</div>
 			</li>
 			<li class="list-group-item row">
-				<div class="col-md-2 title_label">대기열</div>
+				<div class="col-md-2 title_label" id="waitingView">대기열</div>
 				<div class="col-md-10">${vo.wait }</div>
 			</li>
 			<!--   <li class="list-group-item row"> -->

@@ -126,7 +126,7 @@
 
 	function createChatingRoom(res){
 		if(res != null){
-			var tag = "<tr><th class='numT'></th><th class='room'>목 록</th><th class='goT'></th></tr>";
+			var tag = "<tr><th class='num'></th><th class='room'>목 록</th><th class='go'></th></tr>";
 			console.log(res);
 			res.forEach(function(d, idx){
 				var rN = d.openRoomName.trim();
