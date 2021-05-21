@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="index">
 <head>
@@ -51,8 +52,6 @@ $(function(){
 	<div class="IE6MIN">
 		<div id="header" class="Header" role="banner">
 			<h1 class="Title">
-				<a id="local" class="local"
-					href="?nil_profile=title&amp;nil_src=local">kakaomap</a>
 			</h1>
 		</div>
 	</div>
@@ -135,8 +134,14 @@ $(function(){
 						<li id="search.tab4" class="subwayRoute subwayRoute-INACTIVE">
 							<a href="#" class="mainmenutab" title="지하철">지하철</a>
 						</li>
-						<li id="search.tab5" class="favorite favorite-INACTIVE"><a
-							href="#" class="mainmenutab" title="즐겨찾기">MY</a></li>
+						<c:if test="${empty login }">
+							<li id="search.tab5" class="favorite favorite-INACTIVE emptyLogin"><a
+								href="#" class="mainmenutab" title="즐겨찾기">로그인</a></li>
+						</c:if>
+						<c:if test="${!empty login }">
+							<li id="search.tab5" class="favorite favorite-INACTIVE login"><a
+								href="#" class="mainmenutab" title="즐겨찾기">${login.id }</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>
