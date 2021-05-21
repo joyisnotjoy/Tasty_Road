@@ -8,8 +8,6 @@ public interface WaitingMapper {
 	
 	public waitVO wait(String shopNo) throws Exception;
 	
-	public bookmarkVO bookmark(String shopNo) throws Exception;
-	
 	public int nowUpdate(shopMemberVO vo) throws Exception;
 	
 	public int totalUpdate(shopMemberVO vo) throws Exception;
