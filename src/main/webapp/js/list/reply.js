@@ -1,39 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>맛집 보기</title>
-<!-- Awesome 4 icons lib : class="fa~ -->
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
-<!-- util JS 포함 - 반드시 reply.js 위에 선언을 해주셔야만 합니다. -->
-<script type="text/javascript" src="/js/util.js"></script>
 
-<!-- reply Model JS 포함 -->
-<script type="text/javascript" src="/js/reply.js"></script>
-<script type="text/javascript" src="/js/bookmark.js"></script>
-<script type="text/javascript" src="/js/waiting.js"></script>
 
-<!-- <style type="text/css"> -->
-<!-- .title_label { -->
-<!-- 	border: 1px dotted #ddd; -->
-<!-- } -->
-
-<!-- ul.chat { -->
-<!-- 	list-style: none; -->
-<!-- } -->
-
-<!-- ul.chat>li { -->
-<!-- 	margin-bottom: 15px; -->
-<!-- } -->
-<!-- </style> -->
-
-<script type="text/javascript">
-// alert("aaa" + 10);
 
 $(function(){
 	// 처리 후 나타나는 메시지 : 글쓰기나 글삭제 처리된 후 리스트로 돌아 오면 보여준다.
@@ -54,9 +21,9 @@ $(function(){
 	*/
 
 	// 모달 안에 삭제 버튼 이벤트
-	$("#modal_deleteBtn").click(function(){
+	$(document).on("click", "#modal_deleteBtn", function() {
 // 		alert("modal 삭제");
-		$("#modal_form").submit();
+		$(document).$("#modal_form").submit();
 	});
 	
 	
@@ -139,7 +106,7 @@ $(function(){
 	var replyModal = $("#replyModal");
 	
 // 	// 댓글 등록 버튼 이벤트 처리 (등록 폼) : 댓글의 모달 창 정보 조정과 보이기 ------------------------
-	$("#writeReplyBtn").click(function(){
+	$(document).on("click", "#writeReplyBtn", function(){
 // 		alert("댓글등록");
 
 		// 댓글 모달 창의 제목 바꾸기
@@ -162,7 +129,7 @@ $(function(){
 	});
 	
 	// 모달 댓글 등록 버튼에 대한 이벤트 처리 - 입력된 데이터를 가져와서 JSON 데이터 만들기 - 서버에 전송
-	$("#replyModalWriteBtn").click(function(){
+	$(document).on("click", "#replyModalWriteBtn", function(){
 		var reply = {};
 		
 // 		reply.replyNo = $("#replyNo").val();
@@ -224,7 +191,7 @@ $(function(){
 	});
 	
 	// 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------------
-	$("#replyModalUpdateBtn").click(function(){
+	$(document).on("click", "#replyModalUpdateBtn", function(){
 // 		alert("수정 처리");
 		// 데이터 수집
 		var reply = {};
@@ -294,7 +261,7 @@ $(function(){
 	});
 	
 	// 댓글 삭제 처리
-	$("#replyModalDeleteBtn").click(function(){
+	$(document).on("clcik", "#replyModalDeleteBtn", function(){
 // 		alert("댓글 삭제 처리");
 		// 데이터 수집
 		var reply= {};
@@ -325,8 +292,7 @@ $(function(){
 	
 	// 댓글의 페이지 번호 클릭 이벤트 - 태그가 나중에 나온다. 그래서 on()
 	// $(원래 있었던 객체 선택).on(이벤트, 새로 만들어진 태그, 실행함수) -> 이벤트의 전달
-	$("#reply_nav").on("click", ".reply_nav_li",
-		function(){
+	$("#reply_nav").on("click", ".reply_nav_li", function(){
 // 			alert("댓글 페이지네이션 클릭");
 			// this => li / move 클래스 li-a에 작성해 놨다.
 			if($(this).find("a").hasClass("move")){
@@ -341,214 +307,3 @@ $(function(){
 	);
 	
 }); // $(function(){~}) 의 끝.
-</script>
-
-</head>
-<body>
-	<div class="container">
-		<h1>맛집 보기</h1>
-		<!-- 데이터 표시하는 부분 -->
-		<ul class="list-group">
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">가게명</div>
-				<div class="col-md-10">${vo.shopName }</div>
-			</li>
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">사업자번호</div>
-				<div class="col-md-10" id="viewShopNo">${vo.shopNo }</div>
-			</li>
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">주소</div>
-				<div class="col-md-10">
-					<pre>${vo.address }</pre>
-				</div> 
-			</li>
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">소개</div>
-				<div class="col-md-10">${vo.content }</div>
-			</li>
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">전화번호</div>
-				<div class="col-md-10">${vo.tel }</div>
-			</li>
-			<!--   <li class="list-group-item row"> -->
-			<!--   	<div class="col-md-2 title_label">이미지</div> -->
-			<%--   	<div class="col-md-10"><pre>${vo.content }</pre></div> --%>
-			<!--   </li> -->
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">총 자리</div>
-				<div class="col-md-10">${vo.total }</div>
-				<button id="more" class="more">더보기</button>
-			</li>
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label">현재 자리</div>
-				<div class="col-md-10">${vo.now }</div>
-			</li>
-			<li class="list-group-item row">
-				<div class="col-md-2 title_label" id="waitingView">대기열</div>
-				<div class="col-md-10">${vo.wait }</div>
-			</li>
-			<!--   <li class="list-group-item row"> -->
-			<!--   	<div class="col-md-2 title_label">조회수</div> -->
-			<%--   	<div class="col-md-10">${vo.cnt }</div> --%>
-			<!--   </li> -->
-			<!--   <li class="list-group-item row"> -->
-			<!--   	<div class="col-md-2 title_label">즐겨찾기</div> -->
-			<%--   	<div class="col-md-10">${vo.status }</div> --%>
-			<!--   </li> -->
-		</ul>
-		<a href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
-			class="btn btn-default">수정</a> 
-		<a class="btn btn-default" onclick="return false;" data-toggle="modal" data-target="#myModal">삭제</a>
-		<a href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
-			class="btn btn-default">리스트</a>
-
-		<!-- 댓글의 시작 -->
-		<div class="row" style="margin: 20px -30px;">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<i class="fa fa-comments fa-fw"></i> Reply <br/>
-						<button class="btn btn-primary btn-xs pull-right"
-							id="writeReplyBtn">New Reply</button>
-					</div>
-					<div class="panel-body">
-						<ul class="chat">
-<!-- 							데이터가 있는 만큼 반복 처리 li태그 만드어 내기 -->
-<!-- 							rno를 표시하지 않고 태그안에 속성으로 숨겨 놓음 data-rno="12" -->
-<!-- 							<li class="left clearfix"> -->
-							<li class="left clearfix" >	
-<!-- 							<li class="left clearfix" data-replyNo="12">	 -->
-								<div>
-									<div class="header">
-										<strong class="primary-font">user00</strong> <br/>
-										<small class="pull-right text-muted">2021.04.21 14:12</small>
-									</div>
-									<p>Good job!</p>
-									<div class="text-right">
-										<button class="btn btn-default btn-xs replyUpdateBtn">수정</button>
-										<button class="btn btn-default btn-xs replyDeleteBtn">삭제</button>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-<!-- 					댓글 panel-body 의 끝 -->
-					<div class="panel-footer">
-						<ul class="pagination" id="reply_nav">
-							<li><a href="">1</a></li>
-							<li class="active"><a href="">2</a></li>
-						</ul>
-					</div>
-				</div>
-<!-- 				댓글 panel 의 끝 -->
-			</div>
-
-		</div>
-		<!-- 댓글의 끝 -->
-
-	</div>
-	<!-- container 끝 -->
-
-	<!-- Modal - 리스트 맛집 정보 삭제 시 사용되는 모달 창 -->
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">맛집 정보 삭제 알림창</h4>
-				</div>
-				<div class="modal-body">
-					<form action="delete.do" method="post" id="modal_form">
-						<input name="shopNo" readonly="readonly" value="${vo.shopNo }">
-						<input type="hidden" name="perPageNum"
-							value="${pageObject.perPageNum }">
-						<!--         	<div class="form-group"> -->
-						<!--         		<label>비밀번호 : </label> -->
-						<!--         		<input name="pw" type="password" class="form-control" id="pw"  -->
-						<!-- 			      pattern="[^가-힣ㄱ-ㅎ]{4,20}" required="required" -->
-						<!-- 			      title="4-20자. 한글은 입력할 수 없습니다." /> -->
-						<!--         	</div> -->
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" id="modal_deleteBtn">삭제</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<!-- Modal - 리스트 맛집 삭제 시 사용되는 모달 창의 끝 -->
-
-	<!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창 -->
-	<div id="replyModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">
-						<i class="fa fa-comments fa-fw"></i> <span id="replyModalTitle">Reply
-							Modal</span>
-					</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						<!-- 			<div class="form-group" id="replyRnoDiv"> -->
-						<!-- 			  <label for="replyRno">댓글번호:</label> -->
-						<!-- 			  <input name="rno" type="text" class="form-control" id="replyRno" -->
-						<!-- 			  readonly="readonly"> -->
-						<!-- 			</div>		     -->
-						<div class="form-group" id="replyNoDiv">
-							<label for="replyNo">댓글 번호:</label> 
-							<input name="replyNo" type="text" class="form-control" id="replyNo"
-								readonly="readonly" >
-						</div>
-						<div class="form-group" id="replyshopNoDiv">
-							<label for="replyshopNo">맛집 등록 번호:</label> 
-							<input name="shopNo" type="text" class="form-control" id="replyshopNo"
-								readonly="readonly" value="${vo.shopNo }">
-						</div>
-						<div class="form-group" id="replyshopNameDiv">
-							<label for="replyshopName">맛집 이름:</label> 
-							<input name="shopName" type="text" class="form-control" id="replyshopName"
-								readonly="readonly" value="${vo.shopName }">
-						</div>
-						<div class="form-group" id="replyContentDiv">
-							<label for="replyContent">내용:</label>
-							<textarea name="content" class="form-control" rows="5"
-								id="replyContent" required="required"></textarea>
-						</div>
-						<div class="form-group" id="replyWriterDiv">
-							<label for="replyWriter">아이디:</label> 
-							<input name="writer" type="text" class="form-control" id="replyWriter"
-								required="required" value="${login.id }">
-						</div>
-						<!-- 			<div class="form-group" id="replyPwDiv"> -->
-						<!-- 			  <label for="replyPw">비밀번호:</label> -->
-						<!-- 			  <input name="pw" type="text" class="form-control" id="replyPw" -->
-						<!-- 			  required="required" pattern=".{4,20}"> -->
-						<!-- 			</div>		     -->
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default"
-						id="replyModalWriteBtn">등록</button>
-					<button type="button" class="btn btn-default"
-						id="replyModalUpdateBtn">수정</button>
-					<button type="button" class="btn btn-default"
-						id="replyModalDeleteBtn">삭제</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창의 끝 -->
-
-</body>
-</html>

@@ -36,7 +36,7 @@ public class ChatController {
 		log.info("list().pageObject : " + pageObject);
 
 		model.addAttribute("list", service.list(pageObject));
-		return MODULE + "list";
+		return MODULE + "/list";
 	}
 
 	// 채팅 보기

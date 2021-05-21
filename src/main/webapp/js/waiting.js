@@ -82,11 +82,12 @@
       
       waitService.wait({shopNo : shopNo}, function(data) {
          
-         // alert(data);
+         alert(data);
          
-         // alert(JSON.stringify(data));
+         alert(JSON.stringify(data));
          
          var str = "";
+         var waitingViewBtn = "";
          
          if(!data || data.length == 0) {
             
@@ -110,6 +111,9 @@
             str += "</div>";
             str += "</div>";
             str += "</div>";
+            
+            waitingViewBtn += "<span styli='disply: inline;'>대기열</span>";
+         	waitingViewBtn += "<button type='button' class='btn btn-default' id='failBtn' style='float: right;'>&#43;더보기</button>";
             
          } else {
             
@@ -141,10 +145,6 @@
             str += "<button type='button' id='nowPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
             str += "<button type='button' id='nowMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
-//          str += "<div class='input-group'>";
-//	    	str += "<span class='input-group-addon'>사용중인 Table </span>";
-//	     	str += "<input id='now' type='text' class='form-control' name='now' value='" + data.now + "' style='width: 100px;'>";
-//		    str += "</div>"
             str += "<div class='form-group col-12' id='totalTableDiv'>";
             str += "<label for='total'>전체 Table</label > <br>";
             str += "<input name='now' type='text' class='form-control col-md-6' id='total' readonly='readonly' value='" + data.total +"' style='width: 6em; display: inline;' >";
@@ -157,12 +157,23 @@
             str += "</div>";
             str += "</div>";
           
+	         waitingViewBtn += "<span styli='disply: inline;'>대기열</span>";
+	         waitingViewBtn += "<button type='button' class='btn btn-default' id='waitingViewBtn' style='float: right;'>&#43;더보기</button>";
             
          }      // end of if-else
          
+         
          // alert(str);
          
+         console.log("<c:out value='${login.id}'/>");
+         
+         var myId = "<c:out value='${login.id}'/>";
+         
+         alert(myId);
+         
+         $("#waitingView").html(waitingViewBtn);
          $("article").append(str);
+         $("#waitingView").html(myId);
          
         // $(".waitModal").html(str);
          
@@ -291,6 +302,18 @@
 		}
 		
 	 
-	})
+	});
+	
+	$(document).on("click", "#waitingViewBtn", function() {
+		
+		alert("click");
+		
+	});
+   
+	$(document).on("click", "#failBtn", function() {
+	
+		alert("대기열을 불러 올 수 업습니다. ");
+	
+	}) 
    
 });
