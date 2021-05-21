@@ -3,7 +3,7 @@ package com.tasty.bookmark.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tasty.bookmark.vo.BookmarkVO;
@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BmController {
 
-	@GetMapping("/like.do")
+	@PostMapping("/like.do")
 	public String like(BookmarkVO vo, HttpSession session) throws Exception {
 
 		LoginVO id = (LoginVO) session.getAttribute("login");
