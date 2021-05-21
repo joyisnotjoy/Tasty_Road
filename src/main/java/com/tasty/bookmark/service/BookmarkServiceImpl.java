@@ -17,11 +17,25 @@ public class BookmarkServiceImpl implements BookmarkService{
 
 	@Inject
 	private BookmarkMapper mapper;
-	
+
+	@Override
+	public bookmarkVO bm(String shopNo) throws Exception {
+		// TODO Auto-generated method stub
+
+		bookmarkVO vo = new bookmarkVO();
+
+		vo.setId("test");
+
+		log.info(vo);
+
+		return mapper.bookmark(shopNo);
+
+	}
+
 	@Override
 	public int like(bookmarkVO vo) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 		log.info(vo);
 		return mapper.like(vo);
 	}

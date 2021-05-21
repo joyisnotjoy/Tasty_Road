@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="pageObject" tagdir="/WEB-INF/tags" %> 
 <!DOCTYPE html>
 <html>
@@ -15,28 +15,6 @@
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/bookmark.js"></script>
 <script type="text/javascript" src="/js/waiting.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		<c:if test= "{!empty msg}">
-			//북마크 등록, 수정 후 메시지 출력
-			setTimeout(function() {
-				alert("${msg}");
-			}, 20);
-		</c:if>
-		
-		<c:if test="${!empty login}">
-		 $("#messageCnt").load("/ajax/getMessageCnt.do",
-					function(result, status){
-						  // console.log(status);
-						  if(status=="error"){
-							  clearTimeout(myVar);
-							  location = "/member/loginForm.do";
-						  }
-		
-	});
-</script>
-</head>
 <body>
  <div class="container">
   <h1>게시판 글 보기</h1>
@@ -70,6 +48,13 @@
   </ul>
  </div>
  <div class="modal fade waitModal" id="wait" role="dialog"></div>
+<!--  로그인 여부 -->
+	<c:if test="${empty login }">
+		<div id="empty login">로그인 하러가기</div>
+	</c:if>
+	<c:if test="${!empty login }">
+		<div id="login">${login.id }</div>
+	</c:if>
 </body>
 </body>
 </html>
