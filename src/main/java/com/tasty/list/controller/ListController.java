@@ -34,7 +34,7 @@ public class ListController {
 	private ListService service;
 	
 	// 1. 맛집 리스트 - 검색 / list.do -get
-	@GetMapping("list.do")
+	@GetMapping("map.do")
 	// @ModelAttribute - 전달 받은 변수의 값을 model에 담아서 JSP까지 보내준다. 변수 이름으로 사용
 	public String list(Model model, @ModelAttribute PageObject pageObject, HttpSession session) throws Exception{
 	
@@ -42,7 +42,7 @@ public class ListController {
 	log.info("list().pageObject : " + pageObject + " ..........");
 	model.addAttribute("list", service.list(pageObject));
 	
-	return MODULE + "/list";
+	return MODULE + "/map";
 	}
 	
 	// 2. 맛집 보기 /view.do -get

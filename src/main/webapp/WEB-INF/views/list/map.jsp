@@ -3,6 +3,8 @@
 <%@taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="pageObject" tagdir="/WEB-INF/tags" %> 
 <!DOCTYPE html>
 <html class="index">
 <head>
@@ -22,9 +24,12 @@
 <link rel="stylesheet"
 	href="https://t1.daumcdn.net/kakaomapweb/subway/linemap/canvas/prod/css/subway.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
@@ -44,6 +49,18 @@ $(function(){
 		location = "view.do?shopNo=" + shopNo + query;
 	});
 });
+	$(".shopListt").click(function(){
+		var shopNo = $(this).find(".shopNo").text();
+		// 페이지 정보 붙이기
+		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
+				+= "&perPageNum=" += pageObject.perPageNum += "'"};
+		// 검색 정보 붙이기
+		query += ${(empty pageObject.word)?"''":"'&key=" += pageObject.key
+				+= "&word=" += pageObject.word += "'"};
+// 		location = "view.do?no=" + no + "&inc=1" + query;
+		location = "view.do?shopNo=" + shopNo + query;
+	});
+});
 </script>
 <title>될 지도 안될 지도</title>
 </head>
@@ -51,8 +68,7 @@ $(function(){
 
 	<div class="IE6MIN">
 		<div id="header" class="Header" role="banner">
-			<h1 class="Title">
-			</h1>
+			<h1 class="Title"></h1>
 		</div>
 	</div>
 
@@ -129,7 +145,8 @@ $(function(){
 						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><a
 							href="/chat/list.do" class="mainmenutab" title="길찾기">Talk</a></li>
 						<c:if test="${empty login }">
-							<li id="search.tab5" class="favorite favorite-INACTIVE emptyLogin"><a
+							<li id="search.tab5"
+								class="favorite favorite-INACTIVE emptyLogin"><a
 								href="/member/loginForm.do" class="mainmenutab" title="즐겨찾기">로그인</a></li>
 						</c:if>
 						<c:if test="${!empty login }">
@@ -142,34 +159,71 @@ $(function(){
 		</div>
 		<div id="info.body" class="body">
 
-				<div id="info.search" class="keywordSearch ">
+			<div id="info.search" class="keywordSearch ">
 
-					<div id="info.search.place" class="section places">
-						<div class="sectiontitle">
-							<h5 class="placetit">장소</h5>
-							<span class="cntwrap"><em id="info.search.place.cnt"
-								class="cnt"></em></span>
-							<ol id="info.search.place.sort" class="Sort"></ol>
-						</div>
-						<ul id="shopList" class="placelist"></ul>
+				<div id="info.search.place" class="section places">
+					<div class="sectiontitle">
+						<h5 class="placetit">장소</h5>
+						<span class="cntwrap"><em id="info.search.place.cnt"
+							class="cnt"></em></span>
+						<ol id="info.search.place.sort" class="Sort"></ol>
 					</div>
-					<div id="info.search.page" class="pages">
-						<div class="pageWrap">
-							<button type="button" id="info.search.page.prev"
-								class="prev disabled">이전</button>
-							<a id="info.search.page.no1" class="INACTIVE" href="#">1</a> <a
-								id="info.search.page.no2" class="INACTIVE" href="#">2</a> <a
-								id="info.search.page.no3" class="INACTIVE" href="#">3</a> <a
-								id="info.search.page.no4" class="INACTIVE" href="#">4</a> <a
-								id="info.search.page.no5" class="INACTIVE" href="#">5</a>
-							<button type="button" id="info.search.page.next" class="next">다음</button>
-						</div>
-					</div>
+					<ul id="shopList" class="placelist">
+						<c:if test="${empty list }">
+							<!-- 데이터 없는 경우의 표시 -->
+							<!-- 데이터가 존재하지 않는 경우 -->
+							<li class="list-group-item">데이터가 존재하지 않습니다.</li>
+						</c:if>
 
+						<c:if test="${!empty list }">
+							<!-- 데이터가 있는 경우의 표시 -->
+							<c:forEach items="${list }" var="vo">
+								<li class="list-group-item dataRow">
+									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소:
+									${vo.address } <br> 전화번호: ${vo.tel } <br> <span
+									class="shopNo">${vo.shopNo }</span> <%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
+									<%-- 		  	<span class="badge">${vo.cnt }</span> --%>
+								</li>
+							</c:forEach>
+						</c:if>
+					</ul>
+				</div>
+				<div id="info.search.place" class="section places">
+					<div class="sectiontitle">
+						<h5 class="placetit">장소</h5>
+						<span class="cntwrap"><em id="info.search.place.cnt"
+							class="cnt"></em></span>
+						<ol id="info.search.place.sort" class="Sort"></ol>
+					</div>
+					<ul id="shopListt" class="placelist">
+						<c:if test="${empty list }">
+							<!-- 데이터 없는 경우의 표시 -->
+							<!-- 데이터가 존재하지 않는 경우 -->
+							<li class="list-group-item">데이터가 존재하지 않습니다.</li>
+						</c:if>
+
+						<c:if test="${!empty list }">
+							<!-- 데이터가 있는 경우의 표시 -->
+							<c:forEach items="${list }" var="vo">
+								<li class="list-group-item dataRow">
+									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소:
+									${vo.address } <br> 전화번호: ${vo.tel } <br> <span
+									class="shopNo">${vo.shopNo }</span> <%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
+									<%-- 		  	<span class="badge">${vo.cnt }</span> --%>
+								</li>
+							</c:forEach>
+						</c:if>
+					</ul>
+				</div>
+				<div>
+					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"
+						query="&key=${pageObject.key }&word=${pageObject.word }" />
 				</div>
 
 			</div>
+
 		</div>
+	</div>
 	<!-- list 들어갈 곳 끝 -->
 
 	<!-- 지도에 들어가는 부분 -->
