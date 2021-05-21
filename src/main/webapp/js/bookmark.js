@@ -7,7 +7,7 @@
 		//전송방법의 타입
 		type:"POST",
 		// 요청 URL
-		url: "/bookmark/like.do",
+		url: "/bm/like.do",
 		// 전송되는 데이터
 		data : JSON.stringify(bookmark),
 		//전송되는 데이터 타입과 엔코딩 방식
@@ -42,5 +42,11 @@
 //			alert("즐겨찾기 완료");
 //			document.getElementById('like').id = 'unlike';
 		});
+		
+	// 북마크 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------
+		$("#likeModalUpdateBtn").click(function() {
+			alert("수정처리");
+		});	
+	
 		
 	});

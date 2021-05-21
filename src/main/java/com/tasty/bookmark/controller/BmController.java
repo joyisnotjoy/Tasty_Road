@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tasty.bookmark.vo.BookmarkVO;
+import com.tasty.bookmark.vo.bookmarkVO;
 import com.tasty.member.vo.LoginVO;
 
 import lombok.extern.log4j.Log4j;
@@ -17,7 +17,7 @@ import lombok.extern.log4j.Log4j;
 public class BmController {
 
 	@PostMapping("/like.do")
-	public String like(BookmarkVO vo, HttpSession session) throws Exception {
+	public String like(bookmarkVO vo, HttpSession session) throws Exception {
 
 		LoginVO id = (LoginVO) session.getAttribute("login");
 		

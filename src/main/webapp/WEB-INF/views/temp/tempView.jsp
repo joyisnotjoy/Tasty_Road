@@ -15,6 +15,27 @@
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/bookmark.js"></script>
 <script type="text/javascript" src="/js/waiting.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		<c:if test= "{!empty msg}">
+			//북마크 등록, 수정 후 메시지 출력
+			setTimeout(function() {
+				alert("${msg}");
+			}, 20);
+		</c:if>
+		
+		<c:if test="${!empty login}">
+		 $("#messageCnt").load("/ajax/getMessageCnt.do",
+					function(result, status){
+						  // console.log(status);
+						  if(status=="error"){
+							  clearTimeout(myVar);
+							  location = "/member/loginForm.do";
+						  }
+		
+	});
+</script>
 </head>
 <body>
  <div class="container">
