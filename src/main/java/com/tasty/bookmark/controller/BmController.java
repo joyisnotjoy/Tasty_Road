@@ -3,10 +3,11 @@ package com.tasty.bookmark.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tasty.bookmark.vo.BookmarkVO;
+import com.tasty.bookmark.vo.bookmarkVO;
+import com.tasty.member.vo.LoginVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -15,15 +16,30 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class BmController {
 
-	@GetMapping("/like.do")
-	public String like(BookmarkVO vo, HttpSession session) throws Exception {
+	@PostMapping("/like.do")
+	public String like(bookmarkVO vo, HttpSession session) throws Exception {
+
+		LoginVO id = (LoginVO) session.getAttribute("login");
 		
-		vo.setId("KFC");
-		vo.setShopNo("234-45-56654");
+//		if (id == null) {
+//			return "redirect:/member/loginForm.do";
+//		}
 		
-		session.setAttribute("login", vo);
-		log.info(session.getAttribute("login"));
+		log.info(id);
+		
 		return "/bookmark/like";
+
 	}
-	
+
+//	@GetMapping("/like.do")
+//	public String like(BookmarkVO vo, HttpSession session) throws Exception {
+//		
+//		vo.setId("KFC");
+//		vo.setShopNo("234-45-56654");
+//		
+//		session.setAttribute("login", vo);
+//		log.info(session.getAttribute("login"));
+//		return "/bookmark/like";
+//	}
+//	
 }

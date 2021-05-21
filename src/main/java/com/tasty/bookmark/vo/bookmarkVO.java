@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class BookmarkVO {
+public class bookmarkVO {
 
 	private Long  cnt;
 	private String id;

@@ -4,15 +4,22 @@
 <!-- namespace="pakage + interface" 동일해야 한다 -->
 <mapper namespace="com.tasty.bookmark.mapper.BookmarkMapper">
 
-<insert id="like">
-insert into bookmark(id, shopNo)
-values (#{id}, #{shopNo})
+	<select id="bookmark"
+		resultType="com.tasty.bookmark.vo.bookmarkVO">
+		SELECT shopNo, id, cnt, writeDate
+		FROM bookMark
+		WHERE shopNo = #{shopNo}
+	</select>
+	<insert id="like">
+		insert into bookmark(id, shopNo)
+		values (#{id}, #{shopNo})
 
-</insert>
+	</insert>
 
-<delete id="unlike">
-delete from bookmark
-where id = #{id} and shopNo = #{shopNo}
-</delete>
+	<delete id="unlike">
+		delete from bookmark
+		where id = #{id} and shopNo = #{shopNo}
+	</delete>
 
 </mapper>
+ 

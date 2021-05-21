@@ -1,10 +1,12 @@
 package com.tasty.bookmark.mapper;
 
-import com.tasty.bookmark.vo.BookmarkVO;
+import com.tasty.bookmark.vo.bookmarkVO;
 
 public interface BookmarkMapper {
-
-	public int like(BookmarkVO vo) throws Exception; 
 	
-	public void unlike(BookmarkVO vo) throws Exception; 
+	public bookmarkVO bookmark(String shopNo) throws Exception;
+
+	public int like(bookmarkVO vo) throws Exception;
+
+	public void unlike(bookmarkVO vo) throws Exception;
 }

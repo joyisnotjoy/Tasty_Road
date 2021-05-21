@@ -156,7 +156,7 @@ $(function(){
 		footer.find("#replyModalUpdateBtn, #replyModalDeleteBtn").hide()
 		
 		// reply > Form  input 데이터 지우기 : intput 중에서 id="replyshopNo"는 제외시킨다. not("#replyshopNo")
-// 		replyModal.find("textarea").not("#replyshopNoDiv, #replyWriter").val(""); 
+		replyModal.find("textarea").not("#replyshopNoDiv, #replyWriter").val(""); 
 		
 		replyModal.modal("show");
 	});
@@ -167,7 +167,7 @@ $(function(){
 		
 // 		reply.replyNo = $("#replyNo").val();
 		reply.shopNo = $("#replyshopNo").val();
-// 		reply.content = $("#replyContent").val();
+		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
 // 		alert(reply);
 // 		alert(JSON.stringify(reply));
@@ -272,7 +272,7 @@ $(function(){
 		// 작업할 데이터의 입력란을 보이게 안보이게
 		$("#replyModal .form-group").show();
 // 		$("#replyNo, #replyshopNoDiv, #replyModal .form-group").show();
-		$("#replyWriterDiv").hide();
+		$("#replyContentDiv, #replyWriterDiv").hide();
 		
 		// 작업할 버튼을 보이게 안보이게
 		var footer = $("#replyModal .modal-footer");
@@ -281,7 +281,6 @@ $(function(){
 		
 		// 댓글 번호 가져오기
 		var li = $(this).closest("li");
-		var content = li.find(".replyContentData").text();
 		var replyNo = li.data("replyno");
 		
 		// 댓글 번호 셋팅
@@ -301,9 +300,7 @@ $(function(){
 		var reply= {};
 		reply.replyNo = $("#replyNo").val();
 		reply.shopNo = $("#shopNo").val();
-		reply.content = $("#replyContent").val();
 		reply.id = $("#replyWriter").val();
-		
 		
 		// reply.js 안에 있는 replyService.delete(reply JSON, 성공함수, 오류함수)
 		replyService.delete(reply,
@@ -388,7 +385,7 @@ $(function(){
 				<div class="col-md-10">${vo.now }</div>
 			</li>
 			<li class="list-group-item row">
-				<div class="col-md-2 title_label">대기열</div>
+				<div class="col-md-2 title_label" id="waitingView">대기열</div>
 				<div class="col-md-10">${vo.wait }</div>
 			</li>
 			<!--   <li class="list-group-item row"> -->
@@ -400,12 +397,10 @@ $(function(){
 			<%--   	<div class="col-md-10">${vo.status }</div> --%>
 			<!--   </li> -->
 		</ul>
-		<a
-			href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
-			class="btn btn-default">수정</a> <a class="btn btn-default"
-			onclick="return false;" data-toggle="modal" data-target="#myModal">삭제</a>
-		<a
-			href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
+		<a href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
+			class="btn btn-default">수정</a> 
+		<a class="btn btn-default" onclick="return false;" data-toggle="modal" data-target="#myModal">삭제</a>
+		<a href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
 			class="btn btn-default">리스트</a>
 
 		<!-- 댓글의 시작 -->
@@ -554,7 +549,6 @@ $(function(){
 		</div>
 	</div>
 	<!-- Modal - 댓글 쓰기/ 수정 시 사용되는 모달창의 끝 -->
-   <div class="modal fade waitModal" id="wait" role="dialog" style="position: relative; z-index: 1;"></div>
 
 </body>
 </html>
