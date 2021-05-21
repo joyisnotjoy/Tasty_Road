@@ -21,9 +21,9 @@ public class BmController {
 
 		LoginVO id = (LoginVO) session.getAttribute("login");
 		
-		if (id == null) {
-			return "redirect:/member/loginForm.do";
-		}
+//		if (id == null) {
+//			return "redirect:/member/loginForm.do";
+//		}
 		
 		log.info(id);
 		

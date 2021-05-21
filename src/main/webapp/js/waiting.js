@@ -4,72 +4,73 @@
  $(document).ready(function() {
    
    var waitService = (
-   function(){
-      // list
-      // param : JSON {no:2, repPage:1, repPerPageNum:5}
-      // list(JSON-넘겨줄데이터, 데이터를 성공적으로 가져왔을때의 실행함수, 실패했을때의 실행함수)
-      function waitView(param, callback, error){
-         
-         var shopNo = $("#viewShopNo").text();
-         
-         $.getJSON(
-            // ajax로 호출하는 url
-            "/waiting/wait.do?shopNo=" + shopNo,
-            // success(성공) 상태일 때 처리되는 함수
-            // 데이터 처리가 성공해서 데이터를 가져오면 data로 넣어준다. list이므로 배열이 넘어온다.
-            function(data){
-//               alert(data);
-               // callback : 데이터를 가져오면 처리하는 함수 
-               // - 가져온 list를 HTML만듦. 지정한 곳에 넣어준다.
-               
-               if(callback){
-                  callback(data);
-               }
-            }
-         )
-         // error(실패) 상태일 때의 처러함수
-         .fail(
-            function(xhr, status, err){
-               //오류 함수가 있으면 오류 함수 실행
-               if(error){
-                  error();
-               }else{
-                  // 오류 출력 -{}, [] 구조 OK, <> - JSON데이터가 아니므로 오류
-                  alert(err);
-               }
-            }
-         ); // $.getJSON().fail()의 끝
-         
-      } // list() 의 끝
-      
-      // update() : ----------------------------------------------------
-      // update(JSON data, 성공함수, 실패함수)
-      function update(reply, callback, error){
-         console.log("reply update() ----------------------------");
-         // ajax를 이용해서 데이터 넘기기
-         $.ajax({
-            type:"patch",
-            url : "/replies/update.do",
-            data : JSON.stringify(reply),
-            contentType : "application/json; charset=utf-8",
-            success : function(result, status, xhr){
-               if(callback) callback(result, status);
-               else alert("수정 성공 - 새로 고침하세요.ㄴㄴㄴ");
-            },
-            error : function(xhr, status, err){
-               if(error) error(err, status);
-               else alert(err);
-            }
-         });
-      }
-      
-      return{
-         // replyService.list(param,callback, error)
-         wait : waitView,
-         update : update
-         
-      }
-   }
+	
+	   function(){
+	      // list
+	      // param : JSON {no:2, repPage:1, repPerPageNum:5}
+	      // list(JSON-넘겨줄데이터, 데이터를 성공적으로 가져왔을때의 실행함수, 실패했을때의 실행함수)
+	      function waitView(param, callback, error){
+	         
+	         var shopNo = $("#viewShopNo").text();
+	         
+	         $.getJSON(
+	            // ajax로 호출하는 url
+	            "/waiting/wait.do?shopNo=" + shopNo,
+	            // success(성공) 상태일 때 처리되는 함수
+	            // 데이터 처리가 성공해서 데이터를 가져오면 data로 넣어준다. list이므로 배열이 넘어온다. 
+	            function(data){
+	//               alert(data);
+	               // callback : 데이터를 가져오면 처리하는 함수 
+	               // - 가져온 list를 HTML만듦. 지정한 곳에 넣어준다.
+	               
+	               if(callback){
+	                  callback(data);
+	               }
+	            }
+	         )
+	         // error(실패) 상태일 때의 처러함수
+	         .fail(
+	            function(xhr, status, err){
+	               //오류 함수가 있으면 오류 함수 실행
+	               if(error){
+	                  error();
+	               }else{
+	                  // 오류 출력 -{}, [] 구조 OK, <> - JSON데이터가 아니므로 오류
+	                  alert(err);
+	               }
+	            }
+	         ); // $.getJSON().fail()의 끝
+	         
+	      } // list() 의 끝
+	      
+	      // update() : ----------------------------------------------------
+	      // update(JSON data, 성공함수, 실패함수)
+	      function update(nowUpdate, callback, error){
+	         console.log("nowUpdate() ----------------------------");
+	         // ajax를 이용해서 데이터 넘기기
+	         $.ajax({
+	            type:"patch",
+	            url : "/waiting/nowUpdate.do",
+	            data : JSON.stringify(nowUpdate),
+	            contentType : "application/json; charset=utf-8",
+	            success : function(result, status, xhr){
+	               if(callback) callback(result, status);
+	               else alert("수정 성공 - 새로 고침하세요.ㄴㄴㄴ");
+	            },
+	            error : function(xhr, status, err){
+	               if(error) error(err, status);
+	               else alert(err);
+	            }
+	         });
+	      }
+	      
+	      return{
+	         // replyService.list(param,callback, error)
+	         wait : waitView,
+	         update : update
+	         
+	      }
+	   }
    
 )();
    
@@ -128,31 +129,42 @@
             str += "<span id='replyModalTitle'>대기열 수정</span>";
             str += "</h4>";
             str += "</div>";
-            str += "<div class='modal-body col-12'>";
+            str += "<div class='modal-body col-md-12'>";
             str += "<form>";
             str += "<div class='form-group' id='shopNoDiv '>"; 
             str += "<input name='shopNo' type='hidden' class='form-control ' id='shopNo' readonly='readonly' value='" + data.shopNo + "'>";
+            str += "<input name='id' type='hidden' class='form-control ' id='id' readonly='readonly' value='" + data.id + "'>";
             str += "</div>";
-            str += "<div class='form-group col-12 row' id='nowTalbeDiv'>";  
-            str += "<label for='now'>사용 중인 Table: </label>";
-            str += "<input name='now' type='text' class='form-control' id='now' readonly='readonly' value='" + data.now +"'>";
+            str += "<div class='form-group col-12' id='nowTalbeDiv'>";  
+            str += "<label for='now'>사용 중인 Table: </label> <br>";
+            str += "<input name='now' type='text' class='form-control col-md-6' id='now' readonly='readonly' value='" + data.now +"' style='width: 6em; display: inline;' >";
+            str += "<button type='button' id='nowPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
+            str += "<button type='button' id='nowMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
-            str += "<div class='form-group col-12 row' id='totalTableDiv'>";
-            str += "<label for='total'>전체 Table</label>";
-            str += "<input name='total' type='text' class='form-control' id='toal' readonly='readonly' value='"+ data.total + "'>";
+//          str += "<div class='input-group'>";
+//	    	str += "<span class='input-group-addon'>사용중인 Table </span>";
+//	     	str += "<input id='now' type='text' class='form-control' name='now' value='" + data.now + "' style='width: 100px;'>";
+//		    str += "</div>"
+            str += "<div class='form-group col-12' id='totalTableDiv'>";
+            str += "<label for='total'>전체 Table</label > <br>";
+            str += "<input name='now' type='text' class='form-control col-md-6' id='total' readonly='readonly' value='" + data.total +"' style='width: 6em; display: inline;' >";
+            str += "<button type='button' id='totalPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
+            str += "<button type='button' id='totalMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
             str += "</div>";
             str += "</form>";
             str += "</div>";
             str += "</div>";
             str += "</div>";
             str += "</div>";
-         
+          
             
          }      // end of if-else
          
          // alert(str);
          
          $("article").append(str);
+         
+        // $(".waitModal").html(str);
          
       });      // end of function(data)
       
@@ -172,5 +184,113 @@
 
       
    });
+   
+	
+   
+   $(document).on("click", ".changeBtn", function() {		// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
+	
+		function modify(data, id) {		// changeBtn click시 now와 total의 데이터 변경 Ajax처리
+	
+			waitService.update (update, function(result, staus) {
+						
+				if(status == "notnodified") {
+					
+					alert("수정에 실패하였습니다, 같은 증상이 반복되면 고객센터에 문의해 주세요");
+					
+				} else {
+					
+					alert("수정되었습니다.");
+					
+					form.find(id).val(data);		// id값과 data값 추가를 통해 다양한 상황에서 적용
+					
+				}
+					
+			}, function(err, status) {
+			
+				alert(err);
+			
+			});
+	
+		}	// end of function Update(data, id);
+	
+		// alert("click");
+		
+		var thisBtn = $(this).attr("id");
+		var form = $(this).closest("form");
+		var shopNo = form.find("#shopNo").val();
+		var id = form.find("#id").val();
+		var preNow = parseInt(form.find("#now").val());
+		var now= form.find("#now").val();
+		var total = form.find("#total").val();
+		var preTotal = parseInt(form.find("#total").val());
+		
+		// alert(shopNo);
+		// alert(id);
+		// alert(total);
+		// alert(now);
+		 
+		var update = {};
+		update.shopNo = shopNo;
+		update.id = id;
+		
+		// alert(nowUpdate);
+		
+		if(thisBtn == "nowPlus") {		// $(this)가 plus인 경우
+			
+			if(now <= total) {
+				
+				// alert(preNow);
+				// alert(preNow + 1);
+				// alert(thisBtn);
+				update.now = (preNow + 1);
+				
+				modify((preNow + 1), "#now");
+			
+			} else {
+				
+				alert("전체 자리 수 보다 증가 시킬 수 없습니다.");
+				
+			}
+			
+			
+		} else if(thisBtn == "nowMinus") {		// $(this)가 Minus인 경우
+			
+			if(now > 0) {
+				
+				//alert(thisBtn);			
+			
+				update.now = (preNow - 1);
+				
+				modify((preNow - 1), "#now");
+				
+			} else {
+				
+				alert("0 밑으로는 내릴 수 없습니다.");
+				
+			}
+			
+			
+		} else if(thisBtn == "totalPlus") {		// $(this)가 plus 이면서 total인 경우
+			
+			// alert(thisBtn);
+			
+			// alert(preTotal);
+			
+			update.total = (preTotal + 1);
+			
+			modify((preTotal + 1), "#total");
+			
+		} else if(thisBtn == "totalMinus") {		// $(this)가 minus 이면서 total인 경우
+			
+			// alert(thisBtn);
+			
+			update.total = (preTotal - 1);
+			
+			modify((preTotal - 1), "#total");
+			
+		}
+		
+	 
+	})
    
 });

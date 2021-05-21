@@ -30,7 +30,7 @@ public class BookmarkController {
 	@PostMapping(value = "/like.do",
 			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 			produces = {"application/text; charset=utf-8"})
-	public ResponseEntity<String> Ulike(@RequestBody BookmarkVO vo) throws Exception {
+	public ResponseEntity<String> like1(@RequestBody BookmarkVO vo) throws Exception {
 		log.info("like().vo : " + vo);
 		
 		// db에 데이터 저장
@@ -96,7 +96,7 @@ public class BookmarkController {
 	// 3. 맛집 북마크 등록 
 	@GetMapping("like.do")
 	public String like(BookmarkVO vo) throws Exception {
-		vo.setId("test");
+		vo.setId("test1");
 		vo.setShopNo("123-45-67890");
 		log.info(vo);
 		 service.like(vo);

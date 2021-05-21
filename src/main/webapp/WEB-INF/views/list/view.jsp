@@ -397,12 +397,10 @@ $(function(){
 			<%--   	<div class="col-md-10">${vo.status }</div> --%>
 			<!--   </li> -->
 		</ul>
-		<a
-			href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
-			class="btn btn-default">수정</a> <a class="btn btn-default"
-			onclick="return false;" data-toggle="modal" data-target="#myModal">삭제</a>
-		<a
-			href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
+		<a href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
+			class="btn btn-default">수정</a> 
+		<a class="btn btn-default" onclick="return false;" data-toggle="modal" data-target="#myModal">삭제</a>
+		<a href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
 			class="btn btn-default">리스트</a>
 
 		<!-- 댓글의 시작 -->

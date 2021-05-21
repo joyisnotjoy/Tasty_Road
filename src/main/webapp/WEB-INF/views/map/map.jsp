@@ -20,8 +20,30 @@
 
 <link rel="stylesheet"
 	href="https://t1.daumcdn.net/kakaomapweb/subway/linemap/canvas/prod/css/subway.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/list.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	// 맛집 글보기 페이지로 이동 함수
+	$(".shopList").click(function(){
+		var shopNo = $(this).find(".shopNo").text();
+		// 페이지 정보 붙이기
+		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
+				+= "&perPageNum=" += pageObject.perPageNum += "'"};
+		// 검색 정보 붙이기
+		query += ${(empty pageObject.word)?"''":"'&key=" += pageObject.key
+				+= "&word=" += pageObject.word += "'"};
+// 		location = "view.do?no=" + no + "&inc=1" + query;
+		location = "view.do?shopNo=" + shopNo + query;
+	});
+});
+</script>
 <title>카카오맵</title>
 </head>
 <body class="MAP">
@@ -119,7 +141,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div id="info.body" class="body">
 			<div id="info.main" class="Main INFOLEFT">
 				<div id="info.main.home" class="home">
@@ -142,7 +163,7 @@
 					<div id="info.main.famous" class="famous"></div>
 					<div id="info.main.around" class="infoAround">
 						<h3 class="tit_around">주변 탐색</h3>
-						<ul class="list_around"></ul>
+						<ul class="list_around" id="shopList"></ul>
 					</div>
 					<div id="info.main.favorite" class="regfav"></div>
 					<div id="info.main.newplace" class="newplace">
