@@ -38,7 +38,6 @@ public class waitingController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("wait", service.wait(shopNo));
-		map.put("bookMark", service.bm(shopNo));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 		

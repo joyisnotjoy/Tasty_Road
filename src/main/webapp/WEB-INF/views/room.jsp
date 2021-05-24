@@ -11,35 +11,23 @@
 			margin:0;
 			padding:0;
 		}
-		body{
-			background-image: url("img/1323.jpg");
-			background-repeat: no-repeat;
-			background-size: 120%;
-			-ms-overflow-style: none; 
-			
-		}
-		::-webkit-scrollbar { 
-			display: none; 
-		}
 		.container{
-			width: 730px;
+			width: 500px;
 			margin: 0 auto;
 			padding: 25px
 		}
 		.container h1{
 			text-align: center;
 			padding: 5px 5px 5px 15px;
-			color: white;
+			color: black;
 			font-weight: bold;
 			margin-bottom: 20px;
 		}
 		.roomContainer{
 			background-color: #F6F6F6;
-			width: 730px;
+			width: 500px;
 			height: 500px;
 			overflow: auto;
-			border-radius: 8px;
-			opacity: 0.9;
 		}
 		.roomList{
 			border: none;
@@ -58,14 +46,14 @@
 			color: black;
 		}
 		.roomList .num{
-			width: 115px;
+			width: 75px;
 			text-align: center;
 		}
 		.roomList .room{
-			width: 486px;
+			width: 350px;
 		}
 		.roomList .go{
-			width: 115px;
+			width: 71px;
 			text-align: center;
 		}
 		.buttonT{
@@ -75,7 +63,7 @@
 			border: 1px solid #beeeff;
 			border-radius: 5px;
 			padding: 3px;
-			width: 109px;
+			width: 65px;
 			margin: 3px;
 		}
 		.buttonT:hover{
@@ -99,10 +87,9 @@
 		.inputTable th{
 			padding: 5px;
 			width: 54px;
-			color:white;
 		}
 		.inputTable input{
-			width: 560px;
+			width: 330px;
 			height: 25px;
 		}
 	</style>
