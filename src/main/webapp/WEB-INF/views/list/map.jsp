@@ -33,34 +33,25 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
+<script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript">
 $(function(){
 	
 	// 맛집 글보기 페이지로 이동 함수
-	$(".shopList").click(function(){
+	$(".dataRow").click(function(){
 		var shopNo = $(this).find(".shopNo").text();
 		// 페이지 정보 붙이기
-		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
-				+= "&perPageNum=" += pageObject.perPageNum += "'"};
-		// 검색 정보 붙이기
-		query += ${(empty pageObject.word)?"''":"'&key=" += pageObject.key
-				+= "&word=" += pageObject.word += "'"};
-// 		location = "view.do?no=" + no + "&inc=1" + query;
-		location = "view.do?shopNo=" + shopNo + query;
+		alert("맛집 정보보기")
+		showView();
+		
+	});
+	$("#click").click(function(){
+// 		alert("클릭됩니다");
+		$("#List").attr("class", "section places HIDDEN");
+		$("#showView").attr("class", "section places");
 	});
 });
-	$(".shopListt").click(function(){
-		var shopNo = $(this).find(".shopNo").text();
-		// 페이지 정보 붙이기
-		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
-				+= "&perPageNum=" += pageObject.perPageNum += "'"};
-		// 검색 정보 붙이기
-		query += ${(empty pageObject.word)?"''":"'&key=" += pageObject.key
-				+= "&word=" += pageObject.word += "'"};
-// 		location = "view.do?no=" + no + "&inc=1" + query;
-		location = "view.do?shopNo=" + shopNo + query;
-	});
-});
+
 </script>
 <title>될 지도 안될 지도</title>
 </head>
@@ -69,6 +60,30 @@ $(function(){
 	<div class="IE6MIN">
 		<div id="header" class="Header" role="banner">
 			<h1 class="Title"></h1>
+			<form>
+		<input name="page" value="1" type="hidden" />
+		<input name="perPageNum" value="${pageObject.perPageNum }" type="hidden" />
+	  <div class="input-group">
+	  	<span class="input-group-addon">
+	  		<select name="key">
+	  			<option value="n" ${(pageObject.key == "n")?"selected":"" }>가게명</option>
+	  			<option value="c" ${(pageObject.key == "c")?"selected":"" }>내용</option>
+	  			<option value="a" ${(pageObject.key == "a")?"selected":"" }>주소</option>
+	  			<option value="nc" ${(pageObject.key == "nc")?"selected":"" }>가게명/내용</option>
+	  			<option value="na" ${(pageObject.key == "na")?"selected":"" }>가게명/주소</option>
+	  			<option value="ca" ${(pageObject.key == "ca")?"selected":"" }>내용/주소</option>
+	  			<option value="nca" ${(pageObject.key == "nca")?"selected":"" }>모두</option>
+	  		</select>
+	  	</span>
+	    <input type="text" class="form-control" placeholder="Search"
+	    name="word" value="${pageObject.word }">
+	    <div class="input-group-btn">
+	      <button class="btn btn-default" type="submit">
+	        <i class="glyphicon glyphicon-search"></i>
+	      </button>
+	    </div>
+	  </div>
+	</form>
 		</div>
 	</div>
 
@@ -144,6 +159,7 @@ $(function(){
 							href="#" class="mainmenutab" title="검색">List</a></li>
 						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><a
 							href="/chat/list.do" class="mainmenutab" title="길찾기">Talk</a></li>
+						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><button type="button" id="click">눌러보세요</button></li>
 						<c:if test="${empty login }">
 							<li id="search.tab5"
 								class="favorite favorite-INACTIVE emptyLogin"><a
@@ -161,7 +177,7 @@ $(function(){
 
 			<div id="info.search" class="keywordSearch ">
 
-				<div id="info.search.place" class="section places">
+				<div id="List" class="section places">
 					<div class="sectiontitle">
 						<h5 class="placetit">장소</h5>
 						<span class="cntwrap"><em id="info.search.place.cnt"
@@ -170,50 +186,33 @@ $(function(){
 					</div>
 					<ul id="shopList" class="placelist">
 						<c:if test="${empty list }">
-							<!-- 데이터 없는 경우의 표시 -->
-							<!-- 데이터가 존재하지 않는 경우 -->
+							데이터 없는 경우의 표시
+							데이터가 존재하지 않는 경우
 							<li class="list-group-item">데이터가 존재하지 않습니다.</li>
 						</c:if>
 
 						<c:if test="${!empty list }">
-							<!-- 데이터가 있는 경우의 표시 -->
+							데이터가 있는 경우의 표시
 							<c:forEach items="${list }" var="vo">
 								<li class="list-group-item dataRow">
 									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소:
 									${vo.address } <br> 전화번호: ${vo.tel } <br> <span
-									class="shopNo">${vo.shopNo }</span> <%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
-									<%-- 		  	<span class="badge">${vo.cnt }</span> --%>
+									class="shopNo">${vo.shopNo }</span> 		  	
+<%-- 									(<fmt:formatDate value="${vo.writeDate }"/>) --%>
+<%-- 											  	<span class="badge">${vo.cnt }</span> --%>
 								</li>
 							</c:forEach>
 						</c:if>
 					</ul>
 				</div>
-				<div id="info.search.place" class="section places">
+				<div id="View" class="section places HIDDEN">
 					<div class="sectiontitle">
-						<h5 class="placetit">장소</h5>
+						<h5 class="placetit">View</h5>
 						<span class="cntwrap"><em id="info.search.place.cnt"
 							class="cnt"></em></span>
 						<ol id="info.search.place.sort" class="Sort"></ol>
 					</div>
-					<ul id="shopListt" class="placelist">
-						<c:if test="${empty list }">
-							<!-- 데이터 없는 경우의 표시 -->
-							<!-- 데이터가 존재하지 않는 경우 -->
-							<li class="list-group-item">데이터가 존재하지 않습니다.</li>
-						</c:if>
-
-						<c:if test="${!empty list }">
-							<!-- 데이터가 있는 경우의 표시 -->
-							<c:forEach items="${list }" var="vo">
-								<li class="list-group-item dataRow">
-									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소:
-									${vo.address } <br> 전화번호: ${vo.tel } <br> <span
-									class="shopNo">${vo.shopNo }</span> <%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
-									<%-- 		  	<span class="badge">${vo.cnt }</span> --%>
-								</li>
-							</c:forEach>
-						</c:if>
-					</ul>
+					<ul id="showView" class="placelist"></ul>
 				</div>
 				<div>
 					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"
