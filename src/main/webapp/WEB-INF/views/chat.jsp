@@ -7,44 +7,31 @@
 <meta charset="UTF-8">
 	<title>쌍쌍바's talk</title>
 	<style>
-		body{
-			background-image: url("img/1323.jpg");
-			background-repeat: no-repeat;
-			background-size: 120%;
-			-ms-overflow-style: none; 
-		}
-		::-webkit-scrollbar { 
-			display: none; 
-		}
-
 		*{
 			margin:0;
 			padding:0;
 		}
 		.container{
-			width: 730px;
+			width: 500px;
 			margin: 0 auto;
 			padding: 25px;
-		}
-		h1{
-			color: white;
 		}
 		.container h1{
 			text-align: center;
 			padding: 5px 5px 5px 15px;
-/* 			color: #111922; */
+			color: #111922;
 /* 			border-left: 3px solid #FFBB00; */
 			margin-bottom: 7px;
 		}
-		.chating {
-		    background-color: #c8e8ff;
-		    width: 720px;
-		    height: 670px;
-		    overflow: auto;
-		    padding-right: 3px;
-		    padding-left: 3px;
-		    margin-bottom: 7px;
-		    border-radius: 5px;
+		.chating{
+			background-color: #c8e8ff;
+			width: 515px;
+			height: 499px;
+			overflow: auto;
+			padding-right: 3px;
+			padding-left: 3px;
+			margin-bottom: 7px;
+			border-radius: 5px;
 		}
 		.chating .me2{
 			word-break:break-all;
@@ -122,16 +109,6 @@
    			position: relative;
    			bottom: 0;
 		}
-		.mdate2 {
-			font-size: 3px;
-			float: right;
-   			padding-right: 3px;
-   			color: grey;
-			display: inline-block; 
-   			position: relative;
-   			bottom: 0;
-   			margin-top: -5px;
-		}
 		.odate {
 			font-size: 3px;
 			float: left;
@@ -208,7 +185,7 @@
 		
 		}
 		input{
-			width: 575px;
+			width: 350px;
 			height: 25px;
 		}
 		#yourMsg{
@@ -223,8 +200,8 @@
             clear: both;
         }
         .msgImg{
-			width: 375px;
-			height: 275px;
+			width: 200px;
+			height: 125px;
 		}
 		.img{
 			float: right;
@@ -257,7 +234,7 @@
 		    font-size: 15px;
 		    box-shadow: 1px 2px 3px 0px #f2f2f2;
 		    outline: none;
-		    margin-right: 482px;
+		    margin-right: 267px;
 		}
 		#fileUpload:hover + label {
 		    border: 1px solid #d9e1e8;
@@ -283,7 +260,7 @@
 		    padding: 5px;
 		    width: 72px;
 		    margin: -3px;
-		    margin-left: -2px;
+		    margin-left: 5px;
 		}
 		.buttonF:hover{
 			cursor: pointer;
@@ -298,7 +275,7 @@
 		    padding: 5px;
 		    width: 72px;
 		    margin: -3px;
-		    margin-left: -2px;
+		    margin-left: 5px;
 		}
 		.buttonS:hover{
 			cursor: pointer;
@@ -321,11 +298,9 @@
 		}
 		.nick{
 			padding-right: 10px;
-			color: white;
 		}
 		.msg{
 			padding-right: 5px;
-			color: white;
 		}
 	</style>
 </head>
@@ -382,24 +357,61 @@
 				}
 			}else{
 					//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
-					var curDate1 = new Date();
-				var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
-	            + curDate1.getHours() + ":" + curDate1.getMinutes();
+// 					var curDate1 = new Date();
+// 					var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
+// 		           		+ curDate1.getHours() + ":" + curDate1.getMinutes();
+// 					var url = URL.createObjectURL(new Blob([msg]));
+// 						$("#chating").append("<div class='img'><img class='msgImg' src=" + 
+// 							url + "></div><div class='clearBoth'></div>");
+// 						$("#chating").append("<li class='mdate2'>" + curTime1 + "</li>");	
+// 						$("#chating").append("<div class='clear'></div>");	
+// 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+				        var msg = data.data;
+						if(msg != null && msg.type != ''){
+							var d1 = JSON.parse(msg);
+							var url = URL.createObjectURL(new Blob([msg]));
+							var curDate1 = new Date();
+							var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
+				            + curDate1.getHours() + ":" + curDate1.getMinutes();
+							if(d1.type == "getId"){
+								var si1 = d1.sessionId != null ? d1.sessionId : "";
+								if(si1 != ''){
+									$("#sessionId").val(si); 
+								}
+							}else if(d1.type == "message"){
+								if(d1.sessionId == $("#sessionId").val()){
+									$("#chating").append("<p class='me'>" + d1.userName + "</p>");	
+									$("#chating").append("<div class='img'><img class='msgImg' src=" + 
+				 							url + "></div><div class='clearBoth'></div>");	
+									$("#chating").append("<div class='clear'></div>");	
+									$("#chating").append("<li class='mdate'>" + curTime1 + "</li>");	
+									$("#chating").append("<div class='clear'></div>");	
+									// 채팅시 스크롤 내리는 함수
+							        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+								}else{
+									$("#chating").append("<p class='others'>" + d1.userName + "</p>");	
+									$("#chating").append("<div class='img'><img class='msgImg' src=" + 
+				 							url + "></div><div class='clearBoth'></div>");	
+									$("#chating").append("<div class='clear'></div>");	
+									$("#chating").append("<li class='odate'>" + curTime1 + "</li>");	
+									$("#chating").append("<div class='clear'></div>");	
+									// 채팅시 스크롤 내리는 함수
+							        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+									 
+								}
 					var url = URL.createObjectURL(new Blob([msg]));
 					$("#chating").append("<div class='img'><img class='msgImg' src=" + 
 							url + "></div><div class='clearBoth'></div>");
-						$("#chating").append("<li class='mdate2'>" + curTime1 + "</li>");	
-						$("#chating").append("<div class='clear'></div>");	
 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 			}
-			
+			 
 		} //onMessage 끝
 		
 
 		document.addEventListener("keypress", function(e){
 			if(e.keyCode == 13){ //enter press
 				send();
-			}
+			} 
 		});
 	}
 
@@ -486,7 +498,7 @@
 			<table class="inputTable">
 				<tr>
 					<th class="msg">CHAT</th>
-					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요." style="width: 590px;"></th>
+					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요." style="width: 380px;"></th>
 					<th><button onclick="send()" id="sendBtn" class="buttonS">보내기</button>
 					<br/></th>
 				</tr>

@@ -1,7 +1,5 @@
 package com.tasty.list.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tasty.list.service.ListRestService;
 import com.tasty.list.service.ReplyService;
 import com.tasty.list.vo.ReplyVO;
+import com.tasty.member.vo.shopMemberVO;
 import com.webjjang.util.PageObject;
 
 import lombok.extern.log4j.Log4j;
@@ -34,27 +33,25 @@ public class ListRestController {
 	@Qualifier("trsi")
 	private ListRestService service;
 	
-	// 1. 맛집 리스트 - 검색 / list.do - get 
+	// 1. 맛집 보기 - 검색 / list.do - get 
 	@GetMapping(value = "/tlist.do",
 			produces = {
 					MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_UTF8_VALUE
 						} )
-	public ResponseEntity<Map<String, Object>> list(
+	public ResponseEntity<shopMemberVO> view(
 			@RequestParam(defaultValue = "1") long repPage,
 			@RequestParam(defaultValue = "5") long repPerPageNum,
-			String shopNo)
+			@RequestParam String shopNo)
 		throws Exception {
-		Map<String, Object> map = new HashMap<>();
 		// 맛집에 대한 페이지 정보
 		PageObject PageObject = new PageObject(repPage, repPerPageNum);
-		log.info("list().replyPageObject : " + PageObject + ", shopNo : " + shopNo);
+		log.info("view().PageObject : " + PageObject + ", shopNo : " + shopNo);
 		
-		map.put("pageObject", PageObject);
-		map.put("list", service.tlist(PageObject, shopNo));
-		
-		return new ResponseEntity<>(map, HttpStatus.OK);
+		return new ResponseEntity<shopMemberVO>(service.view(shopNo), HttpStatus.OK);
 	}
+	
+	
 //	// 0. 댓글 등록 처리 / write.do - post
 //	@PostMapping(value = "/write.do",
 //		consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
