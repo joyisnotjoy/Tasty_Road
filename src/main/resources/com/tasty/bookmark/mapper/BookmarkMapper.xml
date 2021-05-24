@@ -18,8 +18,8 @@
 
 	<update id="increase">
 		update bookmark
-		set hit = hit + 1
-		where cnt = #{cnt}
+		set cnt = cnt + 1
+		where shopNo = #{shopNo}
 	</update>
 
 	<update id="decrease">

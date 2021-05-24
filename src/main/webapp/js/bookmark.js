@@ -6,15 +6,15 @@ var bookmarkService = (
 		function likeView(param, callback, error) {
 
 			var shopNo = $("#viewShopNo").text();
-
+			var id = $("#checkId").text();
 			$.getJSON(
 
 				"/bm/like.do?shopNo=" + shopNo,
 				function(data) {
-						if (callback) {
-							callback(data);
-						}
+					if (callback) {
+						callback(data);
 					}
+				}
 			) // end of Json
 				// error (실패) 상태일 때의 처리함수
 				.fail(
@@ -29,8 +29,8 @@ var bookmarkService = (
 				); // $.getJSON().fail()의 끝
 
 		}//end of likeView func()
-		
-		
+
+
 		function bookmark(liked, callback, error) {
 
 			console.log("bookmark data - " + JSON.stringify(liked));
@@ -57,9 +57,9 @@ var bookmarkService = (
 			});//$.ajax의 끝 
 		}
 		return {
-			bookmark : bookmark,
-			likeView : likeView
-			
+			bookmark: bookmark,
+			likeView: likeView
+
 		}
 	}
 )();
@@ -90,6 +90,7 @@ $(function() {
 
 	});
 
+	var shopNo = $("#viewShopNo").text(); 
 
 	$(".like").click(function() { 	// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
 		var liked = {};
@@ -110,33 +111,39 @@ $(function() {
 			} else {
 
 				alert("수정되었습니다.");
-			} 
+			}
 
 		});
 
+	
+
 		$(this).html('unlike');
+
+		
 
 	});	// end of click
 
 	function checkLike() {
 
-		bookmarkService.like({ shopNo: shopNo }, function(data) {
+			bookmarkService.bookmark({ shopNo: shopNo, id : id }, function(data) {
 
-			alert(data);
+				alert(data);
 
-			alert(JSON.stringify(data));
+				alert(JSON.stringify(data));
 
-			alert(bookmark);
+				alert(bookmark);
 
-			$(".liked").click(function() {
-				if (login.id != null) {
-					cnt = -1
-				}
-				else {
-					(login.id == null)
-					cnt = 1
-				}
-			});
-		})
-	}
+				$(".liked").click(function() {
+					if (login.id != null) {
+						cnt = -1
+					}
+					else {
+						(login.id == null)
+						cnt = 1
+					}
+				});
+			})
+		}
+checkLike();
+
 });
