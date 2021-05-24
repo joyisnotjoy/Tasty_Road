@@ -58,7 +58,7 @@ public class waitingController {
 		
 		if(vo.getNow() != null) {
 			
-			result = service.nowUpdate(vo);
+			result = service.nowUpdate(vo); 
 			
 		} else if(vo.getTotal() != null) {
 			
