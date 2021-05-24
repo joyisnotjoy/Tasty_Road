@@ -6,7 +6,7 @@
 <decorators defaultdir="/WEB-INF/views/decorator">
 	<!-- hello에 대한 요청이 들어오면 적용시키는 레이아웃 선언 -->
 	<decorator name="main" page="default_decorator.jsp">
-		<pattern>/list/*</pattern>
+<!-- 		<pattern>/list/*</pattern> -->
 		<pattern>/chat/*</pattern>
 		<pattern>/chatRoom/*</pattern>
 		<pattern>/member/*</pattern>

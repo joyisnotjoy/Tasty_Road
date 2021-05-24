@@ -1,7 +1,5 @@
 package com.tasty.list.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,27 +32,25 @@ public class ListRestController {
 	@Qualifier("trsi")
 	private ListRestService service;
 	
-	// 1. 맛집 리스트 - 검색 / list.do - get 
+	// 1. 맛집 보기 - 검색 / list.do - get 
 	@GetMapping(value = "/tlist.do",
 			produces = {
 					MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_UTF8_VALUE
 						} )
-	public ResponseEntity<Map<String, Object>> list(
+	public ResponseEntity<String> view(
 			@RequestParam(defaultValue = "1") long repPage,
 			@RequestParam(defaultValue = "5") long repPerPageNum,
 			String shopNo)
 		throws Exception {
-		Map<String, Object> map = new HashMap<>();
 		// 맛집에 대한 페이지 정보
 		PageObject PageObject = new PageObject(repPage, repPerPageNum);
-		log.info("list().replyPageObject : " + PageObject + ", shopNo : " + shopNo);
+		log.info("view().PageObject : " + PageObject + ", shopNo : " + shopNo);
 		
-		map.put("pageObject", PageObject);
-		map.put("list", service.tlist(PageObject, shopNo));
-		
-		return new ResponseEntity<>(map, HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
+	
+	
 //	// 0. 댓글 등록 처리 / write.do - post
 //	@PostMapping(value = "/write.do",
 //		consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},

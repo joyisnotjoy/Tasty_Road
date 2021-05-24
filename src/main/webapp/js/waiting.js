@@ -287,9 +287,9 @@
 	
 		function modify(data, id) {		// changeBtn click시 now와 total의 데이터 변경 Ajax처리
 	
-			waitService.update (update, function(result, staus) {
+			waitService.update (update, function(result, status) {
 						
-				if(status == "notnodified") {
+				if(status == "notmodified") {
 					
 					alert("수정에 실패하였습니다, 같은 증상이 반복되면 고객센터에 문의해 주세요");
 					

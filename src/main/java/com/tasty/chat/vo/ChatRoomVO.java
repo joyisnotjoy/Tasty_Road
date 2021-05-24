@@ -11,5 +11,6 @@ public class ChatRoomVO {
 	private String content;
 	private String id;
 	private Date writeDate;
+	private Date acceptDate;
 
 }
