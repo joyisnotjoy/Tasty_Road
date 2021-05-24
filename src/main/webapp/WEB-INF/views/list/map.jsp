@@ -31,28 +31,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
-<script type="text/javascript" src="/js/list/reply.js"></script>
-<script type="text/javascript">
-$(function(){
-	
-	// 맛집 글보기 페이지로 이동 함수
-	$(".dataRow").click(function(){
-		var shopNo = $(this).find(".shopNo").text();
-		// 페이지 정보 붙이기
-		alert("맛집 정보보기")
-		showView();
-		
-	});
-	$("#click").click(function(){
-// 		alert("클릭됩니다");
-		$("#List").attr("class", "section places HIDDEN");
-		$("#showView").attr("class", "section places");
-	});
-});
-
-</script>
 <title>될 지도 안될 지도</title>
 </head>
 <body class="MAP">
@@ -197,7 +178,7 @@ $(function(){
 								<li class="list-group-item dataRow">
 									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소:
 									${vo.address } <br> 전화번호: ${vo.tel } <br> <span
-									class="shopNo">${vo.shopNo }</span> 		  	
+									class="shopNo" id="shopNo">${vo.shopNo }</span> 		  	
 <%-- 									(<fmt:formatDate value="${vo.writeDate }"/>) --%>
 <%-- 											  	<span class="badge">${vo.cnt }</span> --%>
 								</li>
