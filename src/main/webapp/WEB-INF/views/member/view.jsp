@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 정보 보기</title>
+<title>회원 정보 보기(관리자)</title>
 
 <script type="text/javascript">
 
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-<h1>내 정보 보기</h1>
+<h1>회원 정보 보기(관리자)</h1>
 <table class="table">
 	<tbody>
 		<tr>
@@ -58,9 +58,9 @@
 	<tfoot>
 		<tr>
 			<td colspan="2">
-				<a href="../member/memberUpdateForm.do" class="btn btn-default">내 정보 수정</a>
-				<a href="../member/memberWithdrawForm.do" class="btn btn-default">회원 탈퇴</a>
-				<a href="../member/myShopPage.do" class="btn btn-default">가게 정보 보기</a>
+<!-- 				<a href="../member/memberUpdateForm.do" class="btn btn-default">내 정보 수정</a> -->
+<!-- 				<a href="../member/logout.do" class="btn btn-default">로그아웃</a> -->
+				<a href="../member/shopReg.do?id=${vo.id }" class="btn btn-default">사업자 등록</a>
 				<c:if test="${login.gradeNo == 9 }">
 		<!-- 관리자 메뉴 -->
 		<a href="../member/memberList.do" class="btn btn-default">회원리스트</a>

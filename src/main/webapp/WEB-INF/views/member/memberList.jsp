@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="pageObject" tagdir="/WEB-INF/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,18 +30,14 @@ $(function(){ // jquery에서 익명함수를 전달해서 저장해놨다가 Do
 		$(".formGradeNo").val([gradeNo]);
 	});
 	
-	// 등급수정 폼의 전달 버튼 이벤트
-	// 객체의 선택이 잘되는지 확인
-	// alert($("#formGradeModifyBtn"));
-	// alert($("#formGradeModifyBtn").prop("tagName"));
-	// 폼의 전달 버튼의 이벤트 붙이기
-	$("#formGradeModifyBtn").click(function(){
-		// alert("formGradeModifyBtn click");
-		// 폼의 데이터 넘기기
-		// 폼 객체 확인
-		// alert($("#gradeModifyForm"));
-		// 폼의 데이터 전송하기 -> 폼객체.submit()
-		$("#gradeModifyForm").submit();
+	
+	//
+	$(".dataRow").click(function(){
+		var id = $(this).find(".id").text();
+// 		// 페이지 정보 붙이기
+		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
+				+= "&perPageNum=" += pageObject.perPageNum += "'"};
+		location = "view.do?id=" + id;
 	});
 	
 });
@@ -55,12 +51,10 @@ $(function(){ // jquery에서 익명함수를 전달해서 저장해놨다가 Do
 	<!-- 제목 -->
 	<thead>
 		<tr>
+			<th>회원 번호</th>
 			<th>아이디</th>
 			<th>이름</th>
-			<th>성별</th>
-			<th>생년월일</th>
 			<th>연락처</th>
-			<th>상태</th>
 			<th>등급번호</th>
 			<th>등급이름</th>
 		</tr>
@@ -69,12 +63,10 @@ $(function(){ // jquery에서 익명함수를 전달해서 저장해놨다가 Do
 		<!-- 데이터가 있는 만큼 반복이 되어 지는 시작 부분 -->
 		<c:forEach items="${list }" var="vo">
 		<tr class="dataRow">
+			<td class="memberNo">${vo.memberNo }</td>
 			<td class="id">${vo.id }</td>
 			<td>${vo.name }</td>
-			<td>${vo.gender }</td>
-			<td>${vo.birth }</td>
 			<td>${vo.tel }</td>
-			<td>${vo.status }</td>
 			<td class="gradeNo">${vo.gradeNo }</td>
 			<td>${vo.gradeName }
 				<c:if test="${vo.id != login.id }">
@@ -96,6 +88,7 @@ $(function(){ // jquery에서 익명함수를 전달해서 저장해놨다가 Do
 		</tr>
 	</tfoot>
 </table>
+		<pageObject:pageNav listURI="memberList.do" pageObject="${pageObject }" />
 </div>
 
 
@@ -111,7 +104,7 @@ $(function(){ // jquery에서 익명함수를 전달해서 저장해놨다가 Do
       </div>
       <div class="modal-body">
         <p>
-        	<form action="gradeModify.jsp" method="post" id="gradeModifyForm">
+        	<form action="gradeModify.do" method="post" id="gradeModifyForm">
         		<div class="form-group">
         			<label for="id">아이디</label>
         			<input name="id" id="formId" readonly="readonly" class="form-control"/>
@@ -120,16 +113,31 @@ $(function(){ // jquery에서 익명함수를 전달해서 저장해놨다가 Do
         			<div><label>등급</label></div>
         			<label class="radio-inline">
         				<input type="radio" name="gradeNo" value="1"
-        				 class="formGradeNo">일반회원</label>
+        				 class="formGradeNo">강퇴</label>
+        			<label class="radio-inline">
+        				<input type="radio" name="gradeNo" value="2"
+        				 class="formGradeNo">탈퇴</label>
+        			<label class="radio-inline">
+        				<input type="radio" name="gradeNo" value="3"
+        				 class="formGradeNo">휴면</label>
+        			<label class="radio-inline">
+        				<input type="radio" name="gradeNo" value="4"
+        				 class="formGradeNo">일반</label>
+        			<label class="radio-inline">
+        				<input type="radio" name="gradeNo" value="5"
+        				 class="formGradeNo">관리자</label>
+        			<label class="radio-inline">
+        				<input type="radio" name="gradeNo" value="6"
+        				 class="formGradeNo">기업</label>
 					<label class="radio-inline">
 						<input type="radio" name="gradeNo" value="9"
-						 class="formGradeNo">관리자</label>
+						 class="formGradeNo">마스터</label>
         		</div>
         	</form>
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="formGradeModifyBtn">변경</button>
+        <button type="submit" class="btn btn-default" id="formGradeModifyBtn">변경</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
     </div>
