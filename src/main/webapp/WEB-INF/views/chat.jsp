@@ -7,31 +7,44 @@
 <meta charset="UTF-8">
 	<title>쌍쌍바's talk</title>
 	<style>
+		body{
+			background-image: url("img/1323.jpg");
+			background-repeat: no-repeat;
+			background-size: 120%;
+			-ms-overflow-style: none; 
+		}
+		::-webkit-scrollbar { 
+			display: none; 
+		}
+
 		*{
 			margin:0;
 			padding:0;
 		}
 		.container{
-			width: 500px;
+			width: 730px;
 			margin: 0 auto;
 			padding: 25px;
+		}
+		h1{
+			color: white;
 		}
 		.container h1{
 			text-align: center;
 			padding: 5px 5px 5px 15px;
-			color: #111922;
+/* 			color: #111922; */
 /* 			border-left: 3px solid #FFBB00; */
 			margin-bottom: 7px;
 		}
-		.chating{
-			background-color: #c8e8ff;
-			width: 515px;
-			height: 499px;
-			overflow: auto;
-			padding-right: 3px;
-			padding-left: 3px;
-			margin-bottom: 7px;
-			border-radius: 5px;
+		.chating {
+		    background-color: #c8e8ff;
+		    width: 720px;
+		    height: 670px;
+		    overflow: auto;
+		    padding-right: 3px;
+		    padding-left: 3px;
+		    margin-bottom: 7px;
+		    border-radius: 5px;
 		}
 		.chating .me2{
 			word-break:break-all;
@@ -109,6 +122,16 @@
    			position: relative;
    			bottom: 0;
 		}
+		.mdate2 {
+			font-size: 3px;
+			float: right;
+   			padding-right: 3px;
+   			color: grey;
+			display: inline-block; 
+   			position: relative;
+   			bottom: 0;
+   			margin-top: -5px;
+		}
 		.odate {
 			font-size: 3px;
 			float: left;
@@ -185,7 +208,7 @@
 		
 		}
 		input{
-			width: 350px;
+			width: 575px;
 			height: 25px;
 		}
 		#yourMsg{
@@ -199,12 +222,19 @@
         {
             clear: both;
         }
-        .msgImg{
-			width: 200px;
-			height: 125px;
+        .msgImgM{
+			width: 375px;
+			height: 275px;
 		}
-		.img{
+		.imgM{
 			float: right;
+		}
+        .msgImgO{
+			width: 375px;
+			height: 275px;
+		}
+		.imgO{
+			float: left;
 		}
 		
 		input.fileUpload {
@@ -234,7 +264,7 @@
 		    font-size: 15px;
 		    box-shadow: 1px 2px 3px 0px #f2f2f2;
 		    outline: none;
-		    margin-right: 267px;
+		    margin-right: 482px;
 		}
 		#fileUpload:hover + label {
 		    border: 1px solid #d9e1e8;
@@ -260,7 +290,7 @@
 		    padding: 5px;
 		    width: 72px;
 		    margin: -3px;
-		    margin-left: 5px;
+		    margin-left: -73px;
 		}
 		.buttonF:hover{
 			cursor: pointer;
@@ -275,7 +305,7 @@
 		    padding: 5px;
 		    width: 72px;
 		    margin: -3px;
-		    margin-left: 5px;
+		    margin-left: -2px;
 		}
 		.buttonS:hover{
 			cursor: pointer;
@@ -298,22 +328,29 @@
 		}
 		.nick{
 			padding-right: 10px;
+			color: white;
 		}
 		.msg{
 			padding-right: 5px;
+			color: white;
+		}
+		.imgT{
+			font-size: 10px;
+		    margin-left: -596px;
+		    position: absolute;
+		    color: white;
 		}
 	</style>
 </head>
 
 <script type="text/javascript">
 	var ws;
-
+	
 	function wsOpen(){
 		//웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
 		ws = new WebSocket("ws://" + location.host + "/chating/"+$("#openRoomNo").val());
 		wsEvt();
 	}
-		
 	function wsEvt() {
 		ws.onopen = function(data){
 			//소켓이 열리면 동작
@@ -322,18 +359,22 @@
 		ws.onmessage = function(data) {
 			//메시지를 받으면 동작
 			var msg = data.data;
+			alert(data);
 			if(msg != null && msg.type != ''){
 				var d = JSON.parse(msg);
 				var curDate = new Date();
 				var curTime = curDate.getFullYear() + "-" + (curDate.getMonth() + 1) + "-" + curDate.getDate() + " " 
 	            + curDate.getHours() + ":" + curDate.getMinutes();
+				var url = URL.createObjectURL(new Blob([msg]));
 				if(d.type == "getId"){
 					var si = d.sessionId != null ? d.sessionId : "";
 					if(si != ''){
 						$("#sessionId").val(si); 
 					}
-				}else if(d.type == "message"){
+				}
+				else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
+// 						if()
 						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
 						$("#chating").append("<span class='me2'>" + d.msg + "</span>");	
 						$("#chating").append("<div class='clear'></div>");	
@@ -350,59 +391,55 @@
 						// 채팅시 스크롤 내리는 함수
 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 						
+					} 
+					
+				}
+				else if(d.type == "fileUpload"){
+						if(d.sessionId == $("#sessionId").val()){
+						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
+						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
+							url + "></div><div class='clearBoth'></div>");
+						$("#chating").append("<li class='mdate'>" + curTime + "</li>");	
+						$("#chating").append("<div class='clear'></div>");	
+				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+							
+						}else{
+						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
+						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
+							url + "></div><div class='clearBoth'></div>");
+						$("#chating").append("<li class='mdate'>" + curTime + "</li>");	
+						$("#chating").append("<div class='clear'></div>");	
+				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+							
+						}
 					}
-						
-				}else{
+				
+				else{
 					console.warn("unknown type!")
 				}
-			}else{
-					//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
+// 			else{
+// 				alert(files);
+// 					//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
+// 					var url = URL.createObjectURL(new Blob([msg]));
 // 					var curDate1 = new Date();
 // 					var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
 // 		           		+ curDate1.getHours() + ":" + curDate1.getMinutes();
-// 					var url = URL.createObjectURL(new Blob([msg]));
-// 						$("#chating").append("<div class='img'><img class='msgImg' src=" + 
+// 					if(fileSend.sessionId == $("#sessionId").val()){
+// 					$("#chating").append("<p class='me'>" + fileSend.userName + "</p>");	
+// 						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
 // 							url + "></div><div class='clearBoth'></div>");
-// 						$("#chating").append("<li class='mdate2'>" + curTime1 + "</li>");	
+// 						$("#chating").append("<li class='mdate'>" + curTime1 + "</li>");	
 // 						$("#chating").append("<div class='clear'></div>");	
 // 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
-				        var msg = data.data;
-						if(msg != null && msg.type != ''){
-							var d1 = JSON.parse(msg);
-							var url = URL.createObjectURL(new Blob([msg]));
-							var curDate1 = new Date();
-							var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
-				            + curDate1.getHours() + ":" + curDate1.getMinutes();
-							if(d1.type == "getId"){
-								var si1 = d1.sessionId != null ? d1.sessionId : "";
-								if(si1 != ''){
-									$("#sessionId").val(si); 
-								}
-							}else if(d1.type == "message"){
-								if(d1.sessionId == $("#sessionId").val()){
-									$("#chating").append("<p class='me'>" + d1.userName + "</p>");	
-									$("#chating").append("<div class='img'><img class='msgImg' src=" + 
-				 							url + "></div><div class='clearBoth'></div>");	
-									$("#chating").append("<div class='clear'></div>");	
-									$("#chating").append("<li class='mdate'>" + curTime1 + "</li>");	
-									$("#chating").append("<div class='clear'></div>");	
-									// 채팅시 스크롤 내리는 함수
-							        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
-								}else{
-									$("#chating").append("<p class='others'>" + d1.userName + "</p>");	
-									$("#chating").append("<div class='img'><img class='msgImg' src=" + 
-				 							url + "></div><div class='clearBoth'></div>");	
-									$("#chating").append("<div class='clear'></div>");	
-									$("#chating").append("<li class='odate'>" + curTime1 + "</li>");	
-									$("#chating").append("<div class='clear'></div>");	
-									// 채팅시 스크롤 내리는 함수
-							        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
-									 
-								}
-					var url = URL.createObjectURL(new Blob([msg]));
-					$("#chating").append("<div class='img'><img class='msgImg' src=" + 
-							url + "></div><div class='clearBoth'></div>");
-				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+// 					}else{
+// 					$("#chating").append("<p class='others'>" + fileSend.userName + "</p>");	
+// 						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
+// 							url + "></div><div class='clearBoth'></div>");
+// 						$("#chating").append("<li class='odate'>" + curTime1 + "</li>");	
+// 						$("#chating").append("<div class='clear'></div>");	
+// 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+						
+// 					}
 			}
 			 
 		} //onMessage 끝
@@ -411,7 +448,7 @@
 		document.addEventListener("keypress", function(e){
 			if(e.keyCode == 13){ //enter press
 				send();
-			} 
+			}
 		});
 	}
 
@@ -498,7 +535,7 @@
 			<table class="inputTable">
 				<tr>
 					<th class="msg">CHAT</th>
-					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요." style="width: 380px;"></th>
+					<th><input id="chatting" placeholder="보내실 메시지를 입력하세요." style="width: 590px;"></th>
 					<th><button onclick="send()" id="sendBtn" class="buttonS">보내기</button>
 					<br/></th>
 				</tr>
@@ -506,6 +543,7 @@
 					<th class="file"><br/></th>
 					<th><br/><input type="file" id="fileUpload">
 					<label for='fileUpload'>이미지 선택</label></th>
+					<th class="imgT">이미지 업로드는 5MB까지 허용합니다</th>
 					<th><br/><button onclick="fileSend()" id="sendFileBtn" class="buttonF">업로드</button></th>
 				</tr>
 			</table>
