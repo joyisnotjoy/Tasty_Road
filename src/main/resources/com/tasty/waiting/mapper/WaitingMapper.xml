@@ -3,6 +3,12 @@
   
 <mapper namespace="com.tasty.waiting.mapper.WaitingMapper">
 	
+	<select id="wait" resultType="com.tasty.waiting.vo.waitVO">
+		SELECT shopNo, id, now, wait, total
+		FROM shopMember
+		WHERE shopNo = #{shopNo}
+	</select>
+	
 	<!-- 현재 테이블 수 수정 -->
 	<update id="nowUpdate">	
 		UPDATE shopMember set now = #{now}

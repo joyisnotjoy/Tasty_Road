@@ -53,7 +53,7 @@ public class ReplyController {
 		map.put("rList", service.list(replyPageObject, shopNo));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
-	}
+	} 
 	// 0. 댓글 등록 처리 / write.do - post
 	@PostMapping(value = "/write.do",
 		consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
@@ -65,7 +65,7 @@ public class ReplyController {
 //		reply.setReplyNo(ReplyNo);
 		// db에 데이터 저장하기
 		service.write(ro);
-		log.info(service.write(ro));
+//		log.info(service.write(ro));
 		return new ResponseEntity<String>
 		("댓글이 등록되었습니다.",HttpStatus.OK);
 	}
