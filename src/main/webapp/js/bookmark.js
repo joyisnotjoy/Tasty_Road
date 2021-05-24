@@ -30,6 +30,7 @@ function like(bookmark, callback, error) {
 let liked = false;
 $(function() {
 	$(".like").click(function() {
+
 		if (liked) {
 			alert("즐겨찾기 해제 완료");
 			liked = false;
@@ -39,32 +40,33 @@ $(function() {
 			liked = true;
 			$(this).html('unlike');
 		}
-					// 북마크 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------
+		// 북마크 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------
 		var login = $(".login").text();
-				
-			$(document).on("click", ".changeBtn", function() {		// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
 
-	var like = {};
-		
-// 		reply.replyNo = $("#replyNo").val();
-		like.shopNo = $("#replyshopNo").val();
-		like.content = $("#replyContent").val();
+		$(document).on("click", ".changeBtn", function() { 	// document 로딩이 다 끝난 후 현재 Table에 대한 button click Event 처리
+			var liked= {};
 
-		if (login != null || login != "") {
-			
-			}else {
+			// 		reply.replyNo = $("#replyNo").val();
+			liked.shopNo = $("#replyshopNo").val();
+			liked.content = $("#replyContent").val();
 
-					like(update, function(result, status) {
+			if (login != null || login != "") {
 
-						if (status == "notmodified") {
+			} else {
 
-							alert("수정에 실패하였습니다, 같은 증상이 반복되면 고객센터에 문의해 주세요");
+				like(update, function(result, status) {
 
-						} else {
+					if (status == "notmodified") {
 
-							alert("수정되었습니다.");
-						}
+						alert("수정에 실패하였습니다, 같은 증상이 반복되면 고객센터에 문의해 주세요");
+
+					} else {
+
+						alert("수정되었습니다.");
+					}
+
+				})
 			}
-			
-	}					
+		});		
+	});
 });

@@ -53,7 +53,7 @@ public class ReplyController {
 		map.put("rList", service.list(replyPageObject, shopNo));
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
-	}
+	} 
 	// 0. 댓글 등록 처리 / write.do - post
 	@PostMapping(value = "/write.do",
 		consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},

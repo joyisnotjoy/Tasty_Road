@@ -390,7 +390,7 @@
 						$("#chating").append("<div class='clear'></div>");	
 						// 채팅시 스크롤 내리는 함수
 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
-						
+						 
 					} 
 					
 				}

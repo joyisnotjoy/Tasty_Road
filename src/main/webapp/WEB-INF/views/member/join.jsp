@@ -105,8 +105,30 @@
 				success : function(result) {
 					if (result == 1) {
 						$("#email_check").html("중복된 이메일이 있습니다.");
+						$("#btnJoin").attr("disabled", "disabled");
 					} else {
 						$("#email_check").html("");
+						$("#btnJoin").removeAttr("disabled");
+					}
+				},
+			})
+		});
+		
+		// 전화번호 중복체크
+		$("#tel").keyup(function(){
+			$.ajax({
+				url : "/member/check_tel.do",
+				type : "POST",
+				data : {
+					tel : $("#tel").val()
+				},
+				success : function(result) {
+					if (result == 1) {
+						$("#tel_check").html("중복된 전화번호가 있습니다.");
+						$("#btnJoin").attr("disabled", "disabled");
+					} else {
+						$("#tel_check").html("");
+						$("#btnJoin").removeAttr("disabled");
 					}
 				},
 			})
@@ -218,9 +240,10 @@
 					<h3 class="join_title">
 						<label for="phoneNo">휴대전화</label>
 					</h3>
-					<span class="box int_mobile"> <input type="tel" id="mobile" name="tel"
+					<span class="box int_mobile"> <input type="text" id="tel" name="tel"
 						class="int" maxlength="16" placeholder="- 없이 숫자만 입력해주세요." pattern="([01]{2})([01679]{1})([0-9]{3,4})([0-9]{4})" required="required">
 					</span> 
+					<span id="tel_check" class="w3-text-red"></span>
 					<span class="error_next_box"></span>
 				</div>
 
