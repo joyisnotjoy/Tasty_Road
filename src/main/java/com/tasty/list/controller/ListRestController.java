@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tasty.list.service.ListRestService;
 import com.tasty.list.service.ReplyService;
 import com.tasty.list.vo.ReplyVO;
+import com.tasty.member.vo.shopMemberVO;
 import com.webjjang.util.PageObject;
 
 import lombok.extern.log4j.Log4j;
@@ -38,16 +39,16 @@ public class ListRestController {
 					MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_UTF8_VALUE
 						} )
-	public ResponseEntity<String> view(
+	public ResponseEntity<shopMemberVO> view(
 			@RequestParam(defaultValue = "1") long repPage,
 			@RequestParam(defaultValue = "5") long repPerPageNum,
-			String shopNo)
+			@RequestParam String shopNo)
 		throws Exception {
 		// 맛집에 대한 페이지 정보
 		PageObject PageObject = new PageObject(repPage, repPerPageNum);
 		log.info("view().PageObject : " + PageObject + ", shopNo : " + shopNo);
 		
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<shopMemberVO>(service.view(shopNo), HttpStatus.OK);
 	}
 	
 	

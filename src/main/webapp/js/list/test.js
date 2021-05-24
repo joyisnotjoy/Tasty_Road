@@ -60,6 +60,8 @@ $(document).ready(function(){
 			var list = data.list;
 			alert(list);
 			
+			
+			//	var str =JSON.parse(data);
 			var str ="";
 			if(!list || list.length == 0){
 				str += "<li class='list-group-item'> 데이터가 존재하지 않습니다. </li>";

@@ -15,37 +15,20 @@
 			from(
 				select chatNo, id1, id2, chatName
 				from chat
-				
-				<include refid="search" />
-				
 				order by chatNo desc
 			)
 		)
 		where rnum between #{startRow} and #{endRow}
 	</select>
 	
-	<!-- 검색 조건 쿼리 따로 저장하기 -->
-	<sql id="search">
-		<!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
-		<if test="word != null and word != ''.toString()">
-			<!-- 검색하는 데이터가 있는 경우 where가 나온다. -->
-			where 1 = 0
-			<if test="key == 'm'.toString()">
-				OR member like '%' || #{word} || '%'
-			</if>
-		</if>
-	</sql>
-	
 	<!-- 1-1. 채팅 전테 데이터 : 채팅방 번호가 필요하다 -->
 	<select id="getTotalRow" resultType="java.lang.Long">
 		select count(*) from
 		chat
-		<!-- mybatis에서는 데이터 자동변환을 한다. 글자가 한자이면 char -->
-		<include refid="search" />
 	</select>
 	
 	<!-- 2. 채팅 보기 -->
-	<select id="view" resultType="com.tasty.chat.vo.ChatRoomVO">
+	<select id="view" resultType="com.tasty.chat.vo.ChatVO">
 		select chatNo, id1, id2, chatName
 		from chat
 		where chatNo = #{chatNo}

@@ -44,10 +44,6 @@ public class waitingController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("wait", service.wait(shopNo));
-<<<<<<< HEAD
-		map.put("bookmark", bService.bm(shopNo));
-=======
->>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 		
@@ -62,7 +58,7 @@ public class waitingController {
 		
 		if(vo.getNow() != null) {
 			
-			result = service.nowUpdate(vo);
+			result = service.nowUpdate(vo); 
 			
 		} else if(vo.getTotal() != null) {
 			

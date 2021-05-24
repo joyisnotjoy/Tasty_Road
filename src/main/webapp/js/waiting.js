@@ -267,6 +267,8 @@
    }
 
 	showWait();
+	
+	alert(shopNo);
    
    $("#more").click(function () {
    
