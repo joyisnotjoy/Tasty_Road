@@ -82,16 +82,13 @@
       
       waitService.wait({shopNo : shopNo}, function(data) {
          
-         alert(data);
+         //alert(data);
          
-         alert(JSON.stringify(data));
+        // alert(JSON.stringify(data));
          
          var str = "";
          var waitingViewBtn = "";
          var waiting = data.wait;
-         var bookmark = data.bookmark;
-         
-         alert(bookmark);
          
          if(!data || data.length == 0) {
             
@@ -121,54 +118,6 @@
             
          } else {
             
-            if(waiting != null && bookmark != null) {
-	
-	            console.log(data);
-	            
-	            // alert("실행");
-	            
-	            str += "<div class='modal fade waitModal' id='wait' role='dialog'>";
-	            str += "<div class='modal-dialog'>";
-	            str += "<div class='modal-content'>";
-	            str += "<div class='modal-header'>";
-	            str += "<h4 class='modal-title'>";
-	            str += "<button type='button' class='close pull-left' data-dismiss='modal'>&times;</button>";
-	            str += "<i class='fa fa-comments fa-fw'></i>";
-	            str += "<span id='replyModalTitle'>대기열 수정</span>";
-	            str += "</h4>";
-	            str += "</div>";
-	            str += "<div class='modal-body col-md-12'>";
-	            str += "<form>";
-	            str += "<div class='form-group' id='shopNoDiv '>"; 
-	            str += "<input name='shopNo' type='hidden' class='form-control ' id='shopNo' readonly='readonly' value='" + waiting.shopNo + "'>";
-	            str += "<input name='id' type='hidden' class='form-control ' id='id' readonly='readonly' value='" + waiting.id + "'>";
-	            str += "<input name='id' type='hidden' class='form-control ' id='myId' readonly='readonly' value='" + bookmark.id + "'>";
-	            str += "<input name='cnt' type='hidden' class='form-control ' id='cnt' readonly='readonly' value='" + bookmark.cnt+ "'>";
-	            str += "</div>";
-	            str += "<div class='form-group col-12' id='nowTalbeDiv'>";  
-	            str += "<label for='now'>사용 중인 Table: </label> <br>";
-	            str += "<input name='now' type='text' class='form-control col-md-6' id='now' readonly='readonly' value='" + waiting.now +"' style='width: 6em; display: inline;' >";
-	            str += "<button type='button' id='nowPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
-	            str += "<button type='button' id='nowMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
-	            str += "</div>";
-	            str += "<div class='form-group col-12' id='totalTableDiv'>";
-	            str += "<label for='total'>전체 Table</label > <br>";
-	            str += "<input name='now' type='text' class='form-control col-md-6' id='total' readonly='readonly' value='" + waiting.total +"' style='width: 6em; display: inline;' >";
-	            str += "<button type='button' id='totalPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
-	            str += "<button type='button' id='totalMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
-	            str += "</div>";
-	            str += "</form>";
-	            str += "</div>";
-	            str += "</div>";
-	            str += "</div>";
-	            str += "</div>";
-	          
-		        waitingViewBtn += "<span styli='disply: inline;'>대기열</span>";
-		        waitingViewBtn += "<button type='button' class='btn btn-default' id='waitingViewBtn' style='float: right;'>&#43;더보기</button>";
-	            
-	
-	
-			} else {
 				
 	            str += "<div class='modal fade waitModal' id='wait' role='dialog'>";
 	            str += "<div class='modal-dialog'>";
@@ -223,17 +172,53 @@
 	            str += "<input name='shopNo' type='hidden' class='form-control ' id='shopNo' readonly='readonly' value='" + waiting.shopNo + "'>";
 	            str += "<input name='id' type='hidden' class='form-control ' id='id' readonly='readonly' value='" + waiting.id + "'>";
 	            str += "</div>";
-	            str += "<div class='form-group col-12' id='visualDiv'>";  
-	            	// DIV 추가 [1 ~ 10]
-		            str += "<div class='form-group col-12' id='visualDiv'>";  
-		            str += "</div>";
-		            // DIV 추가 끝
+	            str += "<div class='col-md-12' id='visualDiv'>";  
+	            
+		
+		
+//	            	for(var y = 1; y <= waiting.total; y++) {
+//		
+//		            	// DIV 추가 [1 ~ 10]
+//			            str += "<div class='col-md-3' id='visualDiv" + y + "' style='width: 1.5em; height: 1.5em; background: #eee; display: inline; margin: 0.75em;'>";   
+//			            str += y;
+//			            str += "</div>";
+//			            
+//			            if(y % 4 == 0) {
+//				
+//							str += "<br>";
+//				
+//						}
+//			            
+//			            // DIV 추가 끝
+//		
+//					}
+					
+					for(var i = 1; i <= waiting.now; i++) {
+						
+						for(var y = waiting.total; y >= 0; y--) {
+							
+				            str += "<div class='col-md-3' id='visualDiv" + y + "' style='width: 1.5em; height: 1.5em; background: #eee; display: inline; margin: 0.75em;'>";   
+				            str += y;
+				            str += "</div>";
+				            
+				            if(y % 4 == 0) {
+					
+								str += "<br>";
+//				
+							}
+							
+						}
+						
+						var div = $("#visualDiv"[i])
+						
+						div.attr("style", "red");
+							
+					}
+					
+					
+					
 	            str += "</div>";
 	            str += "<div class='form-group col-12' id='totalTableDiv'>";
-	            str += "<label for='total'>전체 Table</label > <br>";
-	            str += "<input name='now' type='text' class='form-control col-md-6' id='total' readonly='readonly' value='" + waiting.total +"' style='width: 6em; display: inline;' >";
-	            str += "<button type='button' id='totalPlus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#43;</button>"
-	            str += "<button type='button' id='totalMinus' class='btn btn-default changeBtn col-md-3' style='float: right;' >&#45;</button>"
 	            str += "</div>";
 	            str += "</form>";
 	            str += "</div>";
@@ -241,7 +226,6 @@
 	            str += "</div>";
 	            str += "</div>";
 				
-			}	// end of if-else (waiting != null && bookmark != null)
             
            // alert("wating else")
             
@@ -254,11 +238,9 @@
          
          var myId = "<c:out value='${login.id}'/>";
          
-         alert(myId);
-         
-//         $("#waitingView").html(waitingViewBtn);
-         $("body").append(str);
-//         $("#waitingView").html(myId);
+         $("#waitingView").append(waitingViewBtn);
+         $("article").append(str);
+         $("#waitingView").append(myId);
          
         // $(".waitModal").html(str);
          
@@ -268,8 +250,6 @@
 
 	showWait();
 	
-	alert(shopNo);
-   
    $("#more").click(function () {
    
       // alert(shopNo);
@@ -395,6 +375,12 @@
 	$(document).on("click", "#waitingViewBtn", function() {
 		
 		alert("click");
+		
+		$("#waitingDivModal").modal();
+		 
+//		var div = $("#visualDiv1") 
+		 
+//		alert(div.text());
 		
 	});
    
