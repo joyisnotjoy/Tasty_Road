@@ -16,6 +16,7 @@ local.properties
 .target/
 pom.xml
 pom.properties
+.properties
 
 # ignore properties file
 config.properties
