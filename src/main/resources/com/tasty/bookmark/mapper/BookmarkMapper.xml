@@ -8,13 +8,25 @@
 		resultType="com.tasty.bookmark.vo.bookmarkVO">
 		SELECT shopNo, id, cnt, writeDate
 		FROM bookMark
-		WHERE shopNo = #{shopNo}
+		WHERE shopNo = #{shopNo} and id = #{id}
 	</select>
 	<insert id="like">
 		insert into bookmark(id, shopNo)
 		values (#{id}, #{shopNo})
 
 	</insert>
+
+	<update id="increase">
+		update bookmark
+		set hit = hit + 1
+		where cnt = #{cnt}
+	</update>
+
+	<update id="decrease">
+		update bookmark
+		set hit = hit - 1
+		where cnt = #{cnt}
+	</update>
 
 	<delete id="unlike">
 		delete from bookmark

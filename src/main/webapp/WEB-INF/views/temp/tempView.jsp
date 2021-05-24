@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/bookmark.js"></script>
-<script type="text/javascript" src="/js/waiting.js"></script>
 <body>
  <div class="container">
   <h1>게시판 글 보기</h1>
@@ -48,13 +47,9 @@
   </ul>
  </div>
  <div class="modal fade waitModal" id="wait" role="dialog"></div>
-<!--  로그인 여부 -->
-	<c:if test="${empty login }">
-		<div id="empty login">로그인 하러가기</div>
-	</c:if>
-	<c:if test="${!empty login }">
-		<div id="login">${login.id }</div>
-	</c:if>
+ <ul>
+  <li class="login">${login.id }</li>
+ </ul>
 </body>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.tasty.bookmark.controller;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,17 @@ public class BmController {
 		@Qualifier("bsi")
 		private BookmarkService service;
 	//1. 맛집 북마크 등록 / write
-		@PostMapping(value = "/like.do",
+		@PostMapping(value = {"/like.do"}, 
 				consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 				produces = {"application/text; charset=utf-8"})
 		public ResponseEntity<String> like1(@RequestBody bookmarkVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
 			
 			log.info("like().vo : " + vo);
 
-			 service.like(vo);
+			int result =  service.like(vo);
+			 
+			log.info(result);
+			
 			 return new ResponseEntity<String>
 			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK);
 		

@@ -17,10 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tasty.bookmark.service.BookmarkService;
 import com.tasty.bookmark.vo.bookmarkVO;
 import com.tasty.member.vo.LoginVO;
-import com.tasty.member.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j;
-
 @Controller
 @RequestMapping("/bm")//임시
 @Log4j

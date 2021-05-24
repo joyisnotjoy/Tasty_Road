@@ -82,9 +82,9 @@
       
       waitService.wait({shopNo : shopNo}, function(data) {
          
-         //alert(data);
+         alert(data);
          
-        // alert(JSON.stringify(data));
+         alert(JSON.stringify(data));
          
          var str = "";
          var waitingViewBtn = "";
@@ -256,9 +256,9 @@
          
          alert(myId);
          
-         $("#waitingView").html(waitingViewBtn);
-         $("article").append(str);
-         $("#waitingView").html(myId);
+//         $("#waitingView").html(waitingViewBtn);
+         $("body").append(str);
+//         $("#waitingView").html(myId);
          
         // $(".waitModal").html(str);
          
