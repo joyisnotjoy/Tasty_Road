@@ -31,8 +31,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-<script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript" src="/js/util.js"></script>
+<script type="text/javascript" src="/js/reply.js"></script>
+<script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
 <title>될 지도 안될 지도</title>
 </head>
@@ -158,7 +159,7 @@
 
 			<div id="info.search" class="keywordSearch ">
 
-				<div id="List" class="section places">
+				<div id="List" class="section places" style="overflow: scroll; width: 600px; height: 800px;">
 					<div class="sectiontitle">
 						<h5 class="placetit">장소</h5>
 						<span class="cntwrap"><em id="info.search.place.cnt"
@@ -186,7 +187,7 @@
 						</c:if>
 					</ul>
 				</div>
-				<div id="View" class="section places HIDDEN">
+				<div id="View" class="section places HIDDEN" style="overflow: scroll; width: 400px; height: 1000px; ">
 					<div class="sectiontitle">
 						<h5 class="placetit">View</h5>
 						<span class="cntwrap"><em id="info.search.place.cnt"
@@ -194,6 +195,7 @@
 						<ol id="info.search.place.sort" class="Sort"></ol>
 					</div>
 					<ul id="showView" class="placelist"></ul>
+					<ul id="showList" class="placelist"></ul>
 				</div>
 				<div>
 					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"

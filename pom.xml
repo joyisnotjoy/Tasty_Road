@@ -6,7 +6,7 @@
 	<groupId>com.tasty</groupId>
 	<artifactId>controller</artifactId>
 	<name>ex03</name>
-	<packaging>war</packaging>
+	<packaging>war</packaging> 
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<junit-version>4.12</junit-version>
