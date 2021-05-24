@@ -33,6 +33,7 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
+<script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -40,7 +41,8 @@ $(function(){
 	$(".dataRow").click(function(){
 		var shopNo = $(this).find(".shopNo").text();
 		// 페이지 정보 붙이기
-		alert("아무거나");
+		alert("맛집 정보보기")
+		showView();
 		
 	});
 	$("#click").click(function(){
@@ -203,32 +205,14 @@ $(function(){
 						</c:if>
 					</ul>
 				</div>
-				<div id="showView" class="section places HIDDEN">
+				<div id="View" class="section places HIDDEN">
 					<div class="sectiontitle">
 						<h5 class="placetit">View</h5>
 						<span class="cntwrap"><em id="info.search.place.cnt"
 							class="cnt"></em></span>
 						<ol id="info.search.place.sort" class="Sort"></ol>
 					</div>
-<!-- 					<ul id="shopListt" class="placelist"> -->
-<%-- 						<c:if test="${empty list }"> --%>
-<!-- 							데이터 없는 경우의 표시 -->
-<!-- 							데이터가 존재하지 않는 경우 -->
-<!-- 							<li class="list-group-item">데이터가 존재하지 않습니다.</li> -->
-<%-- 						</c:if> --%>
-
-<%-- 						<c:if test="${!empty list }"> --%>
-<!-- 							데이터가 있는 경우의 표시 -->
-<%-- 							<c:forEach items="${list }" var="vo"> --%>
-<!-- 								<li class="list-group-item dataRow"> -->
-<%-- 									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소: --%>
-<%-- 									${vo.address } <br> 전화번호: ${vo.tel } <br> <span --%>
-<%-- 									class="shopNo">${vo.shopNo }</span> 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
-<%-- 											  	<span class="badge">${vo.cnt }</span> --%>
-<!-- 								</li> -->
-<%-- 							</c:forEach> --%>
-<%-- 						</c:if> --%>
-<!-- 					</ul> -->
+					<ul id="showView" class="placelist"></ul>
 				</div>
 				<div>
 					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"
