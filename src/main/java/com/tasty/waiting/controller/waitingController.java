@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tasty.bookmark.service.BookmarkService;
 import com.tasty.list.service.ListService;
 import com.tasty.member.vo.shopMemberVO;
 import com.tasty.waiting.service.WaitService;
@@ -31,13 +33,21 @@ public class waitingController {
 	@Qualifier("waitsi")
 	private WaitService service;
 	
+	@Inject
+	@Qualifier("bsi")
+	private BookmarkService bService;
 	
-	@GetMapping(value = "/wait.do", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+	
+	@GetMapping(value = "/wait.do", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<Map<String, Object>> wait(String shopNo) throws Exception {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("wait", service.wait(shopNo));
+<<<<<<< HEAD
+		map.put("bookmark", bService.bm(shopNo));
+=======
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
 		
 		return new ResponseEntity<>(map, HttpStatus.OK);
 		
