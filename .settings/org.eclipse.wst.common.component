@@ -1,22 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
     	
     <wb-module deploy-name="TastyRoad">
                 
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         		
+=======
+                                                    	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <wb-module deploy-name="controller-1.0.0-BUILD-SNAPSHOT">
+                                                                                                        		
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
         		
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         		
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+=======
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-test-sources/test-annotations"/>
         		
+=======
+                                                                                                        		
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
         <property name="java-output-path" value="target/classes"/>
+<<<<<<< HEAD
                 
         <property name="context-root" value="comtroller"/>
         	
-    </wb-module>
+=======
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <property name="context-root" value="controller"/>
+                                                                                                        	
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
+    </wb-module>
+<<<<<<< HEAD
+    
+=======
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
 </project-modules>
