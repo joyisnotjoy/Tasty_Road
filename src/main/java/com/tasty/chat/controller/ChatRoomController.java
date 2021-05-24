@@ -1,5 +1,7 @@
 package com.tasty.chat.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,19 +31,15 @@ public class ChatRoomController {
 	@Qualifier("crsi")
 	private ChatRoomService service;
 
-//	@Autowired
-//	@Qualifier("csi")
-//	private ChatService chatService;
-
 	@GetMapping(value = "/list.do", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	// ResponseEmtity : 실행 상태 코드와 함께 실행 결과를 클라이언트 쪽으로 전달할 때 사용하는 객체
-	public ResponseEntity<String> list(Long no, Model model) throws Exception {
+	public ResponseEntity<List<ChatRoomVO>> list(long no) throws Exception {
+//	public ResponseEntity<String> list(Long no, Model model) throws Exception {
 		log.info("list().no : " + no);
+//		model.addAttribute("list", service.list(no));
 
-		model.addAttribute("list", service.list(no));
-
-		return new ResponseEntity<String>("채팅방에 입장했습니다.", HttpStatus.OK);
+		return new ResponseEntity<>(service.list(no), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/write.do", consumes = { MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = {

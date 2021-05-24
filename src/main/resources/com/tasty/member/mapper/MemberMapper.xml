@@ -28,6 +28,11 @@
 	<select id="check_email" parameterType="String" resultType="int">
 		select count(*) from member where email = #{email}
 	</select>
+
+	<!-- 전화번호 중복 검사 -->
+	<select id="check_tel" parameterType="String" resultType="int">
+		select count(*) from member where tel = #{tel}
+	</select>
 	
 	
 	<!-- 아이디,비밀번호 찾기 용 -->
@@ -39,6 +44,11 @@
 	<!-- 이메일 중복 검사 -->
 	<select id="checkEmail" resultType="com.tasty.member.vo.MemberVO">
 		select email from member where email = #{email} and id = #{id}
+	</select>
+
+	<!-- 탈퇴 검사 -->
+	<select id="checkPw" resultType="com.tasty.member.vo.MemberVO">
+		select email from member where id = #{id} and pw = #{pw}
 	</select>
 	
 	<!-- 아이디 찾기 -->
@@ -53,14 +63,75 @@
 	
 	<!-- 내 정보 보기 -->
 	<select id="myPage" resultType="com.tasty.member.vo.MemberVO">
-		select id, name, birth, gender, tel, email, regDate, status, address, gradeNo
-		from member
-		where id = #{id}
+		select m.id, m.name, m.birth, m.gender, m.tel, m.email, m.regDate, m.status, m.address, m.gradeNo, g.gradeName
+		from member m, grade g
+		where (id = #{id}) and (m.gradeNo = g.gradeNo)
 	</select>
-	
+
+	<!-- 가게 정보 보기 -->
+	<select id="myShopPage" resultType="com.tasty.member.vo.shopMemberVO">
+		select s.shopName, s.shopNo, s.address, s.image, s.content, s.tel, m.id, s.content, s.image 
+		from member m, shopMember s
+		where (m.id = #{id}) and (m.id= s.id)
+	</select>
+
+
 	<update id="memberUpdate">
-		update member set pw = #{pw}, birth = #{birth}, gender = #{gender}, tel = #{tel}, address = #{address}
+		update member set pw = #{pw}, tel = #{tel}, address = #{address}
 		where id=#{id}
 	</update>
+
+	<update id="shopUpdate">
+		update shopMember set content = #{content}
+		where id=#{id}
+	</update>
+	
+	<update id="updateFile">
+		update shopMember set  image = #{image}
+		where id = #{id}
+	</update>
+	
+	<update id="memberWithdraw">
+		update member set gradeNo='2'
+		where id=#{id} and pw=#{pw}
+	</update>
+	
+	
+	
+	
+	<!-- 관리자 -->
+	
+	<select id="memberList" resultType="com.tasty.member.vo.MemberVO">
+		select rnum, memberNo, id, name, tel, email, gradeNo, gradeName from(
+		 select rownum rnum, memberNo, id, name, tel, email, gradeNo, gradeName from(
+		  select  m.memberNo, m.id, m.name, m.tel, m.email, m.gradeNo, g.gradeName 
+		  from member m, grade g 
+		  where m.gradeNo = g.gradeNo
+		  order by memberNo desc
+		  )
+		  ) where rnum between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getTotalRow" resultType="java.lang.Long">
+		select count(*) from member
+		
+	</select>
+	
+	<update id="gradeModify">
+		update member set gradeNo = #{gradeNo} where id = #{id}
+	</update>
+	
+	<select id="view" resultType="com.tasty.member.vo.MemberVO">
+		select m.id, m.name, m.birth, m.gender, m.tel, m.email, m.regDate, m.status, m.address, m.gradeNo, g.gradeName
+		from member m, grade g
+		where (id = #{id}) and (m.gradeNo = g.gradeNo)
+	</select>
+	
+	<insert id="shopReg">
+		insert into shopMember(id, shopName, shopNo, address, tel, content, image)
+		values(#{id}, #{shopName}, #{shopNo}, #{address}, #{tel}, #{content}, #{image})
+<!-- 		insert into shopMember(id, shopname, shopNo, address, tel) -->
+<!--         values('test4', '가게명', '123-45-67891', '경기도 양주시', '031-123-4567'); -->
+	</insert>
 
 </mapper>
