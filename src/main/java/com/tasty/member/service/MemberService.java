@@ -65,5 +65,7 @@ public interface MemberService {
 	public int shopReg(shopMemberVO vo) throws Exception;
 
 	
+	/* 지도 */ 
+	public List<shopMemberVO> getMap(shopMemberVO vo) throws Exception;
 
 }

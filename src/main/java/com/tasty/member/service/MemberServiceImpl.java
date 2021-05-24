@@ -301,6 +301,14 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.shopReg(vo);
 	}
 
+	@Override
+	public List<shopMemberVO> getMap(shopMemberVO vo) throws Exception {
+		
+		log.info("찍어보좌 impl : " + vo);
+		// TODO Auto-generated method stub
+		return mapper.getMap(vo);
+	}
+
 
 
 

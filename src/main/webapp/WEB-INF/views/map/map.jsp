@@ -175,9 +175,18 @@ $(function(){
 	<!-- 지도에 들어가는 부분 -->
 	<div id="view" class="View">
 		<div id="map" style="width: 100%; height: 100%;"></div>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6e016ddb84caddc8c080816b4d9e06d"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6e016ddb84caddc8c080816b4d9e06d&libraries=services"></script>
 		<script>
+		
+// 		alert(${vo.address});
+		
+        var listData = [
+        	//["addr0","addr1"]
+            ["서울 중구 세종대로 110","바보"],
+            ["경기 수원시 팔달구 효원로 1","경기도청"]
+        ];
+        
+        
 			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 			var options = { //지도를 생성할 때 필요한 기본 옵션
 				center : new kakao.maps.LatLng(37.739297, 127.044853), // 지도의 중심좌표
@@ -186,38 +195,39 @@ $(function(){
 			};
 
 			var map = new kakao.maps.Map(container, options); // 지도 생성
+			
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+	        
 
-			// 마커를 표시할 위치입니다 
-			var position = new kakao.maps.LatLng(37.739297, 127.044853);
-
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-				position : position,
-				clickable : true
-			// 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-			});
-
-			// 아래 코드는 위의 마커를 생성하는 코드에서 clickable: true 와 같이
-			// 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-			// marker.setClickable(true);
-
-			// 마커를 지도에 표시합니다.
-			marker.setMap(map);
-
-			// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-			var iwContent = '<div style="padding:10px;">이젠 컴퓨또로링 학원 <br><a href="/sample/EZEN.do" style="color:blue" target="_blank">QR코드 찍기</a> <a href="https://map.kakao.com/link/to/Hello World!,33.450701,126.570667" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-			iwPosition = new kakao.maps.LatLng(37.739297, 127.044853); //인포윈도우 표시 위치입니다
-
-			var infowindow = new kakao.maps.InfoWindow({
-				position : iwPosition,
-				content : iwContent
-			});
-
-			// 마커에 클릭이벤트를 등록합니다
-			kakao.maps.event.addListener(marker, 'click', function() {
-				// 마커 위에 인포윈도우를 표시합니다
-				infowindow.open(map, marker);
-			});
+	     // foreach loop
+	        listData.forEach(function(addr, index) {
+	            geocoder.addressSearch(addr[0], function(result, status) {
+	                if (status === kakao.maps.services.Status.OK) {
+	                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	        
+	                    var marker = new kakao.maps.Marker({
+	                        position: coords,
+	                        clickable: true
+	                    });
+	        
+	                    // 마커를 지도에 표시합니다.
+	                    marker.setMap(map);
+	    
+	                    // 인포윈도우를 생성합니다
+	                    var infowindow = new kakao.maps.InfoWindow({
+	                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + addr[1] + '</div>',
+	                        removable : true
+	                    });
+	                        
+	                    // 마커에 클릭이벤트를 등록합니다
+	                    kakao.maps.event.addListener(marker, 'click', function() {
+	                          // 마커 위에 인포윈도우를 표시합니다
+	                          infowindow.open(map, marker);  
+	                    });
+	                } 
+	            });
+	        });
 		</script>
 	</div>
 	<!--  지도에 들어가는 부분 끝 -->
