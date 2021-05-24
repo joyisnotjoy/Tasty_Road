@@ -5,8 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tasty</groupId>
 	<artifactId>controller</artifactId>
+<<<<<<< HEAD
+	<name>ex03</name>
+	<packaging>war</packaging> 
+=======
 	<name>Tasty_Road</name>
 	<packaging>war</packaging>
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
 	<properties>
