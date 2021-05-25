@@ -105,6 +105,24 @@
 			width: 560px;
 			height: 25px;
 		}
+		.btnA{ 
+		    text-decoration: none;
+		    font-size: 12px;
+		    color: black;
+		    text-align: center;
+		    padding: 8px 16px 8px 16px;
+		    margin-left: 650px;
+		    display: inline-block;
+		    border-radius: 6px;
+		    transition: all 0.1s;
+		    margin-bottom: 3px;
+   		}
+   		.btnA.blue{
+		    background-color: #a2e7ff;
+   		}
+   		.btnA.blue:active{
+     		border-bottom:2px solid #165195;
+   		}
 	</style>
 </head>
 
@@ -173,6 +191,7 @@
 <body>
 	<div class="container">
 		<h1>비회원 오픈 채팅방</h1>
+		<a href="/list/map.do" class="btnA blue">돌아가기</a>
 		<div id="roomContainer" class="roomContainer">
 			<table id="roomList" class="roomList"></table>
 		</div>

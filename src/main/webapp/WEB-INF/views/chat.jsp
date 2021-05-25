@@ -340,6 +340,41 @@
 		    position: absolute;
 		    color: white;
 		}
+		.btnA{ 
+		    text-decoration: none;
+		    font-size: 12px;
+		    color: black;
+		    text-align: center;
+		    padding: 8px 16px 8px 16px;
+		    display: inline-block;
+		    border-radius: 6px;
+		    transition: all 0.1s;
+		    margin-bottom: 3px;
+   		}
+   		.btnA.blue{
+		    background-color: #a2e7ff;
+   		}
+   		.btnA.blue:active{
+     		border-bottom:2px solid #165195;
+   		}
+		.btnB{ 
+		    text-decoration: none;
+		    font-size: 12px;
+		    color: black;
+		    text-align: center;
+		    padding: 8px 16px 8px 16px;
+		    display: inline-block;
+		    border-radius: 6px;
+		    transition: all 0.1s;
+		    float: right;
+		    margin-right: 3px;
+   		}
+   		.btnB.blue{
+		    background-color: #a2e7ff;
+   		}
+   		.btnB.blue:active{
+     		border-bottom:2px solid #165195;
+   		}
 	</style>
 </head>
 
@@ -517,6 +552,10 @@
 <body>
 	<div id="container" class="container">
 		<h1>${openRoomName } TALK</h1>
+		<div>
+		<a href="/list/map.do" class="btnA blue">돌아가기</a>
+		<a href="/room" class="btnB blue">Room</a>
+		</div>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="openRoomNo" value="${openRoomNo }">
 		
@@ -544,7 +583,7 @@
 					<th class="file"><br/></th>
 					<th><br/><input type="file" id="fileUpload">
 					<label for='fileUpload'>이미지 선택</label></th>
-					<th class="imgT">이미지 업로드는 5MB까지 허용합니다</th>
+					<th class="imgT">이미지 업로드는 50MB까지 허용합니다</th>
 					<th><br/><button onclick="fileSend()" id="sendFileBtn" class="buttonF">업로드</button></th>
 				</tr>
 			</table>
