@@ -12,7 +12,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content="">	
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <title>SB Admin 2 - Dashboard</title>
@@ -381,6 +384,7 @@
 						<span>Copyright &copy; Your Website 2021</span>
 					</div>
 				</div>
+				
 			</footer>
 			<!-- End of Footer -->
 
@@ -396,11 +400,11 @@
 	</a>
 
 	<!-- Bootstrap core JavaScript-->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- 	<script src="/vendor/jquery/jquery.min.js"></script> -->
+<!-- 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
 	<!-- Core plugin JavaScript-->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- 	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
 	<!-- Custom scripts for all pages-->
 	<script src="/js/sb-admin-2.min.js"></script>

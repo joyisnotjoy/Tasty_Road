@@ -462,7 +462,7 @@
 			$("#yourName").hide();
 			$("#yourMsg").show();
 		}
-	}
+	} 
 	// 정보를 받아 메세지 입력
 	function send() {
 		var option ={

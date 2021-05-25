@@ -54,15 +54,12 @@ $(document).ready(function(){
 	
 	)();  // listService 끝 ★★★★ (); 이거 붙이는지 마는지
 	
-	
-
-	
-	
 
 	
 	// showView();
 	
-	$(".dataRow").click(function(){
+//	$(".dataRow").click(function(){
+	$(document).on('click', '.dataRow', function(){
 		
 		var li = $(this).closest("li");
 		var shopNo = li.find("span").text();
@@ -128,12 +125,12 @@ $(document).ready(function(){
 					str += "</ul>";
 					str += "<button class='btn btn-default' id='list' class='list' style='float: left;'>리스트</button>";
 					
-						// 댓글 시작 부분
+	// 댓글 시작 부분
 	str += "<div class='row' style='margin: 20px -30px;'>";
 	str += "<div class='col-lg-12'>";
 	str += "<div class='panel panel-default'>";
 	str += "<div class='panel-heading'>";
-	str += "	<i class='fa fa-comments fa-fw'></i> Reply <br/>";
+	str += "<i class='fa fa-comments fa-fw'></i> Reply <br/>";
 	str += "<button class='btn btn-primary btn-xs pull-right' id='writeReplyBtn'>New Reply</button>";
 	str += "</div>";
 	str += "<div class='panel-body'>";
@@ -327,7 +324,9 @@ $(document).ready(function(){
 		
 	});
 	
-	$(document).on("click", "#list", function() {
+	
+	
+	$(document).on('click', '#list', function() {
 		
 		$("#List").attr("class", "section places ");
 		$("#View").attr("class", "section places HIDDEN");
@@ -339,7 +338,7 @@ $(document).ready(function(){
 	$(function(){
 
 	// 모달 안에 삭제 버튼 이벤트
-	$(document).on("click", "#modal_deleteBtn", function() {
+	$(document).on('click', '#modal_deleteBtn', function() {
 // 		alert("modal 삭제");
 		$(document).$("#modal_form").submit();
 	});
@@ -365,10 +364,11 @@ $(document).ready(function(){
 	
 	// 댓글 모달창의 전역 변수
 	var replyModal = $("#replyModal");
+	alert("replyModal=" + replyModal);
 	
 // 	// 댓글 등록 버튼 이벤트 처리 (등록 폼) : 댓글의 모달 창 정보 조정과 보이기 ------------------------
-	$(document).on("click", "#writeReplyBtn", function(){
-// 		alert("댓글등록");
+	$(document).on('click', '#writeReplyBtn', function(){
+ 		alert("댓글등록");
  
 		// 댓글 모달 창의 제목 바꾸기
 		$("#replyModalTitle").text("댓글 쓰기");
@@ -377,7 +377,7 @@ $(document).ready(function(){
 		$("#replyModal .form-group").show();
 // 		$("#replyRnoDiv").hide();
 		$("#replyNoDiv, #replyRnoDiv").hide();    
-		
+			
 		// 작업할 버튼을 보이게 안보이게
 		var footer = $("#replyModal .modal-footer");
 		footer.find("button").show();
@@ -387,10 +387,12 @@ $(document).ready(function(){
 		replyModal.find("textarea").not("#replyshopNoDiv, #replyWriter").val(""); 
 		
 		replyModal.modal("show");
+		alert("replyModal=" + replyModal);
+		
 	});
 	
 	// 모달 댓글 등록 버튼에 대한 이벤트 처리 - 입력된 데이터를 가져와서 JSON 데이터 만들기 - 서버에 전송
-	$(document).on("click", "#replyModalWriteBtn", function(){
+	$(document).on('click', '#replyModalWriteBtn', function(){
 		var reply = {};
 		
 // 		reply.replyNo = $("#replyNo").val();
@@ -414,7 +416,8 @@ $(document).ready(function(){
 	
 	// 댓글 수정 폼 : 모달 창 열기 (replyModal) ----------------------------------------------
 	// 댓글번호, 내용, 작성자, 비밀번호
-	$(".chat").on("click",".replyUpdateBtn",function(){
+//	$(".chat").on("click",".replyUpdateBtn",function(){
+	$(document).on('click','.replyUpdateBtn',function(){
 // 		alert("댓글 수정");
 		// 모달창 제목 바꾸기
 		$("#replyModalTitle").text("댓글 수정하기");
@@ -452,7 +455,7 @@ $(document).ready(function(){
 	});
 	
 	// 모달창 수정 버튼 이벤트 - 수정 처리 -----------------------------------------------
-	$(document).on("click", "#replyModalUpdateBtn", function(){
+	$(document).on('lick', '#replyModalUpdateBtn', function(){
 // 		alert("수정 처리");
 		// 데이터 수집
 		var reply = {};
@@ -492,7 +495,8 @@ $(document).ready(function(){
 	
 	
 	// 댓글 삭제 폼 : 모달 (replyModal) ----------------------------------------------
-	$(".chat").on("click", ".replyDeleteBtn", function(){
+//	$(".chat").on("click", ".replyDeleteBtn", function(){
+	$(document).on('click', '.replyDeleteBtn', function(){
 // 		alert("댓글 삭제");
 		// 모달창 제목 바꾸기
 		$("#replyModalTitle").text("댓글 삭제하기");
@@ -553,7 +557,8 @@ $(document).ready(function(){
 	
 	// 댓글의 페이지 번호 클릭 이벤트 - 태그가 나중에 나온다. 그래서 on()
 	// $(원래 있었던 객체 선택).on(이벤트, 새로 만들어진 태그, 실행함수) -> 이벤트의 전달
-	$("#reply_nav").on("click", ".reply_nav_li", function(){
+//	$("#reply_nav").on("click", ".reply_nav_li", function(){
+	$(document).on('click', '.reply_nav_li', function(){
 // 			alert("댓글 페이지네이션 클릭");
 			// this => li / move 클래스 li-a에 작성해 놨다.
 			if($(this).find("a").hasClass("move")){
