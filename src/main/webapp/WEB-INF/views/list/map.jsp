@@ -200,8 +200,8 @@
 							class="cnt"></em></span>
 						<ol id="info.search.place.sort" class="Sort"></ol>
 					</div>
-					<ul id="showView" class="placelist"></ul>
-					<ul id="showList" class="placelist"></ul>
+					<div id="showView" class="placelist"></div>
+					<div id="showList" class="placelist"></div>
 				</div>
 				<div>
 					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"
