@@ -187,11 +187,11 @@
 		</dependency>
 
 		<!-- XML 데이터 처리 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.9.6</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.dataformat</groupId> -->
+<!-- 			<artifactId>jackson-dataformat-xml</artifactId> -->
+<!-- 			<version>2.9.6</version> -->
+<!-- 		</dependency> -->
 
 		<!-- 파일 업로드 -->
 		<dependency>
