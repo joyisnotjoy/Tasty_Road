@@ -1,9 +1,11 @@
 package com.tasty.member.service;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.tasty.member.mapper.MemberMapper;
 import com.tasty.member.vo.LoginVO;
 import com.tasty.member.vo.MemberVO;
+import com.tasty.member.vo.shopMemberVO;
+import com.webjjang.util.PageObject;
 
 import lombok.extern.log4j.Log4j;
 
@@ -90,6 +94,13 @@ public class MemberServiceImpl implements MemberService {
 	public void check_email(String email, HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
 		out.println(mapper.check_email(email));
+		out.close();
+	}
+	
+	@Override
+	public void check_tel(String tel, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(mapper.check_tel(tel));
 		out.close();
 	}
 
@@ -207,10 +218,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO myPage(LoginVO vo) throws Exception {
-
-//		session.getAttribute("login");
 		
 		return mapper.myPage(vo);
+	}
+
+	@Override
+	public shopMemberVO myShopPage(LoginVO vo) throws Exception {
+		
+		return mapper.myShopPage(vo);
 	}
 
 	@Override
@@ -218,6 +233,84 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mapper.memberUpdate(vo);
 	}
+	
+	@Override
+	public int shopUpdate(shopMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.shopUpdate(vo);
+	}
+	
+	@Override
+	public int updateFile(shopMemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.updateFile(vo);
+	}
+	
+	@Override
+	public int memberWithdraw(MemberVO vo, HttpServletResponse response, HttpSession session) throws Exception {
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		MemberVO data = mapper.checkPw(vo);
+		
+		log.info("memberWithdraw().vo : " + vo);
+		log.info("memberWithdraw().data : " + data);
+		
+		if(data == null) {
+			out.println("<script>");
+			out.println("alert('비밀번호가 다릅니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		}else {
+			//탈퇴하면 로그아웃 시킨다.
+			session.removeAttribute("login");
+		}
+		return mapper.memberWithdraw(vo);
+	}
+	
+	
+	
+	
+	
+	/* 관리자 */
+	@Override
+	public List<MemberVO> memberList(PageObject pageObject) throws Exception {
+
+		pageObject.setTotalRow(mapper.getTotalRow(pageObject));
+		log.info("pageObject : " + pageObject);
+		
+		return mapper.memberList(pageObject);
+	}
+
+	@Override
+	public int gradeModify(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.gradeModify(vo);
+	}
+
+	@Override
+	public MemberVO view(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.view(id);
+	}
+	
+	@Override
+	public int shopReg(shopMemberVO vo) throws Exception {
+		return mapper.shopReg(vo);
+	}
+
+	@Override
+	public List<shopMemberVO> getMap(shopMemberVO vo) throws Exception {
+		
+		log.info("찍어보좌 impl : " + vo);
+		// TODO Auto-generated method stub
+		return mapper.getMap(vo);
+	}
+
+
+
 
 
 

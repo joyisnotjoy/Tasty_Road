@@ -41,10 +41,25 @@ public class BookmarkServiceImpl implements BookmarkService{
 	}
 
 	@Override
-	public void unlike(bookmarkVO vo) throws Exception {
+	public int unlike(bookmarkVO vo) throws Exception { 
 		// TODO Auto-generated method stub
 		mapper.unlike(vo);
 		log.info(vo);
+		return mapper.unlike(vo);
+	}
+	@Override
+	public int increase(bookmarkVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.increase(vo);
+		log.info(vo);
+		return mapper.increase(vo);
+	}
+	@Override
+	public int decrease(bookmarkVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		mapper.decrease(vo);
+		log.info(vo);
+		return mapper.decrease(vo);
 	}
 
 }

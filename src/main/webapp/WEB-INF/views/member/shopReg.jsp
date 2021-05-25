@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>기업 회원 추가</title>
 
 <link href="/resources/css/new_main.css" rel="stylesheet" />
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 
 <script type="text/javascript">
+
+//허용되는 이미지 파일 형식들
+var imageExt = ["JPG", "JPEG", "GIF", "PNG"];
 
 	// 다음 주소 api를 위한 코드
 	function execPostCode() {
@@ -51,31 +52,52 @@
 				$("[id=addr1]").val(data.zonecode);
 				$("[id=addr2]").val(fullRoadAddr);
 
-				/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
-				document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
-				document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
 			}
 		}).open();
 	}
 	
-	// 비밀번호 확인
 	$(function(){
-		$("#joinForm").submit(function(){
-			if($("#pw").val() !== $("#pw2").val()){
-				alert("비밀번호가 다릅니다.");
-				$("#pw").val("").focus();
-				$("#pw2").val("");
-				return false;
-			}else if ($("#pw").val().length < 8) {
-				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-				$("#pw").val("").focus();
-				return false;
-			}else if($.trim($("#pw").val()) !== $("#pw").val() || $.trim($("#email").val()) !== $("#email").val() || $.trim($("#id").val()) !== $("#id").val()){
-				alert("공백은 입력이 불가능합니다.");
+		// 전달할 때의 데이터 찍기
+		$("#shopReg").submit(function(){
+			// alert("submit()");
+			// alert($("#title").val());
+			// alert($("#content").val());
+			// C:\fakepath\flower01.jpg
+			// alert($("#imageFile").val());
+			// 첨부파일이 이미지 파일인지 알아내는 프로그램 작성 -> 확장자 : 파일명의 마지막 "." 이후의 글자
+			var fileName = $("#imageFile").val();
+			// substring(시작[, 끝]) - 부분 문자열 잘라내기
+			// lastIndexOf(찾는 문자열) - 뒤에서 부터 찾는 문자열의 위치. 찾는 문자열이 없으면 -1이 된다.
+			// toUpperCase() -> 모든 영문자를 대문자로 만들어 준다. <--> toLowerCase()
+			var ext = fileName.substring(fileName.lastIndexOf(".")+1).toUpperCase();
+			// alert(ext);
+			
+			// 이미지 확장자인지 확인하는 반복문
+			var checkExt = false; // 지원하지 않는 확장자를 기본으로 셋팅
+			for(i = 0; i < imageExt.length; i++){
+				if(ext == imageExt[i]){
+					checkExt = true; // 지원하는 확장자로 바꾼다.
+					break;
+				}
+			}
+			// 지원하지 않는 이미지 파일 선택경의 처리
+			if(!checkExt){
+				alert("지원하지 않는 이미지 파일입니다.");
+				$("#imageFile").focus();
 				return false;
 			}
+			
+			// submit을 취소
+			// return false;
 		});
-	});
+		
+		
+		// 취소 버튼을 클릭하면 이전 페이지로 이동
+		$("#cancelBtn").click(function(){
+			history.back();
+		});
+	
+
 </script>
 
 
@@ -94,7 +116,7 @@
 			<!-- content-->
 			<div id="content">
 
-	<form action="memberUpdate.do" id="memberUpdate" method="post">
+	<form action="shopReg.do" id="shopReg" method="post" enctype="multipart/form-data">
 
 
 				<div>
@@ -108,76 +130,29 @@
 
 				<div>
 					<h3 class="join_title">
-						<label for="pswd1">비밀번호</label>
+						<label for="name">가게명</label>
 					</h3>
-					<span class="box int_pass"> <input type="password" id="pw1"
-						name="pw" class="int" maxlength="20" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" required="required"> <span id="alertTxt">사용불가</span>
-						<img src="/resources/image/m_icon_pass.png" id="pswd1_img1"
-						class="pswdImg" >
+					<span class="box int_name"> <input type="text" id="name"
+						name="shopName" class="int" maxlength="20" required="required">
 					</span> 
-					<span class="error_next_box"></span>
 				</div>
-
-				<div>
-					<h3 class="join_title">
-						<label for="pswd2">비밀번호 재확인</label>
-					</h3>
-					<span class="box int_pass_check"> <input type="password"
-						id="pw2" name="pw2" class="int" maxlength="20" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$" required="required"> <img
-						src="/resources/image/m_icon_check_disable.png" id="pswd2_img1"
-						class="pswdImg">
-					</span> 
-					<span class="error_next_box"></span>
-				</div>
-
-				<div>
-					<h3 class="join_title">
-						<label for="name">이름</label>
-					</h3>
-					<span class="box int_name" style="background:#eee;"> <input type="text" id="name"
-						name="name" class="int" maxlength="20" required="required" value="${vo.name }" readonly style="background:#eee;">
-					</span> 
-					<span class="error_next_box"></span>
-				</div>
-				
 				
 				<div>
 					<h3 class="join_title">
-						<label for="birth">생년월일</label>
+						<label for="phoneNo">사업자등록번호</label>
 					</h3>
-					<span class="box int_birth" style="background:#eee;"> <fmt:formatDate value="${vo.birth }"/>
-<%-- 					<input id="birth" type="text" value="${vo.birth }" --%>
-<!-- 						name="birth" class="int" maxlength="20" required="required" style="background:#eee;" readonly> -->
+					<span class="box int_mobile"> <input type="text" id="tel" name="shopNo"
+						class="int" maxlength="16" placeholder="- 없이 숫자만 입력해주세요." required="required">
 					</span> 
-					<span class="error_next_box"></span>
 				</div>
 				
-				
-				<div>
-					<h3 class="join_title">
-						<label for="gender">성별</label>
-					</h3>
-					<span class="box gender_code" style="background:#eee;"> <input type="text" id="gender"
-						name="gender" class="int" value="${vo.gender }" readonly style="background:#eee;">
-					</span> 
-					<span class="error_next_box">필수 정보입니다.</span>
-				</div>
-				<div>
-					<h3 class="join_title">
-						<label for="email">이메일</label>
-					</h3>
-					<span class="box int_email" style="background:#eee;"> <input type="text" id="email" name="email"
-						class="int" maxlength="100" pattern = [a-z0-9]{2,}@[a-z0-9-]{2,}\.[a-z0-9]{2,} required="required" value="${vo.email }" readonly style="background:#eee;">
-					</span> 
-				</div>
 				<div>
 					<h3 class="join_title">
 						<label for="phoneNo">휴대전화</label>
 					</h3>
-					<span class="box int_mobile"> <input type="tel" id="mobile" name="tel"
-						class="int" maxlength="16" placeholder="- 없이 숫자만 입력해주세요." pattern="([01]{2})([01679]{1})([0-9]{3,4})([0-9]{4})" required="required" value="${vo.tel }">
+					<span class="box int_mobile"> <input type="text" id="tel" name="tel"
+						class="int" maxlength="16" placeholder="- 없이 숫자만 입력해주세요." pattern="([01]{2})([01679]{1})([0-9]{3,4})([0-9]{4})" required="required">
 					</span> 
-					<span class="error_next_box"></span>
 				</div>
 
 				<div>
@@ -194,17 +169,28 @@
 				</div>
 				<div>
 					<span class="postbox int_mobile"><input class="int" placeholder="도로명 주소"
-						name="address" id="addr2" type="text" readonly="readonly"  style="background:#eee;" value="${vo.address }" /> </span>
+						name="address" id="addr2" type="text" readonly="readonly"  style="background:#eee;" /> </span>
 				</div>
 				<div>
 					<span class="postboxtext int_mobile"> <input class="int" placeholder="상세주소" name="address"
 						id="addr3" type="text" /> </span>
 				</div>
+				
+				
+				<div class="form-group">
+					<label for="content">내용</label>
+					<textarea name="content" id="content" class="form-control" rows="5" ></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="imageFile">대표 이미지 (JPG, JPEG, GIF, PNG - 이미지 지원)</label>
+					<input name="multipartFile" id="imageFile" type="file" class="form-control" />
+				</div>
 
 
 				<div class="btn_area">
 					<button id="btnJoin">
-						<span>수정하기</span>
+						<span>등록하기</span>
 					</button>
 				</div>
 	</form>
@@ -214,6 +200,5 @@
 
 		</div>
 		<!-- wrapper -->
-<script src="/js/main.js"></script>
 </body>
 </html>

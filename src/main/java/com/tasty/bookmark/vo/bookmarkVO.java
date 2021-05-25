@@ -11,5 +11,7 @@ public class bookmarkVO {
 	private String id;
 	private Date writeDate;
 	private String  shopNo;
+		// TODO Auto-generated method stub
+		
+	}
 	
-}

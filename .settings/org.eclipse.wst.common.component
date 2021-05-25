@@ -2,6 +2,10 @@
         	
     
     <wb-module deploy-name="controller-1.0.0-BUILD-SNAPSHOT">
+<<<<<<< HEAD
+=======
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+>>>>>>> branch 'develop' of https://github.com/KimMinSik0915/Tasty_Road.git
                 		
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
