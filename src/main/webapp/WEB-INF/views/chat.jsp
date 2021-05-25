@@ -141,12 +141,29 @@
    			position: relative;
    			bottom: 0;
 		}
+		.odate3 {
+			font-size: 3px;
+			float: left;
+   			padding-left: 3px;
+   			color: grey;
+			display: inline-block; 
+   			position: relative;
+   			bottom: 6px;
+  			margin-left: 320px;
+		}
 		.chating .others{
 			color: black;
 			text-align: left;
 			font-weight: bolder;
 			font-size: 11px;
 			padding-top: 1px;
+		}
+		.chating .others3{
+		    color: black;
+		    text-align: center;
+		    font-weight: bolder;
+		    font-size: 11px;
+		    padding-top: 1px;
 		}
 		.chating .others2{
 			word-break:break-all;
@@ -232,10 +249,11 @@
         .msgImgO{
 			width: 375px;
 			height: 275px;
+			margin-left: 187px;
 		}
-		.imgO{
-			float: left;
-		}
+/* 		.imgO{ */
+/* 			float: left; */
+/* 		} */
 		
 		input.fileUpload {
         	background: url( "/Tasty_Road/src/main/webapp/WEB-INF/images/3927-200.png" ) no-repeat;
@@ -453,24 +471,24 @@
 					console.warn("unknown type!")
 				}
 			}else{
-				alert(msg);
+// 				alert(msg);
 					//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
 					var url = URL.createObjectURL(new Blob([msg]));
 					var curDate1 = new Date();
 					var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
 		           		+ curDate1.getHours() + ":" + curDate1.getMinutes();
 					if(sessionId == $("#sessionId").val()){
-					$("#chating").append("<p class='me'>" + document.getElementById('userName').value + "</p>");	
+					$("#chating").append("<p class='me'>" + document.getElementById('sessionId').value + "</p>");	
 						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
 							url + "></div><div class='clearBoth'></div>");
 						$("#chating").append("<li class='mdate'>" + curTime1 + "</li>");	
 						$("#chating").append("<div class='clear'></div>");	
 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 					}else{
-					$("#chating").append("<p class='others'>" + document.getElementById('userName').value + "</p>");	
+					$("#chating").append("<p class='others3'>" + '이미지' + "</p>");	
 						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
 							url + "></div><div class='clearBoth'></div>");
-						$("#chating").append("<li class='odate'>" + curTime1 + "</li>");	
+						$("#chating").append("<li class='odate3'>" + curTime1 + "</li>");	
 						$("#chating").append("<div class='clear'></div>");	
 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 						
@@ -546,7 +564,6 @@
 			ws.send(arrayBuffer); //파일 소켓 전송
 		};
 		fileReader.readAsArrayBuffer(file);
-		alert(result);
 	}
 </script>
 <body>
@@ -583,7 +600,7 @@
 					<th class="file"><br/></th>
 					<th><br/><input type="file" id="fileUpload">
 					<label for='fileUpload'>이미지 선택</label></th>
-					<th class="imgT">이미지 업로드는 50MB까지 허용합니다</th>
+					<th class="imgT">이미지 업로드는 50MB 이하만 가능합니다.</th>
 					<th><br/><button onclick="fileSend()" id="sendFileBtn" class="buttonF">업로드</button></th>
 				</tr>
 			</table>
