@@ -364,7 +364,7 @@ $(document).ready(function(){
 	
 	// 댓글 모달창의 전역 변수
 	var replyModal = $("#replyModal");
-	alert("replyModal=" + replyModal);
+//	alert("replyModal=" + replyModal);
 	
 // 	// 댓글 등록 버튼 이벤트 처리 (등록 폼) : 댓글의 모달 창 정보 조정과 보이기 ------------------------
 	$(document).on('click', '#writeReplyBtn', function(){
