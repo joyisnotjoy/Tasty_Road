@@ -133,5 +133,10 @@
 <!-- 		insert into shopMember(id, shopname, shopNo, address, tel) -->
 <!--         values('test4', '가게명', '123-45-67891', '경기도 양주시', '031-123-4567'); -->
 	</insert>
+	
+	<!-- 지도 -->
+	<select id="getMap" resultType="com.tasty.member.vo.shopMemberVO">
+		select shopName, address from shopMember
+	</select>
 
 </mapper>

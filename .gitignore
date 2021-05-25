@@ -14,7 +14,9 @@ local.properties
 .loadpath
 .recommenders
 .target/
-
+pom.xml
+pom.properties
+.properties
 
 # ignore properties file
 config.properties

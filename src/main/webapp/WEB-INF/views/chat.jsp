@@ -440,7 +440,7 @@
 // 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 						
 // 					}
-			} 
+			}  
 			   
 		} //onMessage 끝
 		

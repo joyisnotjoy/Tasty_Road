@@ -1,5 +1,8 @@
 package com.tasty.bookmark.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tasty.bookmark.service.BookmarkService;
 import com.tasty.bookmark.vo.bookmarkVO;
 import com.tasty.member.vo.LoginVO;
-import com.tasty.member.vo.MemberVO;
 
 import lombok.extern.log4j.Log4j;
-
 @Controller
 @RequestMapping("/bm")//임시
 @Log4j
@@ -63,7 +64,12 @@ public class BookmarkController {
 	
 		}
 	
-	
+	@GetMapping(value = "/wait.do", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<bookmarkVO> wait(String shopNo) throws Exception {
+
+		
+		return new ResponseEntity<bookmarkVO>(service.bm(shopNo), HttpStatus.OK);
+	}
 	// 2. 맛집 북마크 삭제 / delete.do - get
 //	@DeleteMapping(value = "/unlike.do",
 //			consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},

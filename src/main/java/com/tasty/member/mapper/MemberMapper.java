@@ -56,6 +56,8 @@ public interface MemberMapper {
 	
 	public int memberWithdraw(MemberVO vo);
 	
+	
+	
 	/* 관리자 */
 	public List<MemberVO> memberList(PageObject pageObject);
 	
@@ -66,5 +68,9 @@ public interface MemberMapper {
 	public MemberVO view(String id);
 	
 	public int shopReg(shopMemberVO vo);
-
+	
+	
+	
+	/* 지도 */
+	public List<shopMemberVO> getMap(shopMemberVO vo);
 }
