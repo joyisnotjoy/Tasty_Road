@@ -14,10 +14,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/bookmark.js"></script>
+<link href="/resources/css/bookmark.css" rel="stylesheet"/>
+</head>
 <body>
  <div class="container">
   <h1>게시판 글 보기</h1>
-  <button type="button" id="like" class="like">like</button><br>
+  
+  <button type="button" id="like" class="like-button">like</button><br>
+<!--   <button class="like-button"></button><br> -->
+  <button type="button" class="pp-bookmark-btn btn btn-default btn-lg pull-right" data-context="investor" data-context-action="view" data-context-id="7">
+</button>
+
+<div id="log"></div>
   <ul class="list-group">
    <li class="list-group-item row">
     <div class="col-md-2 title_label">가게명</div>

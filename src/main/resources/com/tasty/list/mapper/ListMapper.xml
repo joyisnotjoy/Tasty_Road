@@ -81,7 +81,7 @@
 	
 	<!-- 2. 맛집 보기 -->
 	<select id="view" resultType="com.tasty.member.vo.shopMemberVO">
-		select shopName, shopNo, address, tel, content, now, total, wait, id
+		select shopName, shopNo, address, tel, content, now, total, wait, id, image
 		from shopMember
 		where shopNo = #{shopNo}
 	</select>

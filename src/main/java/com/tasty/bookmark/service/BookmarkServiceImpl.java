@@ -44,4 +44,10 @@ public class BookmarkServiceImpl implements BookmarkService{
 		return mapper.unlike(vo);
 	}
 
+	@Override
+	public bookmarkVO list(bookmarkVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return (bookmarkVO) mapper.list(vo);
+	}
+
 }

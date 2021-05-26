@@ -195,13 +195,13 @@ $(function(){
 					</div>
 					<ul id="shopList" class="placelist">
 						<c:if test="${empty list }">
-							데이터 없는 경우의 표시
-							데이터가 존재하지 않는 경우
+<!-- 							데이터 없는 경우의 표시 -->
+<!-- 							데이터가 존재하지 않는 경우 -->
 							<li class="list-group-item">데이터가 존재하지 않습니다.</li>
 						</c:if>
 
 						<c:if test="${!empty list }">
-							데이터가 있는 경우의 표시
+<!-- 							데이터가 있는 경우의 표시 -->
 							<c:forEach items="${list }" var="vo">
 								<li class="list-group-item dataRow">
 									<div>가게명: ${vo.shopName } / ${vo.content }</div> 주소:
