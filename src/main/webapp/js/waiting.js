@@ -82,9 +82,9 @@
       
       waitService.wait({shopNo : shopNo}, function(data) {
          
-         //alert(data);
+         // alert(data);
          
-        // alert(JSON.stringify(data));
+         // alert(JSON.stringify(data));
          
          var str = "";
          var waitingViewBtn = "";
@@ -176,46 +176,29 @@
 	            
 		
 		
-//	            	for(var y = 1; y <= waiting.total; y++) {
-//		
-//		            	// DIV 추가 [1 ~ 10]
-//			            str += "<div class='col-md-3' id='visualDiv" + y + "' style='width: 1.5em; height: 1.5em; background: #eee; display: inline; margin: 0.75em;'>";   
-//			            str += y;
-//			            str += "</div>";
-//			            
-//			            if(y % 4 == 0) {
-//				
-//							str += "<br>";
-//				
-//						}
-//			            
-//			            // DIV 추가 끝
-//		
-//					}
-					
-					for(var i = 1; i <= waiting.now; i++) {
+	            	for(var i = 1; i <= waiting.total; i++) {
+		
+						var background = "#eee";
 						
-						for(var y = waiting.total; y >= 0; y--) {
-							
-				            str += "<div class='col-md-3' id='visualDiv" + y + "' style='width: 1.5em; height: 1.5em; background: #eee; display: inline; margin: 0.75em;'>";   
-				            str += y;
-				            str += "</div>";
-				            
-				            if(y % 4 == 0) {
-					
-								str += "<br>";
-//				
-							}
+						if(i <= waiting.now) {
+						
+							background = "#ffe6e6";
 							
 						}
 						
-						var div = $("#visualDiv"[i])
-						
-						div.attr("style", "red");
-							
+		            	// DIV 추가 [1 ~ 10]
+			            str += "<div class='col-md-3' id='visualDiv" + i + "' style='background: "+ background+"; display: inline; margin: 0.75em;'>";   
+			            str += i;
+			            str += "</div>";
+			            // DIV 추가 끝
+			            
+			            if(i % 4 == 0) {
+				
+							str += "<br>";
+				
+						}
+			            
 					}
-					
-					
 					
 	            str += "</div>";
 	            str += "<div class='form-group col-12' id='totalTableDiv'>";
@@ -238,9 +221,8 @@
          
          var myId = "<c:out value='${login.id}'/>";
          
-         $("#waitingView").append(waitingViewBtn);
+         $("#waitingView").html(waitingViewBtn);
          $("article").append(str);
-         $("#waitingView").append(myId);
          
         // $(".waitModal").html(str);
          
@@ -374,7 +356,9 @@
 	
 	$(document).on("click", "#waitingViewBtn", function() {
 		
-		alert("click");
+		// alert("click");
+		
+		showWait();
 		
 		$("#waitingDivModal").modal();
 		 
