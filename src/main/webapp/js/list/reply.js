@@ -124,6 +124,7 @@ $(document).ready(function(){
 					str += "</li>";
 					str += "</ul>";
 					str += "<button class='btn btn-default' id='list' class='list' style='float: left;'>리스트</button>";
+					str += "<br/>"
 					
 	// 댓글 시작 부분
 	str += "<div class='row' style='margin: 20px -30px;'>";
@@ -132,6 +133,8 @@ $(document).ready(function(){
 	str += "<div class='panel-heading'>";
 	str += "<i class='fa fa-comments fa-fw'></i> Reply <br/>";
 	str += "<button class='btn btn-primary btn-xs pull-right' id='writeReplyBtn'>New Reply</button>";
+//	str += "<button class='button reply_btn upButton' id='reply_btn' style='margin-top: 5px;'>수정</button>"; 
+
 	str += "</div>";
 	str += "<div class='panel-body'>";
 	str += "<ul class='chat'>";
@@ -143,7 +146,7 @@ $(document).ready(function(){
 	str += "</div>";
 	str += "<p>Good job!</p>";
 	str += "<div class='text-right'>";
-	str += "<button class='btn btn-default btn-xs replyUpdateBtn'>수정</button>";
+	str += "<button class='button reply_btn upButton' id='reply_btn'>수정</button>";
 	str += "<button class='btn btn-default btn-xs replyDeleteBtn'>삭제</button>";
 	str += "</div>";
 	str += "</div>";
@@ -152,6 +155,17 @@ $(document).ready(function(){
 	str += "</div>";
 	// 댓글 panel-body 끝 , 
 	// 댓글 panel 시작
+	str += "<form action='replyWrite.do' method='post' id='replyForm'>";
+	str +=  "<input type='hidden' name='no' id='no' value="+ data.replyNo + " class='chNo'>"; 
+	str +=  "<input type='hidden' name='rno' id='rno' value='' class='chRno'>"; 
+	str += "<input type='hidden' name='id' id='id' value=" + data.id + ">" ;
+	str += "<textarea rows='5' cols='30' class='w3-input w3-border form-control chData' placeholder='댓글 작성' name='rcontent' id='rcontent'></textarea>";
+	str += "<input type='hidden' class='button Ureply_btn' name='Ureply_btn' id='Ureply_btn' value='수정'>";
+	str +=  "</form>";
+	
+	
+	
+	str += "<button class='button reply_btn wrButton' id='reply_btn' style='margin-top: 5px;'>등록</button>";
 	str += "<div class='panel-footer'>";
 	str += "<ul class='pagination' id='reply_nav'>";
 	str += "<li><a href=''>1</a></li>";
@@ -368,7 +382,7 @@ $(document).ready(function(){
 	
 // 	// 댓글 등록 버튼 이벤트 처리 (등록 폼) : 댓글의 모달 창 정보 조정과 보이기 ------------------------
 	$(document).on('click', '#writeReplyBtn', function(){
- 		alert("댓글등록");
+// 		alert("댓글등록");
  
 		// 댓글 모달 창의 제목 바꾸기
 		$("#replyModalTitle").text("댓글 쓰기");
@@ -387,7 +401,7 @@ $(document).ready(function(){
 		replyModal.find("textarea").not("#replyshopNoDiv, #replyWriter").val(""); 
 		
 		replyModal.modal("show");
-		alert("replyModal=" + replyModal);
+//		alert("replyModal=" + replyModal);
 		
 	});
 	
@@ -577,5 +591,63 @@ $(document).ready(function(){
 // view 
 
 
+
+// 댓글 스크립트 
+	// ===========================================================================================================================
+	 //수정버튼 숨기기
+	   $(".upButton").hide();
+	   
+	   //수정버튼 클릭하면 수정
+	   $(document).on('click', '.upButton', function name(){
+	      location = "replyUpdate.do?page=1&perPageNum=10&no=${vo.no}";      
+	   });
+	   
+	   //글 삭제 시 삭제 여부를 확인
+       $(document).on('click', '#deleteBtn', function(){
+	      if(!confirm("게시글을 삭제하시겠습니까?")) return false; //a tag 이동 취소
+	   });
+	   
+	   //댓글 작성
+	    $(document).on('click', '.wrButton', function(){
+	      $("#replyForm").attr("action", "replyWrite.do?page=1&perPageNum=10&no=${vo.no}");
+	   });
+	   
+	   //댓글 수정처리
+	    $(document).on('click', '.replyUpdateBtn', function(){
+	       //댓글 -> 댓글 수정 
+	       
+	       var dataRow = $(this).closest(".dataRow");
+	       //alert(dataRow);
+	       
+	      var no = $(".table").find(".no").text();
+	       
+	      var rno = parseInt(dataRow.find(".rno").text());
+	      $(".dataRow").val(rno);
+//	       alert(rno);
+	      
+	      $(".chRno").val(rno);
+	      
+	      $(".wrButton").hide();
+	      $(".upButton").show();
+	      
+	      var rcontent = dataRow.find(".rcontent").text();
+	      
+	      $(".chData").val(rcontent);
+	             
+	      //replyForm에 있는 action의 속성을 뒤의 걸로 변경해라
+	      //뒤에 no는 ${vo.no}로 해줘야 오류가 나지 않는다. 어느 no인지 찾지 못해서 생기는 오류인 거 같다
+	       $(".dataRow").hide();
+	      var t = $("#replyForm").attr("action", "replyUpdate.do?page=1&perPageNum=10&no=${vo.no }");
+//	       alert(t);
+	   });
+
+	   //댓글 삭제
+	   $(document).on('click', '#replyDeleteBtn', function(){
+	      if(!confirm("댓글을 삭제하시겠습니까?")) return false;
+	   });
+		
+		
+		
+	// ===========================================================================================================================
 	
 }); // $(documnet).ready(function() 첫줄의 끝

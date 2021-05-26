@@ -39,6 +39,7 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/reply.js"></script>
+<script type="text/javascript" src="/js/waiting.js"></script>
 <script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
 <title>될 지도 안될 지도</title>
@@ -200,8 +201,8 @@
 							class="cnt"></em></span>
 						<ol id="info.search.place.sort" class="Sort"></ol>
 					</div>
-					<ul id="showView" class="placelist"></ul>
-					<ul id="showList" class="placelist"></ul>
+					<div id="showView" class="placelist"></div>
+					<div id="showList" class="placelist"></div>
 				</div>
 				<div>
 					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"
