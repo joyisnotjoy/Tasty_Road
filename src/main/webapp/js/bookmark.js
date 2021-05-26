@@ -66,7 +66,7 @@ var bookmarkService = (
 
 				"/bookmark/view.do?shopNo=" + shopNo + "&id=" + id,
 				function(data) {
-					alert(data);
+//					alert(data);
 					if (callback) {
 						callback(data);
 					}
@@ -99,7 +99,7 @@ var bookmarkService = (
 		//좋아요 처리 함수
 		function bookmark(like, callback, error) {
 
-			console.log("bookmark data - " + JSON.stringify(like));
+//			console.log("bookmark data - " + JSON.stringify(like));
 			//ajax 이용해서 데이터를 서버에 보낸다.
 			$.ajax({
 				//전송방법의 타입
@@ -213,10 +213,10 @@ $(function() {
 		// 		reply.replyNo = $("#replyNo").val();
 		unlike.shopNo = shopNo;
 		unlike.id = id;
-		alert(JSON.stringify(unlike));
+//		alert(JSON.stringify(unlike));
 		bookmarkService.deleteBookmark(unlike, function(result, status) {
 			console.log("result=" + result + ",status =" + status);
-			alert("result=" + result + ",status =" + status);
+//			alert("result=" + result + ",status =" + status);
 
 			if (status == "notmodified") {
 				alert("즐겨찾기 취소 실패. 다시 시도해주세요.");
@@ -242,15 +242,15 @@ $(function() {
 
 		bookmarkService.bookmark(like, function(result, status) {
 
-			alert("result=" + result + ", status=" + status);
+//			alert("result=" + result + ", status=" + status);
 
 			if (status == "notmodified") {
 
-				alert("failed");
+				alert("즐겨찾기 등록 실패");
 
 			} else {
 
-				alert("edited.");
+				alert("즐겨찾기가 되었습니다.");
 				// 버튼의 정보 바꾸기
 				$("#like").removeClass();
 				$("#like").addClass("liked");
