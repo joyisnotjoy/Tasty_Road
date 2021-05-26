@@ -6,18 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" href="#">
-<meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 <title>Chatting Room</title>
-<!-- <link rel="stylesheet" href="/css/chatRoomView.css"> -->
 
-<!-- Awesome 4 icons lib : class="fa~ -->
-<link rel="stylesheet"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- 기본적으로 사용되는 util js : reply.js 위에 써줘야 함 -->
+<!-- 기본적으로 사용되는 util js : chat.js 위에 써줘야 함 -->
 <script type="text/javascript" src="/js/util.js"></script>
 
 <!-- chat에 해당하는 Model js포함 -->
@@ -27,7 +20,7 @@
 h5{
 	text-align: center;
 	position:relative;
-	top:-360px;
+	top:-200px;
 }
 
 .chat{
@@ -128,14 +121,14 @@ $(function() {
 
       //전역 변수 선언 - $(function(){}); : 이 안에 선언된 함수에서는 공통으로 사용할 수 있다. 
       var no = ${vo.chatNo};
-      var a = "${vo.id1}";
-      var b = "${login.id}";
-      var c = "${vo.id2}";
+      var id1 = "${vo.id1}";
+      var loginId = "${login.id}";
+      var id2 = "${vo.id2}";
 
       console.log(" * JS chat List no : " + no + " * ");
-      console.log(" * JS chat List id1 : " + a + " * ");
-      console.log(" * JS chat List id2 : " + c + " * ");
-      console.log(" * JS chat List login.id : " + b + " * ");
+      console.log(" * JS chat List id1 : " + id1 + " * ");
+      console.log(" * JS chat List id2 : " + id2 + " * ");
+      console.log(" * JS chat List login.id : " + loginId + " * ");
 
       var chatServiceUL = $(".chat");
 
@@ -143,6 +136,7 @@ $(function() {
       showList();
 
       function showList() {
+//     	  alert(chatService);
          chatService.list({no : no},
             function(data) {
             //alert(data);
@@ -154,22 +148,22 @@ $(function() {
                } else {
                   for (var i = 0; i < list.length; i++) {
                      console.log(list[i]);
-                     if (list[i].id == b) {
+                     if (list[i].id == loginId) {
                         str += "<div>";
-                        str += "<div class='row' id='myF'>";
+                        str += "<div class='row'>";
                         str += "<div class='col-sm-4 pull-right' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
-                        str += "<label id='user'><i class='fas fa-user-circle'> "+ list[i].id+ " : <br></label></i>";
-                           str += "   <pre class='rightChatView'>"+ list[i].content+ "<br>"+ chatService.displayTime(list[i].writeDate)+ "</pre>";
+                        str += "<label id='user'><i class='fas fa-user-circle'> " + list[i].id + " : <br></label></i>";
+                           str += "<pre class='rightChatView'>" + list[i].content + "<br>" + chatService.displyTime(list[i].writeDate) + "</pre>";
                            str += "</div>";
                            str += "</div>";
                            str += "</div>";
 
                      } else {
                         str += "<div>";
-                        str += "<div class='row' id='myF'>";
+                        str += "<div class='row'>";
                         str += "<div class='col-sm-4 pull-left' id='chatMessageArea' data-chatNo='" + list[i].chatNo + "'>";
-                        str += "<label id='user'><i class='far fa-user-circle'> "+ list[i].id+ " : <br></label></i> ";
-                           str += "<pre class='leftChatView'>"+ list[i].content+ "<br>"+ chatService.displayTime(list[i].writeDate)+ "</pre>";
+                        str += "<label id='user'><i class='far fa-user-circle'> " + list[i].id + " : <br></label></i> ";
+                           str += "<pre class='leftChatView'>" + list[i].content + "<br>" + chatService.displyTime(list[i].writeDate) + "</pre>";
                            str += "</div>";
                            str += "</div>";
                            str += "</div>";
@@ -253,7 +247,7 @@ $(function() {
                   </div>
                </div>
                
-               <div class="row">
+               <div class="row" >
                   <div class='col-sm-3 pull-right' id='myF' data-chatNo=10>
                      <label>test : <br></label>
                      <pre>test<br> 2021.05.13</pre>
