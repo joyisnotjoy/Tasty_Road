@@ -53,12 +53,6 @@ public class ListController {
 		
 	LoginVO vo = new LoginVO();
 	
-	vo.setId("test");
-	
-	session.setAttribute("login", vo);
-	
-	log.info(session.getAttribute("login"));
-		
 	model.addAttribute("vo", service.view(shopNo));	
 	
 	return MODULE + "/view";

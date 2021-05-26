@@ -173,21 +173,19 @@
 	            str += "<input name='id' type='hidden' class='form-control ' id='id' readonly='readonly' value='" + waiting.id + "'>";
 	            str += "</div>";
 	            str += "<div class='col-md-12' id='visualDiv'>";  
-	            
-		
 		
 	            	for(var i = 1; i <= waiting.total; i++) {
 		
 						var background = "#eee";
 		
-						if(i >= waiting.now) {
+						if(i <= waiting.now) {
 							
 							background = "#ffe6e6";
 							
 						}
 		
 		            	// DIV 추가 [1 ~ 10]
-			            str += "<div class='col-md-3' id='visualDiv" + i + "'background: " + background + "; displai: inline; margin: 0.75em;'>";   
+			            str += "<div class='col-md-3' id='visualDiv" + i + "' style='width: 1.5em; height: 1.5em; background: " + background + "; display: inline; margin: 0.75em;'>";   
 			            str += i;
 			            str += "</div>";
 			            
@@ -200,7 +198,6 @@
 			            // DIV 추가 끝
 		
 					}
-					
 					
 	            str += "</div>";
 	            str += "<div class='form-group col-12' id='totalTableDiv'>";
@@ -359,7 +356,7 @@
 	
 	$(document).on("click", "#waitingViewBtn", function() {
 		
-		alert("click");
+		// alert("click");
 		
 		$("#waitingDivModal").modal();
 		 
@@ -371,7 +368,7 @@
    
 	$(document).on("click", "#failBtn", function() {
 	
-		alert("대기열을 불러 올 수 업습니다. ");
+		alert("대기열을 불러 올 수 없습니다. ");
 	
 	}) 
    
