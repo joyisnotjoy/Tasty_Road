@@ -141,12 +141,29 @@
    			position: relative;
    			bottom: 0;
 		}
+		.odate3 {
+			font-size: 3px;
+			float: left;
+   			padding-left: 3px;
+   			color: grey;
+			display: inline-block; 
+   			position: relative;
+   			bottom: 6px;
+  			margin-left: 320px;
+		}
 		.chating .others{
 			color: black;
 			text-align: left;
 			font-weight: bolder;
 			font-size: 11px;
 			padding-top: 1px;
+		}
+		.chating .others3{
+		    color: black;
+		    text-align: center;
+		    font-weight: bolder;
+		    font-size: 11px;
+		    padding-top: 1px;
 		}
 		.chating .others2{
 			word-break:break-all;
@@ -232,10 +249,11 @@
         .msgImgO{
 			width: 375px;
 			height: 275px;
+			margin-left: 187px;
 		}
-		.imgO{
-			float: left;
-		}
+/* 		.imgO{ */
+/* 			float: left; */
+/* 		} */
 		
 		input.fileUpload {
         	background: url( "/Tasty_Road/src/main/webapp/WEB-INF/images/3927-200.png" ) no-repeat;
@@ -340,6 +358,41 @@
 		    position: absolute;
 		    color: white;
 		}
+		.btnA{ 
+		    text-decoration: none;
+		    font-size: 12px;
+		    color: black;
+		    text-align: center;
+		    padding: 8px 16px 8px 16px;
+		    display: inline-block;
+		    border-radius: 6px;
+		    transition: all 0.1s;
+		    margin-bottom: 3px;
+   		}
+   		.btnA.blue{
+		    background-color: #a2e7ff;
+   		}
+   		.btnA.blue:active{
+     		border-bottom:2px solid #165195;
+   		}
+		.btnB{ 
+		    text-decoration: none;
+		    font-size: 12px;
+		    color: black;
+		    text-align: center;
+		    padding: 8px 16px 8px 16px;
+		    display: inline-block;
+		    border-radius: 6px;
+		    transition: all 0.1s;
+		    float: right;
+		    margin-right: 3px;
+   		}
+   		.btnB.blue{
+		    background-color: #a2e7ff;
+   		}
+   		.btnB.blue:active{
+     		border-bottom:2px solid #165195;
+   		}
 	</style>
 </head>
 
@@ -359,7 +412,7 @@
 		ws.onmessage = function(data) {
 			//메시지를 받으면 동작
 			var msg = data.data;
-			alert(data);
+// 			alert(data);
 			if(msg != null && msg.type != ''){
 				var d = JSON.parse(msg);
 				var curDate = new Date();
@@ -394,52 +447,52 @@
 					} 
 					
 				}
-				else if(d.type == "fileUpload"){
-						if(d.sessionId == $("#sessionId").val()){
-						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
-						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
-							url + "></div><div class='clearBoth'></div>");
-						$("#chating").append("<li class='mdate'>" + curTime + "</li>");	
-						$("#chating").append("<div class='clear'></div>");	
-				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+// 				else if(d.type == "fileUpload"){
+// 						if(d.sessionId == $("#sessionId").val()){
+// 						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
+// 						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
+// 							url + "></div><div class='clearBoth'></div>");
+// 						$("#chating").append("<li class='mdate'>" + curTime + "</li>");	
+// 						$("#chating").append("<div class='clear'></div>");	
+// 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 							
-						}else{
-						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
-						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
-							url + "></div><div class='clearBoth'></div>");
-						$("#chating").append("<li class='mdate'>" + curTime + "</li>");	
-						$("#chating").append("<div class='clear'></div>");	
-				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+// 						}else{
+// 						$("#chating").append("<p class='me'>" + d.userName + "</p>");	
+// 						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
+// 							url + "></div><div class='clearBoth'></div>");
+// 						$("#chating").append("<li class='mdate'>" + curTime + "</li>");	
+// 						$("#chating").append("<div class='clear'></div>");	
+// 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 							
-						}
-					}
+// 						}
+// 					}
 				
 				else{
 					console.warn("unknown type!")
 				}
-// 			else{
-// 				alert(files);
-// 					//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
-// 					var url = URL.createObjectURL(new Blob([msg]));
-// 					var curDate1 = new Date();
-// 					var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
-// 		           		+ curDate1.getHours() + ":" + curDate1.getMinutes();
-// 					if(fileSend.sessionId == $("#sessionId").val()){
-// 					$("#chating").append("<p class='me'>" + fileSend.userName + "</p>");	
-// 						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
-// 							url + "></div><div class='clearBoth'></div>");
-// 						$("#chating").append("<li class='mdate'>" + curTime1 + "</li>");	
-// 						$("#chating").append("<div class='clear'></div>");	
-// 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
-// 					}else{
-// 					$("#chating").append("<p class='others'>" + fileSend.userName + "</p>");	
-// 						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
-// 							url + "></div><div class='clearBoth'></div>");
-// 						$("#chating").append("<li class='odate'>" + curTime1 + "</li>");	
-// 						$("#chating").append("<div class='clear'></div>");	
-// 				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+			}else{
+// 				alert(msg);
+					//파일 업로드한 경우 업로드한 파일을 채팅방에 뿌려준다.
+					var url = URL.createObjectURL(new Blob([msg]));
+					var curDate1 = new Date();
+					var curTime1 = curDate1.getFullYear() + "-" + (curDate1.getMonth() + 1) + "-" + curDate1.getDate() + " " 
+		           		+ curDate1.getHours() + ":" + curDate1.getMinutes();
+					if(sessionId == $("#sessionId").val()){
+					$("#chating").append("<p class='me'>" + document.getElementById('sessionId').value + "</p>");	
+						$("#chating").append("<div class='imgM'><img class='msgImgM' src=" + 
+							url + "></div><div class='clearBoth'></div>");
+						$("#chating").append("<li class='mdate'>" + curTime1 + "</li>");	
+						$("#chating").append("<div class='clear'></div>");	
+				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
+					}else{
+					$("#chating").append("<p class='others3'>" + '이미지' + "</p>");	
+						$("#chating").append("<div class='imgO'><img class='msgImgO' src=" + 
+							url + "></div><div class='clearBoth'></div>");
+						$("#chating").append("<li class='odate3'>" + curTime1 + "</li>");	
+						$("#chating").append("<div class='clear'></div>");	
+				        $('#chating').scrollTop($('#chating').prop('scrollHeight'));
 						
-// 					}
+					}
 			}  
 			   
 		} //onMessage 끝
@@ -450,7 +503,7 @@
 				send();
 			}
 		});
-	}
+	} 
 
 	function chatName(){
 		var userName = $("#userName").val();
@@ -462,7 +515,7 @@
 			$("#yourName").hide();
 			$("#yourMsg").show();
 		}
-	}
+	} 
 	// 정보를 받아 메세지 입력
 	function send() {
 		var option ={
@@ -516,6 +569,10 @@
 <body>
 	<div id="container" class="container">
 		<h1>${openRoomName } TALK</h1>
+		<div>
+		<a href="/list/map.do" class="btnA blue">돌아가기</a>
+		<a href="/room" class="btnB blue">Room</a>
+		</div>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="openRoomNo" value="${openRoomNo }">
 		
@@ -543,7 +600,7 @@
 					<th class="file"><br/></th>
 					<th><br/><input type="file" id="fileUpload">
 					<label for='fileUpload'>이미지 선택</label></th>
-					<th class="imgT">이미지 업로드는 5MB까지 허용합니다</th>
+					<th class="imgT">이미지 업로드는 50MB 이하만 가능합니다.</th>
 					<th><br/><button onclick="fileSend()" id="sendFileBtn" class="buttonF">업로드</button></th>
 				</tr>
 			</table>

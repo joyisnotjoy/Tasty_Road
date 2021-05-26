@@ -24,12 +24,18 @@
 <link rel="stylesheet"
 	href="https://t1.daumcdn.net/kakaomapweb/subway/linemap/canvas/prod/css/subway.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
+
+
+<!-- <script -->
+<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/reply.js"></script>
@@ -138,10 +144,10 @@
 					<h2 class="screen_out">검색 메뉴</h2>
 					<ul class="menu">
 						<li id="search.tab1" class="keyword keyword-ACTIVE"><a
-							href="#" class="mainmenutab" title="검색">List</a></li>
+							href="/list/map.do" class="mainmenutab" title="검색">List</a></li>
 						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><a
 							href="/chat/list.do" class="mainmenutab" title="길찾기">Talk</a></li>
-						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><button type="button" id="click">눌러보세요</button></li>
+						<li id="search.tab2" class="carRoute carRoute-INACTIVE"><a href="/room">오픈 채팅</a></li>
 						<c:if test="${empty login }">
 							<li id="search.tab5"
 								class="favorite favorite-INACTIVE emptyLogin"><a
