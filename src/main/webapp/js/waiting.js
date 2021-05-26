@@ -11,7 +11,7 @@
 	      // list(JSON-넘겨줄데이터, 데이터를 성공적으로 가져왔을때의 실행함수, 실패했을때의 실행함수)
 	      function waitView(param, callback, error){
 	         
-	         var shopNo = param.shopNo;
+	         var shopNo = $("#viewShopNo").text();
 	         
 	         $.getJSON(
 	            // ajax로 호출하는 url
@@ -74,7 +74,7 @@
    
 )();
    
-   
+   var shopNo = $("#viewShopNo").text();
    
    // alert(shopNo);
    
@@ -248,7 +248,7 @@
       
    }
 
-	//showWait();
+	showWait();
 	
    $("#more").click(function () {
    
@@ -389,15 +389,5 @@
 		alert("대기열을 불러 올 수 업습니다. ");
 	
 	}) 
-	
-	$(".dataRow").click(function() {
-		
-		 alert("click");
-		 
-		 var shop = $(this).closest("#shopNo");
-		 
-		 alert(shop.text());
-		
-	});
    
 });

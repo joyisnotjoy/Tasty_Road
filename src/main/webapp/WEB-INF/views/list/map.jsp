@@ -24,24 +24,44 @@
 <link rel="stylesheet"
 	href="https://t1.daumcdn.net/kakaomapweb/subway/linemap/canvas/prod/css/subway.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-<!-- <script -->
-<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
 
 
-<!-- <script -->
-<!-- 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/reply.js"></script>
-<script type="text/javascript" src="/js/waiting.js"></script>
 <script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
+<script type="text/javascript" src="/js/waiting.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	// 처리 후 나타나는 메시지 : 글쓰기나 글삭제 처리된 후 리스트로 돌아 오면 보여준다.
+	// - sitemesh - default_decorator.jsp에서 해결
+	
+	// 게시판 글보기 페이지로 이동 함수
+	$(".dataRow").click(function(){
+		var li = $(this).closest("li");
+		var shopNo = li.find("span").text();
+		// 페이지 정보 붙이기
+		var query = ${(empty pageObject)?"''":"'&page=" += pageObject.page
+				+= "&perPageNum=" += pageObject.perPageNum += "'"};
+		// 검색 정보 붙이기
+		query += ${(empty pageObject.word)?"''":"'&key=" += pageObject.key
+				+= "&word=" += pageObject.word += "'"};
+		location = "view.do?shopNo=" + shopNo + query;
+	});
+});
+</script>
 <title>될 지도 안될 지도</title>
 </head>
 <body class="MAP">
@@ -194,23 +214,7 @@
 						</c:if>
 					</ul>
 				</div>
-				<div id="View" class="section places HIDDEN" style="overflow: scroll; width: 400px; height: 1000px; ">
-					<div class="sectiontitle">
-						<h5 class="placetit">View</h5>
-						<span class="cntwrap"><em id="info.search.place.cnt"
-							class="cnt"></em></span>
-						<ol id="info.search.place.sort" class="Sort"></ol>
-					</div>
-					<div id="showView" class="placelist"></div>
-					<div id="showList" class="placelist"></div>
-				</div>
-				<div>
-					<pageObject:pageNav listURI="list.do" pageObject="${pageObject }"
-						query="&key=${pageObject.key }&word=${pageObject.word }" />
-				</div>
-
 			</div>
-
 		</div>
 	</div>
 	<!-- list 들어갈 곳 끝 -->

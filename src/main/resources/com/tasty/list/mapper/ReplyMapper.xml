@@ -41,7 +41,7 @@
 	<update id="update">
 		update reply set content=#{content}
 <!-- 		where id = #{id} -->
-		where id = #{id} and replyNo = #{replyNo}
+		where id = #{id} and replyNo = #{replyNo} 
 		<!-- replyNo = #{replyNo} and  -->
 	</update>
 	
@@ -49,7 +49,7 @@
 	<delete id="delete">
 		delete from reply
 <!-- 		where id = #{id} -->
-		where id = #{id} and replyNo = #{replyNo}
+		where id = #{id} and replyNo = #{replyNo} 
 		<!-- replyNo = #{replyNo} and  -->
 	</delete>
 	
