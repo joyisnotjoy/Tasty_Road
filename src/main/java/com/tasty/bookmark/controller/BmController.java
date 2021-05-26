@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,28 @@ public class BmController {
 			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK);
 		
 		
+			}
+			//2. 맛집 북마크 삭제 / write
+			@DeleteMapping(value = {"/unlike.do"}, 
+					consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
+					produces = {"application/text; charset=utf-8"})
+			public ResponseEntity<String> unlike(@RequestBody bookmarkVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
+				
+				log.info("like().vo : " + vo);
+				
+				int result =  service.unlike(vo);
+				// 전달되는 데이터의 선언
+				String msg = "즐겨찾기가 해제되었습니다.";
+				HttpStatus status = HttpStatus.OK;
+				log.info(result);
+				if(result == 0) {
+					msg = "즐겨찾기 해제 실패 - 즐겨찾기가 되어있는지 확인해주세요.";
+				}
+				log.info("unlike().msg: " + msg);
+				return new ResponseEntity<String>(msg, status);
+//				("즐겨찾기가 취소되었습니다.",HttpStatus.OK);
+				
+				
 			}
 
 //	@GetMapping("/like.do")

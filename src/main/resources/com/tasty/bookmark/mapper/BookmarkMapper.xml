@@ -16,18 +16,6 @@
 
 	</insert>
 
-	<update id="increase">
-		update bookmark
-		set cnt = cnt + 1
-		where shopNo = #{shopNo}
-	</update>
-
-	<update id="decrease">
-		update bookmark
-		set hit = hit - 1
-		where cnt = #{cnt}
-	</update>
-
 	<delete id="unlike">
 		delete from bookmark
 		where id = #{id} and shopNo = #{shopNo}
