@@ -18,26 +18,19 @@
 <script type="text/javascript" src="/js/bookmark.js"></script>
 <script type="text/javascript" src="/js/waiting.js"></script>
 
-<style type="text/css">
-.title_label { 
-border: 1px dotted #ddd; 
- } 
+<!-- <style type="text/css"> -->
+<!-- .title_label { -->
+<!-- 	border: 1px dotted #ddd; -->
+<!-- } -->
 
-.ul.chat { 
-list-style: none;
- } 
+<!-- ul.chat { -->
+<!-- 	list-style: none; -->
+<!-- } -->
 
-.ul.chat>li {
-margin-bottom: 15px;
-}
-.pull-right {
- float: right;
-}
-.btn-primary{
-margin-top: -30px;
-}
-
-</style>
+<!-- ul.chat>li { -->
+<!-- 	margin-bottom: 15px; -->
+<!-- } -->
+<!-- </style> -->
 
 <script type="text/javascript">
 // alert("aaa" + 10);
@@ -407,7 +400,7 @@ $(function(){
 		<a href="update.do?shopNo=${vo.shopNo }&page=${pageObject.page}&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
 			class="btn btn-default">수정</a> 
 		<a class="btn btn-default" onclick="return false;" data-toggle="modal" data-target="#myModal">삭제</a>
-		<a href="map.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
+		<a href="list.do?page=${pageObject.page }&perPageNum=${pageObject.perPageNum}&key=${pageObject.key}&word=${pageObject.word}"
 			class="btn btn-default">리스트</a>
 
 		<!-- 댓글의 시작 -->
@@ -418,7 +411,6 @@ $(function(){
 						<i class="fa fa-comments fa-fw"></i> Reply <br/>
 						<button class="btn btn-primary btn-xs pull-right"
 							id="writeReplyBtn">New Reply</button>
-							<br/>
 					</div>
 					<div class="panel-body">
 						<ul class="chat">

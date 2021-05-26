@@ -54,17 +54,17 @@ var replyService = (
 		function rList(param, callback, error){
 			var shopNo = param.shopNo;
 			// param.repPage || 1 -> param.repPage의 값이 없으면 1을 사용
-//			var page = param.repPage || 1;
+			var page = param.repPage || 1;
 			// param.repPerPageNum || 5 -> param.repPerPageNum의 값이 없으면 5을 사용
-//			var perPageNum = param.repPerPageNum || 5;
+			var perPageNum = param.repPerPageNum || 5;
 			
 			// Ajax를 이용한 데이터 가져오기 -> Ajax 해야합니다. 형식에 맞으면 Ajax를 한다.
 			// Ajax 함수 : $.getJSON() - $.ajax()를 통해서 JSON 데이터를 받아오게 만든함수
 			//            $(selector).load(url[, success]) - 아이디 중복체크 시 사용
 			$.getJSON(
 				// ajax로 호출하는 url
-				"/replies/list.do?shopNo=" + shopNo,
-//				"/replies/list.do?shopNo=" + shopNo + "&repPage=" + page + "&repPerPageNum=" + perPageNum,
+//				"/replies/list.do?shopNo=" + shopNo,
+				"/replies/list.do?shopNo=" + shopNo + "&repPage=" + page + "&repPerPageNum=" + perPageNum,
 				// success(성공) 상태일 때 처리되는 함수
 				// 데이터 처리가 성공해서 데이터를 가져오면 data로 넣어준다. list이므로 배열이 넘어온다.
 				function(data){

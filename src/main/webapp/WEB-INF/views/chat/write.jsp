@@ -17,7 +17,7 @@ $(function(){
 </head>
 <body>
 <div class="container">
-	<h1>메시지 보내기</h1>
+	<h1>채팅 방 생성</h1>
 	<form action="write.do" method="post">
 		<input name="perPageNum" type="hidden" value="${param.perPageNum }">
 		<div class="form-group">
