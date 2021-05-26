@@ -18,7 +18,7 @@
 			-ms-overflow-style: none; 
 			 
 		}
-		::-webkit-scrollbar { 
+		::-webkit-scrollbar {  
 			display: none; 
 		}
 		.container{

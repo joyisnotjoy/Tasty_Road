@@ -10,6 +10,12 @@
 		FROM bookMark
 		WHERE shopNo = #{shopNo} and id = #{id}
 	</select>
+	<select id="list"
+		resultType="com.tasty.bookmark.vo.bookmarkVO">
+		SELECT shopName, writeDate
+		FROM bookMark
+		WHERE shopName = #{shopName} and writeDate = #{writeDate}
+	</select>
 	<insert id="like">
 		insert into bookmark(id, shopNo)
 		values (#{id}, #{shopNo})
