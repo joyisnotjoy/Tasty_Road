@@ -82,9 +82,9 @@
       
       waitService.wait({shopNo : shopNo}, function(data) {
          
-         // alert(data);
+         //alert(data);
          
-         // alert(JSON.stringify(data));
+        // alert(JSON.stringify(data));
          
          var str = "";
          var waitingViewBtn = "";
@@ -179,18 +179,17 @@
 	            	for(var i = 1; i <= waiting.total; i++) {
 		
 						var background = "#eee";
-						
-						if(i <= waiting.now) {
-						
+		
+						if(i >= waiting.now) {
+							
 							background = "#ffe6e6";
 							
 						}
-						
+		
 		            	// DIV 추가 [1 ~ 10]
-			            str += "<div class='col-md-3' id='visualDiv" + i + "' style='background: "+ background+"; display: inline; margin: 0.75em;'>";   
+			            str += "<div class='col-md-3' id='visualDiv" + i + "'background: " + background + "; displai: inline; margin: 0.75em;'>";   
 			            str += i;
 			            str += "</div>";
-			            // DIV 추가 끝
 			            
 			            if(i % 4 == 0) {
 				
@@ -198,7 +197,10 @@
 				
 						}
 			            
+			            // DIV 추가 끝
+		
 					}
+					
 					
 	            str += "</div>";
 	            str += "<div class='form-group col-12' id='totalTableDiv'>";
@@ -221,8 +223,9 @@
          
          var myId = "<c:out value='${login.id}'/>";
          
-         $("#waitingView").html(waitingViewBtn);
+         $("#waitingView").append(waitingViewBtn);
          $("article").append(str);
+         $("#waitingView").append(myId);
          
         // $(".waitModal").html(str);
          
@@ -356,9 +359,7 @@
 	
 	$(document).on("click", "#waitingViewBtn", function() {
 		
-		// alert("click");
-		
-		showWait();
+		alert("click");
 		
 		$("#waitingDivModal").modal();
 		 

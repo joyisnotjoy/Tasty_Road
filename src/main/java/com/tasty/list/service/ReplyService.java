@@ -20,4 +20,5 @@ public interface ReplyService {
 	public int delete(ReplyVO ro) throws Exception;
 
 
+
 }

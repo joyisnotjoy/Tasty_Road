@@ -29,6 +29,7 @@ var chatService = (
 					}
 				);  // $.getJSON().fail()의 끝
 		} // list() 의 끝
+		
 		// write()
 		function write(chatRoom, callback, error) {
 			console.log("chatRoom write() -------------------- ");
@@ -43,15 +44,15 @@ var chatService = (
 					else alert("채팅 전송 성공");
 				},
 				error: function(xht, status, err) {
-					if (error) error(err); 
+					if (error) error(err);
 					else alert("전송 실패");
 				}
 			}); //$.ajax 의 끝
 
 		}
 
-		function update(chat, callback, error) {
-			console.log("chat update() -------------------- ");
+		function update(chatRoom, callback, error) {
+			console.log("chatRoom update() -------------------- ");
 			//ajax를 이용해서 데이터 넘기기
 			$.ajax({
 				type: "post",
@@ -68,12 +69,14 @@ var chatService = (
 				}
 			}); //$.ajax 의 끝
 		}
+		
+		
 
 		return {
 			list: list,
 			write: write,
 			update: update,
-			displayTime: displayTime
+			displyTime: displyTime
 		}
 	}
 )();

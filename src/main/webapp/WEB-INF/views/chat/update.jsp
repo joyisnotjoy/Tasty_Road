@@ -28,7 +28,7 @@ $(function(){
 </head>
 <body>
 	<div class="container">
-		<h1>UpdateForm</h1>
+		<h1>방이름 수정</h1>
 		<form action="update.do" method="post">
 		<input name="page" value="${param.page }" type="hidden" />
 		<input name="perPageNum" value="${param.perPageNum }" type="hidden" />
