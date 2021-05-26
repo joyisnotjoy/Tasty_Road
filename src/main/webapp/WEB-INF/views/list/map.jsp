@@ -39,6 +39,7 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/reply.js"></script>
+<script type="text/javascript" src="/js/waiting.js"></script>
 <script type="text/javascript" src="/js/list/reply.js"></script>
 <script type="text/javascript" src="/js/list/list.js"></script>
 <title>될 지도 안될 지도</title>
