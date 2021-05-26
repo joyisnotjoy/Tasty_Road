@@ -41,7 +41,7 @@ public class BookmarkController {
 		
 		//id에 로그인한 아이디 담기
 		String id = loginVO.getId();
-		
+		 
 		if (id == null) {
 			rttr.addFlashAttribute("msg", "로그인이 필요한 서비스 입니다");
 		}		

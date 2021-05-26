@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tasty.bookmark.service.BookmarkService;
 import com.tasty.bookmark.vo.bookmarkVO;
+import com.tasty.member.vo.LoginVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -43,15 +45,33 @@ public class BmController {
 			 return new ResponseEntity<String>
 			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK);
 		
-		
+
+				
 			}
+		@GetMapping(value = "/view.do", produces = { MediaType.APPLICATION_XML_VALUE,
+				MediaType.APPLICATION_JSON_UTF8_VALUE })
+		public ResponseEntity<bookmarkVO> view(bookmarkVO vo) throws Exception {
+			
+			log.info("기본 좋아요 표시.");
+			
+			return new ResponseEntity<bookmarkVO>(service.bm(vo), HttpStatus.OK);
+		}
 			//2. 맛집 북마크 삭제 / write
-			@DeleteMapping(value = {"/unlike.do"}, 
+			@PostMapping(value = {"/unlike.do"}, 
 					consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE},
 					produces = {"application/text; charset=utf-8"})
 			public ResponseEntity<String> unlike(@RequestBody bookmarkVO vo, HttpSession session, RedirectAttributes rttr) throws Exception {
 				
-				log.info("like().vo : " + vo);
+				log.info("unlike().vo : " + vo);
+				
+				LoginVO loginVO = (LoginVO) session.getAttribute("login");
+				
+				//id에 로그인한 아이디 담기
+				String id = loginVO.getId();
+				vo.setId(id);
+				
+				log.info(id);
+				
 				
 				int result =  service.unlike(vo);
 				// 전달되는 데이터의 선언
