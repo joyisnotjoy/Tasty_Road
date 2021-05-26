@@ -148,7 +148,7 @@
    			color: grey;
 			display: inline-block; 
    			position: relative; 
-   			bottom: 6px; 
+   			bottom: 6px;  
   			margin-left: 320px;
 		}
 		.chating .others{
