@@ -19,23 +19,19 @@ public class BookmarkServiceImpl implements BookmarkService{
 	private BookmarkMapper mapper;
 
 	@Override
-	public bookmarkVO bm(String shopNo) throws Exception {
+	public bookmarkVO bm(bookmarkVO vo) throws Exception {
 		// TODO Auto-generated method stub
-
-		bookmarkVO vo = new bookmarkVO();
-
-		vo.setId("test");
 
 		log.info(vo);
 
-		return mapper.bookmark(shopNo);
+		return mapper.bookmark(vo);
 
 	}
 
 	@Override
 	public int like(bookmarkVO vo) throws Exception {
 		// TODO Auto-generated method stub
-
+//		mapper.increase(vo);
 		log.info(vo);
 		return mapper.like(vo);
 	}
@@ -43,23 +39,9 @@ public class BookmarkServiceImpl implements BookmarkService{
 	@Override
 	public int unlike(bookmarkVO vo) throws Exception { 
 		// TODO Auto-generated method stub
-		mapper.unlike(vo);
+//		mapper.decrease(vo)
 		log.info(vo);
 		return mapper.unlike(vo);
-	}
-	@Override
-	public int increase(bookmarkVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		mapper.increase(vo);
-		log.info(vo);
-		return mapper.increase(vo);
-	}
-	@Override
-	public int decrease(bookmarkVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		mapper.decrease(vo);
-		log.info(vo);
-		return mapper.decrease(vo);
 	}
 
 }
