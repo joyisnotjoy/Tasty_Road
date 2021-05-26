@@ -78,10 +78,10 @@ var bookmarkService = (
 						if (error) {
 							error();
 						} else {
-							alert(JSON.stringify(xhr));
+//							alert(JSON.stringify(xhr));
 							// 데이터가 없어서 나오는 오류
 							if (xhr.status == 200) {
-								alert("데이터 없음");
+//								alert("데이터 없음");
 								$("#like").removeClass();
 								$("#like").addClass("like");
 								$("#like").text("like");
