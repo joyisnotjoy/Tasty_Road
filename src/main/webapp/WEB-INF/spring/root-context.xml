@@ -17,22 +17,22 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	<!-- 오라클 서버 정보, 아이디, 비번 -->
 		<!-- property tag : setter()를 이용한 데이터 셋팅 -->
-<!-- 		<property name="driverClassName"  -->
-<!-- 			value="oracle.jdbc.driver.OracleDriver" /> -->
-<!-- 		<property name="jdbcUrl"  -->
-<!-- 			value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
-   
 		<property name="driverClassName" 
-			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl" 
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
+   
+<!-- 		<property name="driverClassName"  -->
+<!-- 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
 		
 		<!-- /src/main/resources/log4jdbc.log4j2.properties 필요 - 설정 -->
-		<property name="jdbcUrl"
-			value="jdbc:log4jdbc:oracle:thin:@192.168.0.125:1521:xe" />
+<!-- 		<property name="jdbcUrl" -->
+<!-- 			value="jdbc:log4jdbc:oracle:thin:@192.168.0.125:1521:xe" /> -->
 		
-		<property name="username" value="tasty" />
-		<property name="password" value="road" />
-<!-- 		<property name="username" value="team1" /> -->
-<!-- 		<property name="password" value="team1" /> -->
+<!-- 		<property name="username" value="tasty" /> -->
+<!-- 		<property name="password" value="road" /> -->
+		<property name="username" value="team1" />
+		<property name="password" value="team1" />
 	</bean>
 	
 	<!-- HikariCP 사용 객체 -->

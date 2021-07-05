@@ -29,27 +29,27 @@
 		즐겨찾기 리스트
 	</h1>
 	
-<!-- 	<ul class="list-group"> -->
-<%-- 	<c:if test="${empty list }"> --%>
-<!-- 	<!-- 데이터 없는 경우의 표시 --> -->
-<!-- 	  <!-- 데이터가 존재하지 않는 경우 --> -->
-<!-- 	  <li class="list-group-item"> -->
-<!-- 	  	데이터가 존재하지 않습니다. -->
-<!-- 	  </li> -->
-<%-- 	</c:if> --%>
+	<ul class="list-group">
+	<c:if test="${empty list }">
+	<!-- 데이터 없는 경우의 표시 -->
+	  <!-- 데이터가 존재하지 않는 경우 -->
+	  <li class="list-group-item">
+	  	데이터가 존재하지 않습니다.
+	  </li>
+	</c:if>
 	
-<%-- 	<c:if test="${!empty list }"> --%>
-<!-- 		<!-- 데이터가 있는 경우의 표시 --> -->
-<%-- 		<c:forEach items="${list }" var="vo"> --%>
-<!-- 		  <li class="list-group-item dataRow"> -->
-<!-- 		  	<div> -->
-<%-- 			  	<span class="shopName">${vo.shopName }</span> --%>
-<!-- 		  	</div>  -->
-<%-- 		  	(<fmt:formatDate value="${vo.writeDate }"/>) --%>
-<!-- 		  </li> -->
-<%-- 	  	</c:forEach> --%>
-<%-- 	</c:if> --%>
-<!-- 	</ul> -->
+	<c:if test="${!empty list }">
+		<!-- 데이터가 있는 경우의 표시 -->
+		<c:forEach items="${list }" var="vo">
+		  <li class="list-group-item dataRow">
+		  	<div>
+			  	<span class="shopName">${vo.shopName }</span>
+		  	</div> 
+		  	(<fmt:formatDate value="${vo.writeDate }"/>)
+		  </li>
+	  	</c:forEach>
+	</c:if>
+	</ul>
 </div>
 </body>
 </html>

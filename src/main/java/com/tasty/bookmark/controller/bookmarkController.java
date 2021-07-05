@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 @RestController
 @RequestMapping("/bookmark")
 @Log4j
-public class BmController {
+public class bookmarkController {
 	// 자동DI
 		@Autowired
 		@Qualifier("bsi")
@@ -88,18 +88,6 @@ public class BmController {
 				
 			}
 			
-			// 3. 맛집 즐찾 리스트 - 검색 / list.do - get -> list.json 불가능 : xml만 서비스
-			@GetMapping(value = "/list.do",
-					produces = {
-							MediaType.APPLICATION_XML_VALUE,
-							MediaType.APPLICATION_JSON_UTF8_VALUE
-								} )
-			// ResponseEntity : 실행 상태 코드와 함께 실행결과를 클라이언트에서 전달할때 사용하는 객체
-			public ResponseEntity<String> list(@RequestBody bookmarkVO vo) throws Exception {
-//				public ResponseEntity<String> list(Long no, Model model) throws Exception {
-//					model.addAttribute("list", service.list(no));
-				
-					return new ResponseEntity<String>(HttpStatus.OK);
-				}
+			
 			
 }

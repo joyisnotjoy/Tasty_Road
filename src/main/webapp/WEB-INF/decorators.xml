@@ -9,6 +9,7 @@
 		<pattern>/list/view.do*</pattern>
 <!-- 		<pattern>/list/map.do*</pattern> -->
 		<pattern>/chat/*</pattern>
+		<pattern>/bm/*</pattern>
 		<pattern>/chatRoom/*</pattern>
 		<pattern>/member/*</pattern>
 		<pattern>/error/*</pattern>
