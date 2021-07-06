@@ -43,7 +43,7 @@ public class bookmarkController {
 			log.info(result);
 			
 			 return new ResponseEntity<String>
-			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK);
+			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK); 
 		
 
 				
