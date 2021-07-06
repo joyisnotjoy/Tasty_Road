@@ -47,7 +47,7 @@ public class bookmarkController {
 		
 
 				
-			}
+			} 
 		@GetMapping(value = "/view.do", produces = { MediaType.APPLICATION_XML_VALUE,
 				MediaType.APPLICATION_JSON_UTF8_VALUE })
 		public ResponseEntity<bookmarkVO> view(bookmarkVO vo) throws Exception {
