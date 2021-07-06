@@ -44,7 +44,7 @@ public class bookmarkController {
 			
 			 return new ResponseEntity<String>
 			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK); 
-		
+		 
  
 				
 			} 
