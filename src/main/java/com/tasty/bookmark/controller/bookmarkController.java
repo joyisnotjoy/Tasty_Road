@@ -46,7 +46,7 @@ public class bookmarkController {
 			 ("즐겨찾기가 완료되었습니다.",HttpStatus.OK); 
 		 
  
-				
+				 
 			} 
 		@GetMapping(value = "/view.do", produces = { MediaType.APPLICATION_XML_VALUE,
 				MediaType.APPLICATION_JSON_UTF8_VALUE })
